@@ -2,11 +2,11 @@
 
 namespace CodeUnits.CSharp
 {
-    public enum Variance { In, Out }
+    public enum Variance { None, In, Out }
 
     public class GenericTypeArgumentDefinition
     {
-        public GenericTypeArgumentDefinition(string name, Variance? variance, IReadOnlyList<AttributeGroup> attributeGroups)
+        public GenericTypeArgumentDefinition(string name, Variance variance, IReadOnlyList<AttributeGroup> attributeGroups)
         {
             Name = name;
             Variance = variance;
@@ -15,7 +15,7 @@ namespace CodeUnits.CSharp
 
         public string Name { get; }
 
-        public Variance? Variance { get; }
+        public Variance Variance { get; }
 
         public IReadOnlyList<AttributeGroup> AttributeGroups { get; }
     }

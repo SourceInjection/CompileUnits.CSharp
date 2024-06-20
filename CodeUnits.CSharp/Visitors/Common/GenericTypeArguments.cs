@@ -32,20 +32,20 @@ namespace CodeUnits.CSharp.Visitors.Common
             {
                 args.Add(new GenericTypeArgumentDefinition(
                     argContext.identifier().GetText(),
-                    null,
+                    Variance.None,
                     AttributeGroups.FromContext(argContext.attributes())));
             }
             return args;
         }
 
-        private static Variance? GetVariance(Variance_annotationContext context)
+        private static Variance GetVariance(Variance_annotationContext context)
         {
             var s = context?.GetText();
             if (s == "in")
                 return Variance.In;
             if (s == "out")
                 return Variance.Out;
-            return null;
+            return Variance.None;
         }
     }
 }

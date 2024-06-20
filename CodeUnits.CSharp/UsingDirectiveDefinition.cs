@@ -4,8 +4,7 @@
     {
         Namespace,
         Static,
-        Alias,
-        TupleDefinition
+        Alias
     }
 
     public abstract class UsingDirectiveDefinition

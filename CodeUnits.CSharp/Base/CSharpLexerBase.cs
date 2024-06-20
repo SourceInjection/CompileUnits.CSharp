@@ -69,7 +69,7 @@ namespace CodeUnits.CSharp.Base
                 }
                 if (switchToFormatString)
                 {
-                    this.Mode(CSharpLexer.INTERPOLATION_FORMAT);
+                    Mode(CSharpLexer.INTERPOLATION_FORMAT);
                 }
             }
         }
