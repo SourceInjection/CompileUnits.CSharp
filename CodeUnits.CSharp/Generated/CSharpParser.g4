@@ -279,7 +279,7 @@ primary_expression_start
         | anonymous_object_initializer
         | rank_specifier array_initializer
     )                                                                                               # objectCreationExpression
-    | OPEN_PARENS argument ( COMMA argument)+ CLOSE_PARENS                                            # tupleExpression
+    | OPEN_PARENS argument ( COMMA argument)+ CLOSE_PARENS                                          # tupleExpression
     | TYPEOF OPEN_PARENS (unbound_type_name | type_ | VOID) CLOSE_PARENS                            # typeofExpression
     | CHECKED OPEN_PARENS expression CLOSE_PARENS                                                   # checkedExpression
     | UNCHECKED OPEN_PARENS expression CLOSE_PARENS                                                 # uncheckedExpression
