@@ -9,39 +9,44 @@
 lexer grammar CSharpLexer;
 @lexer::header {#pragma warning disable 3021}
 
-channels {
-    COMMENTS_CHANNEL,
-    DIRECTIVE
-}
-
 options {
     superClass = CodeUnits.CSharp.Base.CSharpLexerBase;
 }
 
 BYTE_ORDER_MARK: '\u00EF\u00BB\u00BF';
 
-SINGLE_LINE_DOC_COMMENT     : '///' InputCharacter*   -> channel(COMMENTS_CHANNEL);
-EMPTY_DELIMITED_DOC_COMMENT : '/***/'                 -> channel(COMMENTS_CHANNEL);
-DELIMITED_DOC_COMMENT       : '/**' ~'/' .*? '*/'     -> channel(COMMENTS_CHANNEL);
-SINGLE_LINE_COMMENT         : '//' InputCharacter*    -> channel(COMMENTS_CHANNEL);
-DELIMITED_COMMENT           : '/*' .*? '*/'           -> channel(COMMENTS_CHANNEL);
-WHITESPACES                 : (Whitespace | NewLine)+ -> channel(HIDDEN);
-SHARP                       : '#'                     -> mode(DIRECTIVE_MODE), skip;
+SINGLE_LINE_DOC_COMMENT     : '///' InputCharacter*        -> skip;
+EMPTY_DELIMITED_DOC_COMMENT : '/***/'                      -> skip;
+DELIMITED_DOC_COMMENT       : '/**' ~'/' .*? '*/'          -> skip;
+SINGLE_LINE_COMMENT         : '//' InputCharacter*         -> skip;
+DELIMITED_COMMENT           : '/*' .*? '*/'                -> skip;
+WHITESPACES                 : (Whitespace | NewLine)+      -> skip;
+PRAGMA_LINE                 : '#pragma' InputCharacter*    -> skip;
+NULLABLE_LINE               : '#nullable' InputCharacter*  -> skip;
+DEFINE_LINE                 : '#define' InputCharacter*    -> skip;
+UNDEF_LINE                  : '#undef' InputCharacter*     -> skip;
+REGION_LINE                 : '#region' InputCharacter*    -> skip;
+ENDREGION_LINE              : '#endregion' InputCharacter* -> skip;
+ERROR_LINE                  : '#error' InputCharacter*     -> skip;
+WARNING_LINE                : '#warning' InputCharacter*   -> skip;
+LINE_LINE                   : '#line' InputCharacter*      -> skip;
+CONDITIONAL_BLOCK           : '#if' ~'#'* ( '#elsif' ~'#'* )* ( '#else' ~'#'* )?  '#endif' InputCharacter* -> skip;
+
 
 ABSTRACT   : 'abstract';
 ADD        : 'add';
 ALIAS      : 'alias';
 AND        : 'and';         // C# 9 patterns
 ARGLIST    : '__arglist';
-AS         : 'as';
 ASCENDING  : 'ascending';
 ASYNC      : 'async';
+AS         : 'as';
 AWAIT      : 'await';
 BASE       : 'base';
 BOOL       : 'bool';
 BREAK      : 'break';
-BY         : 'by';
 BYTE       : 'byte';
+BY         : 'by';
 CASE       : 'case';
 CATCH      : 'catch';
 CHAR       : 'char';
@@ -53,8 +58,8 @@ DECIMAL    : 'decimal';
 DEFAULT    : 'default';
 DELEGATE   : 'delegate';
 DESCENDING : 'descending';
-DO         : 'do';
 DOUBLE     : 'double';
+DO         : 'do';
 DYNAMIC    : 'dynamic';
 ELSE       : 'else';
 ENUM       : 'enum';
@@ -66,19 +71,19 @@ FALSE      : 'false';
 FINALLY    : 'finally';
 FIXED      : 'fixed';
 FLOAT      : 'float';
-FOR        : 'for';
 FOREACH    : 'foreach';
+FOR        : 'for';
 FROM       : 'from';
 GET        : 'get';
 GOTO       : 'goto';
 GROUP      : 'group';
 IF         : 'if';
 IMPLICIT   : 'implicit';
-IN         : 'in';
-INT        : 'int';
 INTERFACE  : 'interface';
 INTERNAL   : 'internal';
 INTO       : 'into';
+INT        : 'int';
+IN         : 'in';
 IS         : 'is';
 JOIN       : 'join';
 LET        : 'let';
@@ -166,6 +171,39 @@ INTERPOLATED_VERBATIUM_STRING_START:
 ;
 
 //B.1.9 Operators And Punctuators
+
+OP_ADD_ASSIGNMENT        : '+=';
+OP_SUB_ASSIGNMENT        : '-=';
+OP_MULT_ASSIGNMENT       : '*=';
+OP_DIV_ASSIGNMENT        : '/=';
+OP_MOD_ASSIGNMENT        : '%=';
+OP_AND_ASSIGNMENT        : '&=';
+OP_OR_ASSIGNMENT         : '|=';
+OP_XOR_ASSIGNMENT        : '^=';
+OP_LEFT_SHIFT            : '<<';
+OP_LEFT_SHIFT_ASSIGNMENT : '<<=';
+OP_COALESCING_ASSIGNMENT : '??=';
+OP_RANGE                 : '..';
+OP_RIGHT_SHIFT           : '>>';
+OP_RIGHT_SHIFT_ASSIGNMENT: '>>=';
+
+OP_NE                    : '!=';
+OP_LE                    : '<=';
+OP_GE                    : '>=';
+LT                       : '<';
+GT                       : '>';
+OP_EQ                    : '==';
+
+DOUBLE_COLON             : '::';
+OP_COALESCING            : '??';
+OP_INC                   : '++';
+OP_DEC                   : '--';
+OP_AND                   : '&&';
+OP_OR                    : '||';
+OP_PTR                   : '->';
+RIGHT_ARROW              : '=>';
+
+INTERR                   : '?';
 OPEN_BRACE               : '{' { this.OnOpenBrace(); };
 CLOSE_BRACE              : '}' { this.OnCloseBrace(); };
 OPEN_BRACKET             : '[';
@@ -187,32 +225,6 @@ CARET                    : '^';
 BANG                     : '!';
 TILDE                    : '~';
 ASSIGNMENT               : '=';
-LT                       : '<';
-GT                       : '>';
-INTERR                   : '?';
-DOUBLE_COLON             : '::';
-OP_COALESCING            : '??';
-OP_INC                   : '++';
-OP_DEC                   : '--';
-OP_AND                   : '&&';
-OP_OR                    : '||';
-OP_PTR                   : '->';
-OP_EQ                    : '==';
-OP_NE                    : '!=';
-OP_LE                    : '<=';
-OP_GE                    : '>=';
-OP_ADD_ASSIGNMENT        : '+=';
-OP_SUB_ASSIGNMENT        : '-=';
-OP_MULT_ASSIGNMENT       : '*=';
-OP_DIV_ASSIGNMENT        : '/=';
-OP_MOD_ASSIGNMENT        : '%=';
-OP_AND_ASSIGNMENT        : '&=';
-OP_OR_ASSIGNMENT         : '|=';
-OP_XOR_ASSIGNMENT        : '^=';
-OP_LEFT_SHIFT            : '<<';
-OP_LEFT_SHIFT_ASSIGNMENT : '<<=';
-OP_COALESCING_ASSIGNMENT : '??=';
-OP_RANGE                 : '..';
 
 // https://msdn.microsoft.com/en-us/library/dn961160.aspx
 mode INTERPOLATION_STRING;
@@ -230,48 +242,6 @@ mode INTERPOLATION_FORMAT;
 DOUBLE_CURLY_CLOSE_INSIDE : '}}' -> type(FORMAT_STRING);
 CLOSE_BRACE_INSIDE        : '}'  { this.OnCloseBraceInside(); } -> skip, popMode;
 FORMAT_STRING             : ~'}'+;
-
-mode DIRECTIVE_MODE;
-
-DIRECTIVE_WHITESPACES  : Whitespace+             -> channel(HIDDEN);
-DIGITS                 : [0-9]+                  -> channel(DIRECTIVE);
-DIRECTIVE_TRUE         : 'true'                  -> channel(DIRECTIVE), type(TRUE);
-DIRECTIVE_FALSE        : 'false'                 -> channel(DIRECTIVE), type(FALSE);
-DEFINE                 : 'define'                -> channel(DIRECTIVE);
-UNDEF                  : 'undef'                 -> channel(DIRECTIVE);
-DIRECTIVE_IF           : 'if'                    -> channel(DIRECTIVE), type(IF);
-ELIF                   : 'elif'                  -> channel(DIRECTIVE);
-DIRECTIVE_ELSE         : 'else'                  -> channel(DIRECTIVE), type(ELSE);
-ENDIF                  : 'endif'                 -> channel(DIRECTIVE);
-LINE                   : 'line'                  -> channel(DIRECTIVE);
-ERROR                  : 'error' Whitespace+     -> channel(DIRECTIVE), mode(DIRECTIVE_TEXT);
-WARNING                : 'warning' Whitespace+   -> channel(DIRECTIVE), mode(DIRECTIVE_TEXT);
-REGION                 : 'region' Whitespace*    -> channel(DIRECTIVE), mode(DIRECTIVE_TEXT);
-ENDREGION              : 'endregion' Whitespace* -> channel(DIRECTIVE), mode(DIRECTIVE_TEXT);
-PRAGMA                 : 'pragma' Whitespace+    -> channel(DIRECTIVE), mode(DIRECTIVE_TEXT);
-NULLABLE               : 'nullable' Whitespace+  -> channel(DIRECTIVE), mode(DIRECTIVE_TEXT);
-DIRECTIVE_DEFAULT      : 'default'               -> channel(DIRECTIVE), type(DEFAULT);
-DIRECTIVE_HIDDEN       : 'hidden'                -> channel(DIRECTIVE);
-DIRECTIVE_OPEN_PARENS  : '('                     -> channel(DIRECTIVE), type(OPEN_PARENS);
-DIRECTIVE_CLOSE_PARENS : ')'                     -> channel(DIRECTIVE), type(CLOSE_PARENS);
-DIRECTIVE_BANG         : '!'                     -> channel(DIRECTIVE), type(BANG);
-DIRECTIVE_OP_EQ        : '=='                    -> channel(DIRECTIVE), type(OP_EQ);
-DIRECTIVE_OP_NE        : '!='                    -> channel(DIRECTIVE), type(OP_NE);
-DIRECTIVE_OP_AND       : '&&'                    -> channel(DIRECTIVE), type(OP_AND);
-DIRECTIVE_OP_OR        : '||'                    -> channel(DIRECTIVE), type(OP_OR);
-DIRECTIVE_STRING:
-    '"' ~('"' | [\r\n\u0085\u2028\u2029])* '"' -> channel(DIRECTIVE), type(STRING)
-;
-CONDITIONAL_SYMBOL: IdentifierOrKeyword -> channel(DIRECTIVE);
-DIRECTIVE_SINGLE_LINE_COMMENT:
-    '//' ~[\r\n\u0085\u2028\u2029]* -> channel(COMMENTS_CHANNEL), type(SINGLE_LINE_COMMENT)
-;
-DIRECTIVE_NEW_LINE: NewLine -> channel(DIRECTIVE), mode(DEFAULT_MODE);
-
-mode DIRECTIVE_TEXT;
-
-TEXT          : ~[\r\n\u0085\u2028\u2029]+ -> channel(DIRECTIVE);
-TEXT_NEW_LINE : NewLine                    -> channel(DIRECTIVE), type(DIRECTIVE_NEW_LINE), mode(DEFAULT_MODE);
 
 // Fragments
 

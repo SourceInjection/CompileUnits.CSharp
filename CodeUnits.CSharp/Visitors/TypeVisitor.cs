@@ -36,14 +36,14 @@ namespace CodeUnits.CSharp.Visitors
         {
             var modifiers = Modifiers.OfDelegate(allModifiers);
             return new DelegateDefinition(
-                name: context.identifier().GetText(),
-                accessModifier: modifiers.AccessModifier,
-                hasNewModifier: modifiers.HasNewModifier,
-                attributeGroups: attributeGroups,
-                returnType: context.return_type().GetText(),
-                parameters: Parameters.FromContext(context.formal_parameter_list()),
+                name:                 context.identifier().GetText(),
+                accessModifier:       modifiers.AccessModifier,
+                hasNewModifier:       modifiers.HasNewModifier,
+                attributeGroups:      attributeGroups,
+                returnType:           context.return_type().GetText(),
+                parameters:           Parameters.FromContext(context.formal_parameter_list()),
                 genericTypeArguments: GenericTypeArguments.FromContext(context.variant_type_parameter_list()),
-                constraints: Constraints.FromContext(context.type_parameter_constraints_clauses()));
+                constraints:          Constraints.FromContext(context.type_parameter_constraints_clauses()));
         }
 
         private static StructDefinition GetStruct(Struct_definitionContext context, List<AttributeGroup> attributeGroups, string[] allModifiers)
@@ -106,12 +106,15 @@ namespace CodeUnits.CSharp.Visitors
                 genericTypeArguments: GenericTypeArguments.FromContext(context.variant_type_parameter_list()),
                 constraints:          Constraints.FromContext(context.type_parameter_constraints_clauses()));
         }
-        private static string[] GetAllMemberModifiers([NotNull] Type_declarationContext context)
+
+        private static string[] GetAllMemberModifiers(Type_declarationContext context)
         {
-            if (context.all_member_modifiers() is null)
+            if (context?.all_member_modifiers()?.all_member_modifier() is null)
                 return Array.Empty<string>();
 
-            return context.all_member_modifiers().all_member_modifier().Select(c => c.GetText()).ToArray();            
+            return context.all_member_modifiers().all_member_modifier()
+                .Select(c => c.GetText())
+                .ToArray();            
         }
     }
 }

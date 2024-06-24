@@ -10,7 +10,8 @@ namespace CodeUnits.CSharp.Visitors
 
         public override MemberDefinition VisitStruct_member_declaration([NotNull] Struct_member_declarationContext context)
         {
-            
+            int x = 3;
+            x >>= 1;
         }
 
         public override MemberDefinition VisitClass_member_declaration([NotNull] Class_member_declarationContext context)
