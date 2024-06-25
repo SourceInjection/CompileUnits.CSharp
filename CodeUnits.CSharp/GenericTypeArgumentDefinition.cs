@@ -4,9 +4,9 @@ namespace CodeUnits.CSharp
 {
     public enum Variance { None, In, Out }
 
-    public class GenericTypeArgumentDefinition
+    public sealed class GenericTypeArgumentDefinition
     {
-        public GenericTypeArgumentDefinition(string name, Variance variance, IReadOnlyList<AttributeGroup> attributeGroups)
+        internal GenericTypeArgumentDefinition(string name, Variance variance, IReadOnlyList<AttributeGroup> attributeGroups)
         {
             Name = name;
             Variance = variance;

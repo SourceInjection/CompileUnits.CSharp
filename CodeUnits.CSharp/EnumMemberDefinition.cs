@@ -2,9 +2,9 @@
 
 namespace CodeUnits.CSharp
 {
-    public class EnumMemberDefinition
+    public sealed class EnumMemberDefinition
     {
-        public EnumMemberDefinition(string name, string value, IReadOnlyList<AttributeGroup> attributeGroups)
+        internal EnumMemberDefinition(string name, Expression value, IReadOnlyList<AttributeGroup> attributeGroups)
         {
             Name = name;
             Value = value;
@@ -15,7 +15,7 @@ namespace CodeUnits.CSharp
 
         public string Name { get; }
 
-        public string Value { get; }
+        public Expression Value { get; }
 
         public IReadOnlyList<AttributeGroup> AttributeGroups { get; }
 

@@ -1,4 +1,7 @@
-﻿namespace CodeUnits.CSharp
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace CodeUnits.CSharp
 {
     public enum MemberKind
     {
@@ -6,7 +9,10 @@
         Property,
         Field,
         Method,
+        Destructor,
+        Constructor,
         Event,
+        Constant,
     }
 
     public enum AccessModifier
@@ -22,16 +28,20 @@
 
     public abstract class MemberDefinition
     {
-        public MemberDefinition(string name, AccessModifier modifier, bool hasNewModifier)
+        protected private MemberDefinition(string name, AccessModifier modifier, bool hasNewModifier, IReadOnlyList<AttributeGroup> attributeGroups)
         {
             Name = name;
             AccessModifier = modifier;
             HasNewModifer = hasNewModifier;
+            AttributeGroups = attributeGroups;
+            Attributes = attributeGroups.SelectMany(a => a.Attributes).ToArray();
         }
 
         public abstract MemberKind MemberKind { get; }
 
-        public abstract AccessModifier DefaultAccessability { get; }
+        public IReadOnlyList<AttributeGroup> AttributeGroups { get; }
+
+        public IReadOnlyList<AttributeUsage> Attributes { get; }
 
         public TypeDefinition ContainingType { get; internal set; }
 

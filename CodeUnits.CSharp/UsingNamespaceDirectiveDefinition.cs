@@ -1,8 +1,8 @@
 ﻿namespace CodeUnits.CSharp
 {
-    public class UsingNamespaceDirectiveDefinition: UsingDirectiveDefinition
+    public sealed class UsingNamespaceDirectiveDefinition: UsingDirectiveDefinition
     {
-        public UsingNamespaceDirectiveDefinition(string value, string @namespace)
+        internal UsingNamespaceDirectiveDefinition(string value, string @namespace)
             : base(value)
         {
             Namespace = @namespace;

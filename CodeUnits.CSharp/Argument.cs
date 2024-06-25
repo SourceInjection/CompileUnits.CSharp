@@ -1,15 +1,15 @@
 ﻿namespace CodeUnits.CSharp
 {
-    public class Argument
+    public sealed class Argument
     {
-        public Argument(string expression, string label = null)
+        internal Argument(Expression expression, string targetedParameter = null)
         {
             Expression = expression;
-            Label = label;
+            TargetedParameter = targetedParameter;
         }
 
-        public string Expression { get; }
+        public Expression Expression { get; }
 
-        public string Label { get; }
+        public string TargetedParameter { get; }
     }
 }

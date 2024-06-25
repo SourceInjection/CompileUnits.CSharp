@@ -15,9 +15,9 @@ namespace CodeUnits.CSharp.Visitors.Common
             var visitor = new MemberVisitor();
             foreach (var c in context.struct_member_declaration())
             {
-                var member = visitor.VisitStruct_member_declaration(c);
-                if (member != null)
-                    members.Add(member);
+                var definitions = visitor.VisitStruct_member_declaration(c);
+                if (definitions.Count > 0)
+                    members.AddRange(definitions);
             }
             return members;
         }
@@ -31,9 +31,9 @@ namespace CodeUnits.CSharp.Visitors.Common
             var visitor = new MemberVisitor();
             foreach (var c in context.class_member_declarations().class_member_declaration())
             {
-                var member = visitor.VisitClass_member_declaration(c);
-                if (member != null)
-                    members.Add(member);
+                var definitions = visitor.VisitClass_member_declaration(c);
+                if (definitions.Count > 0)
+                    members.AddRange(definitions);
             }
             return members;
         }
@@ -46,7 +46,7 @@ namespace CodeUnits.CSharp.Visitors.Common
             return context.enum_member_declaration()
                 .Select(c => new EnumMemberDefinition(
                     c.identifier().GetText(),
-                    c.expression()?.GetText(),
+                    c.expression() is null ? null : new Expression(c.expression()),
                     AttributeGroups.FromContext(c.attributes())))
                 .ToList();
         }

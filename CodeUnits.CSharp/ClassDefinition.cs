@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace CodeUnits.CSharp
 {
-    public class ClassDefinition: StructuredTypeDefinition
+    public sealed class ClassDefinition: StructuredTypeDefinition
     {
-        public ClassDefinition(
+        internal ClassDefinition(
             string name,
             AccessModifier accessModifier,
             bool hasNewModifier,
@@ -23,6 +24,8 @@ namespace CodeUnits.CSharp
             IsRecord = isRecord;
             IsSealed = isSealed;
             IsAbstract = isAbstract;
+            Destructor = members.OfType<DestructorDefinition>()
+                .FirstOrDefault();
         }
 
         public override TypeKind TypeKind { get; } = TypeKind.Class;
@@ -34,5 +37,7 @@ namespace CodeUnits.CSharp
         public bool IsSealed { get; }
 
         public bool IsAbstract { get; }
+
+        public DestructorDefinition Destructor { get; }
     }
 }

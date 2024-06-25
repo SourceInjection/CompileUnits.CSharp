@@ -27,7 +27,7 @@ namespace CodeUnits.CSharp.Visitors.Common
                         if (attributeContext.attribute_argument() != null)
                         {
                             foreach (var argContext in attributeContext.attribute_argument())
-                                args.Add(new Argument(argContext.expression().GetText(), argContext.identifier()?.GetText()));
+                                args.Add(new Argument(new Expression(argContext.expression()), argContext.identifier()?.GetText()));
                         }
                         attributes.Add(new AttributeUsage(name, args));
                     }

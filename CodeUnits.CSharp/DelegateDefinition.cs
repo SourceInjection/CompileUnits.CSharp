@@ -2,12 +2,17 @@
 
 namespace CodeUnits.CSharp
 {
-    internal class DelegateDefinition : TypeDefinition
+    public sealed class DelegateDefinition : TypeDefinition
     {
-        public DelegateDefinition(
-            string name, AccessModifier accessModifier, bool hasNewModifier, IReadOnlyList<AttributeGroup> attributeGroups,
-            string returnType, IReadOnlyList<ParameterDefinition> parameters,
-            IReadOnlyList<GenericTypeArgumentDefinition> genericTypeArguments, IReadOnlyList<ConstraintDefinition> constraints)
+        internal DelegateDefinition(
+            string name, 
+            AccessModifier accessModifier, 
+            bool hasNewModifier, 
+            IReadOnlyList<AttributeGroup> attributeGroups,
+            TypeUsage returnType, 
+            IReadOnlyList<ParameterDefinition> parameters,
+            IReadOnlyList<GenericTypeArgumentDefinition> genericTypeArguments, 
+            IReadOnlyList<ConstraintDefinition> constraints)
 
             : base(name, accessModifier, hasNewModifier, attributeGroups)
         {
@@ -17,11 +22,9 @@ namespace CodeUnits.CSharp
             Constraints = constraints;
         }
 
-        public override AccessModifier DefaultAccessability { get; } = CSharp.AccessModifier.Internal;
-
         public override TypeKind TypeKind { get; } = TypeKind.Delegate;
 
-        public string ReturnType { get; }
+        public TypeUsage ReturnType { get; }
 
         public IReadOnlyList<ParameterDefinition> Parameters { get; }
 

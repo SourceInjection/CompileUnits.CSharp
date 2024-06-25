@@ -5,8 +5,11 @@ namespace CodeUnits.CSharp
 {
     public abstract class StructuredTypeDefinition : TypeDefinition
     {
-        protected StructuredTypeDefinition(
-            string name, AccessModifier accessModifier, bool hasNewModifier, IReadOnlyList<AttributeGroup> attributeGroups,
+        protected private StructuredTypeDefinition(
+            string name, 
+            AccessModifier accessModifier, 
+            bool hasNewModifier, 
+            IReadOnlyList<AttributeGroup> attributeGroups,
             IReadOnlyList<MemberDefinition> members, 
             IReadOnlyList<GenericTypeArgumentDefinition> genericTypeArguments, 
             IReadOnlyList<ConstraintDefinition> constraints)
@@ -19,23 +22,29 @@ namespace CodeUnits.CSharp
             GenericTypeArguments = genericTypeArguments;
             ConstraintClauses = constraints;
             Members = members;
+
+            Constructors = members.OfType<ConstructorDefinition>().ToArray();
             Fields = members.OfType<FieldDefinition>().ToArray();
             Properties = members.OfType<PropertyDefinition>().ToArray();
-            Methods = members.OfType<MethodDefinition>().ToArray();
+            Methods = members.OfType<MethodDefinition>()
+                .Where(m => m.IsKind(MemberKind.Method)).ToArray();
             Types = members.OfType<TypeDefinition>().ToArray();
+            Constants = members.OfType<ConstantDefinition>().ToArray();
         }
-
-        public override AccessModifier DefaultAccessability { get; } = CSharp.AccessModifier.Internal;
 
         public IReadOnlyList<MemberDefinition> Members { get; }
 
+        public IReadOnlyList<TypeDefinition> Types { get; }
+
+        public IReadOnlyList<ConstantDefinition> Constants { get; }
+
         public IReadOnlyList<FieldDefinition> Fields { get; }
+
+        public IReadOnlyList<ConstructorDefinition> Constructors { get; }
 
         public IReadOnlyList<PropertyDefinition> Properties { get; }
 
         public IReadOnlyList<MethodDefinition> Methods { get; }
-
-        public IReadOnlyList<TypeDefinition> Types { get; }
 
         public IReadOnlyList<GenericTypeArgumentDefinition> GenericTypeArguments { get; }
 

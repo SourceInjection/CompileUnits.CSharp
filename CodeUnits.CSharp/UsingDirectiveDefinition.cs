@@ -9,7 +9,7 @@
 
     public abstract class UsingDirectiveDefinition
     {
-        public UsingDirectiveDefinition(string value)
+        protected private UsingDirectiveDefinition(string value)
         {
             Value = value;
         }

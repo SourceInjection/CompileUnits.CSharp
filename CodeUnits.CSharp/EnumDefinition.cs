@@ -2,15 +2,15 @@
 
 namespace CodeUnits.CSharp
 {
-    public class EnumDefinition : TypeDefinition
+    public sealed class EnumDefinition : TypeDefinition
     {
-        public EnumDefinition(
+        internal EnumDefinition(
             string name, 
             AccessModifier accessModifier, 
             bool hasNewModifier, 
             IReadOnlyList<AttributeGroup> attributeGroups,
             IReadOnlyList<EnumMemberDefinition> members, 
-            string intType)
+            TypeUsage baseType)
             
             : base(name, accessModifier, hasNewModifier, attributeGroups)
         {
@@ -18,15 +18,13 @@ namespace CodeUnits.CSharp
                 member.ContainingType = this;
 
             Members = members;
-            IntType = intType;
+            BaseType = baseType;
         }
 
         public IReadOnlyList<EnumMemberDefinition> Members { get; }
 
         public override TypeKind TypeKind { get; } = TypeKind.Enum;
 
-        public override AccessModifier DefaultAccessability { get; } = CSharp.AccessModifier.Internal;
-
-        public string IntType { get; }
+        public TypeUsage BaseType { get; }
     }
 }

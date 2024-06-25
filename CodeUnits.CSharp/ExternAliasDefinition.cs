@@ -1,8 +1,8 @@
 ﻿namespace CodeUnits.CSharp
 {
-    public class ExternAliasDefinition
+    public sealed class ExternAliasDefinition
     {
-        public ExternAliasDefinition(string name)
+        internal ExternAliasDefinition(string name)
         {
             Name = name;
         }

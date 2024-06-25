@@ -1,12 +1,20 @@
-﻿namespace CodeUnits.CSharp
-{
-    public class PropertyDefinition: MemberDefinition
-    {
-        public PropertyDefinition(
-            string name, AccessModifier accessModifier, bool hasNewModifier,
-            string type, bool isAbstract, bool isVirtual, bool isOverride)
+﻿using System.Collections.Generic;
 
-            : base(name, accessModifier, hasNewModifier)
+namespace CodeUnits.CSharp
+{
+    public sealed class PropertyDefinition: MemberDefinition
+    {
+        internal PropertyDefinition(
+            string name, 
+            AccessModifier accessModifier, 
+            bool hasNewModifier,
+            IReadOnlyList<AttributeGroup> attributeGroups,
+            TypeUsage type, 
+            bool isAbstract, 
+            bool isVirtual, 
+            bool isOverride)
+
+            : base(name, accessModifier, hasNewModifier, attributeGroups)
         {
             Type = type;
             IsAbstract = isAbstract;
@@ -16,9 +24,7 @@
 
         public override MemberKind MemberKind { get; } = MemberKind.Property;
 
-        public override AccessModifier DefaultAccessability { get; } = CSharp.AccessModifier.Private;
-
-        public string Type { get; }
+        public TypeUsage Type { get; }
 
         public bool IsAbstract { get; }
 

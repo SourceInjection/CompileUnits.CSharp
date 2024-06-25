@@ -1,17 +1,17 @@
 ﻿namespace CodeUnits.CSharp
 {
-    public class UsingAliasDirectiveDefinition : UsingDirectiveDefinition
+    public sealed class UsingAliasDirectiveDefinition : UsingDirectiveDefinition
     {
-        public UsingAliasDirectiveDefinition(string value, string newName, string oldName)
+        internal UsingAliasDirectiveDefinition(string value, string name, TypeUsage type)
             : base(value)
         {
-            NewName = newName;
-            OldName = oldName;
+            Name = name;
+            Type = type;
         }
 
-        public string NewName { get; }
+        public string Name { get; }
 
-        public string OldName { get; }
+        public TypeUsage Type { get; }
 
         public override UsingDirectiveKind Kind { get; } = UsingDirectiveKind.Alias;
     }

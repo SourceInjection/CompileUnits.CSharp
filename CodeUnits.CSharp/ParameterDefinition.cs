@@ -1,21 +1,44 @@
-﻿namespace CodeUnits.CSharp
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace CodeUnits.CSharp
 {
-    public class ParameterDefinition
+    public enum ParameterModifier
     {
-        public ParameterDefinition(string type, string name, bool isParamsArray = false, string defaultValue = null)
+        None,
+        Ref,
+        In,
+        Out,
+        RefThis,
+        InThis,
+        This,
+    }
+
+    public sealed class ParameterDefinition
+    {
+        internal ParameterDefinition(TypeUsage type, string name, ParameterModifier modifier, IReadOnlyList<AttributeGroup> attributes, bool isParamsArray = false, Expression defaultValue = null)
         {
             Type = type;
             Name = name;
             IsParamsArray = isParamsArray;
             DefaultValue = defaultValue;
-            IsOptional = defaultValue != null;
+            AttributeGroups = attributes;
+            Attributes = attributes.SelectMany(a => a.Attributes).ToArray();
+            IsOptional = defaultValue == null;
+            Modifier = modifier;
         }
 
-        public string Type { get; }
+        public TypeUsage Type { get; }
 
         public string Name { get; }
 
-        public string DefaultValue { get; }
+        public ParameterModifier Modifier { get; }
+
+        public IReadOnlyList<AttributeGroup> AttributeGroups { get; }
+
+        public IReadOnlyList<AttributeUsage> Attributes { get; }
+
+        public Expression DefaultValue { get; }
 
         public bool IsParamsArray { get; }
 

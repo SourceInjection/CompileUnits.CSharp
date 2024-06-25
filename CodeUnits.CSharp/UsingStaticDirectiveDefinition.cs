@@ -1,14 +1,14 @@
 ﻿namespace CodeUnits.CSharp
 {
-    public class UsingStaticDirectiveDefinition: UsingDirectiveDefinition
+    public sealed class UsingStaticDirectiveDefinition: UsingDirectiveDefinition
     {
-        public UsingStaticDirectiveDefinition(string value, string classFullName)
+        internal UsingStaticDirectiveDefinition(string value, TypeUsage type)
             : base(value)
         {
-            ClassFullName = classFullName;
+            Type = type;
         }
 
-        public string ClassFullName { get; }
+        public TypeUsage Type { get; }
 
         public override UsingDirectiveKind Kind { get; } = UsingDirectiveKind.Static;
     }

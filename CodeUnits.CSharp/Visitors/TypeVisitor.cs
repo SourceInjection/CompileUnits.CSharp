@@ -35,12 +35,16 @@ namespace CodeUnits.CSharp.Visitors
         private static DelegateDefinition GetDelegate(Delegate_definitionContext context, List<AttributeGroup> attributeGroups, string[] allModifiers)
         {
             var modifiers = Modifiers.OfDelegate(allModifiers);
+            var returnType = context.return_type().type_() is null
+                ? TypeUsage.Void
+                : new TypeUsage(context.return_type().type_());
+
             return new DelegateDefinition(
                 name:                 context.identifier().GetText(),
                 accessModifier:       modifiers.AccessModifier,
                 hasNewModifier:       modifiers.HasNewModifier,
                 attributeGroups:      attributeGroups,
-                returnType:           context.return_type().GetText(),
+                returnType:           returnType,
                 parameters:           Parameters.FromContext(context.formal_parameter_list()),
                 genericTypeArguments: GenericTypeArguments.FromContext(context.variant_type_parameter_list()),
                 constraints:          Constraints.FromContext(context.type_parameter_constraints_clauses()));
@@ -66,13 +70,17 @@ namespace CodeUnits.CSharp.Visitors
         private static EnumDefinition GetEnum(Enum_definitionContext context, List<AttributeGroup> attributeGroups, string[] allModifiers)
         {
             var modifiers = Modifiers.OfEnum(allModifiers);
+            var baseType = context.enum_base()?.type_() is null
+                ? null
+                : new TypeUsage(context.enum_base().type_());
+
             return new EnumDefinition(
                 name:            context.identifier().GetText(),
                 accessModifier:  modifiers.AccessModifier,
                 hasNewModifier:  modifiers.HasNewModifier,
                 attributeGroups: attributeGroups,
                 members:         Members.FromContext(context.enum_body()),
-                intType:         context.enum_base()?.type_()?.GetText());
+                baseType:        baseType);
         }
 
         private static ClassDefinition GetClass(Class_definitionContext context, List<AttributeGroup> attributeGroups, string[] allModifiers)

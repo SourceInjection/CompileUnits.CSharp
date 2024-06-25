@@ -4,7 +4,7 @@ namespace CodeUnits.CSharp
 {
     public class NamespaceDefinition
     {
-        public NamespaceDefinition(string name, IReadOnlyList<UsingDirectiveDefinition> directives,
+        protected internal NamespaceDefinition(string name, IReadOnlyList<UsingDirectiveDefinition> directives,
             IReadOnlyList<NamespaceDefinition> namespaces, IReadOnlyList<TypeDefinition> types, IReadOnlyList<ExternAliasDefinition> externAliases)
         {
             Name = name;

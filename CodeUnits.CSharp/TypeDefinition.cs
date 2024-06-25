@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace CodeUnits.CSharp
 {
@@ -16,27 +15,20 @@ namespace CodeUnits.CSharp
 
     public abstract class TypeDefinition: MemberDefinition
     {
-        public TypeDefinition(
+        protected private TypeDefinition(
             string name, 
             AccessModifier accessModifier, 
             bool hasNewModifier, 
             IReadOnlyList<AttributeGroup> attributeGroups)
 
-            : base(name, accessModifier, hasNewModifier)
-        {
-            AttributeGroups = attributeGroups;
-            Attributes = attributeGroups.SelectMany(g => g.Attributes).ToArray();
-        }
+            : base(name, accessModifier, hasNewModifier, attributeGroups)
+        { }
 
         public abstract TypeKind TypeKind { get; }
 
         public override MemberKind MemberKind { get; } = MemberKind.Type;
 
         public NamespaceDefinition ContainingNamespace { get; internal set; }
-
-        public IReadOnlyList<AttributeGroup> AttributeGroups { get; }
-
-        public IReadOnlyList<AttributeUsage> Attributes { get; }
 
         public string FullName()
         {

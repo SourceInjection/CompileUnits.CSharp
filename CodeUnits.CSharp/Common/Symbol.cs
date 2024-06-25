@@ -10,8 +10,60 @@ namespace CodeUnits.CSharp.Common
         {
             if (_symbolKind.TryGetValue(id, out var symbolKind))
                 return symbolKind;
-            throw new InvalidOperationException($"{nameof(CSharpParser)} does not have a token with id '{id}'.");
+            throw new InvalidOperationException($"{nameof(CSharpParser)} does not have a token in its dictionary with id '{id}'.");
         }
+
+
+
+        public static bool IsPredefinedType(TerminalSymbolKind symbolKind)
+        {
+            return IsObject(symbolKind)
+                || IsString(symbolKind)
+                || IsSimpleType(symbolKind);
+        }
+
+        public static bool IsObject(TerminalSymbolKind symbolKind)
+        {
+            return symbolKind == TerminalSymbolKind.Object;
+        }
+
+        public static bool IsString(TerminalSymbolKind symbolKind)
+        {
+            return symbolKind == TerminalSymbolKind.String;
+        }
+
+        public static bool IsSimpleType(TerminalSymbolKind symbolKind)
+        {
+            return IsBoolean(symbolKind)
+                || IsInteger(symbolKind)
+                || IsReal(symbolKind);
+        }
+
+        public static bool IsInteger(TerminalSymbolKind symbolKind)
+        {
+            return symbolKind == TerminalSymbolKind.Sbyte
+                || symbolKind == TerminalSymbolKind.Byte
+                || symbolKind == TerminalSymbolKind.Short
+                || symbolKind == TerminalSymbolKind.Ushort
+                || symbolKind == TerminalSymbolKind.Int
+                || symbolKind == TerminalSymbolKind.Uint
+                || symbolKind == TerminalSymbolKind.Long
+                || symbolKind == TerminalSymbolKind.Ulong
+                || symbolKind == TerminalSymbolKind.Char;
+        }
+
+        public static bool IsReal(TerminalSymbolKind symbolKind)
+        {
+            return symbolKind == TerminalSymbolKind.Float
+                || symbolKind == TerminalSymbolKind.Double
+                || symbolKind == TerminalSymbolKind.Decimal;
+        }
+
+        public static bool IsBoolean(TerminalSymbolKind symbolKind)
+        {
+            return symbolKind == TerminalSymbolKind.Bool;
+        }
+
 
         private static readonly Dictionary<int, TerminalSymbolKind> _symbolKind = new Dictionary<int, TerminalSymbolKind>()
         {

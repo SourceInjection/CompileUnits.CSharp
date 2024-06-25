@@ -2,9 +2,9 @@
 
 namespace CodeUnits.CSharp.Visitors
 {
-    internal class InterfaceDefinition: StructuredTypeDefinition
+    public sealed class InterfaceDefinition: StructuredTypeDefinition
     {
-        public InterfaceDefinition(
+        internal InterfaceDefinition(
             string name,
             AccessModifier accessModifier,
             bool hasNewModifier,

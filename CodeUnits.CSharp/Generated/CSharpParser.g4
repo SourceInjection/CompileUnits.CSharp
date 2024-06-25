@@ -1,8 +1,4 @@
-﻿// Eclipse Public License - v 1.0, http://www.eclipse.org/legal/epl-v10.html
-// Copyright (c) 2013, Christian Wulf (chwchw@gmx.de)
-// Copyright (c) 2016-2017, Ivan Kochurkin (kvanttt@gmail.com), Positive Technologies.
-
-// $antlr-format alignTrailingComments true, columnLimit 150, minEmptyLines 1, maxEmptyLinesToKeep 1, reflowComments false, useTab false
+﻿// $antlr-format alignTrailingComments true, columnLimit 150, minEmptyLines 1, maxEmptyLinesToKeep 1, reflowComments false, useTab false
 // $antlr-format allowShortRulesOnASingleLine false, allowShortBlocksOnASingleLine true, alignSemicolons hanging, alignColons hanging
 
 parser grammar CSharpParser;
@@ -23,9 +19,8 @@ compilation_unit
 //B.2.1 Basic concepts
 
 namespace_or_type_name
-    : (identifier type_argument_list? | qualified_alias_member) (
-        DOT identifier type_argument_list?
-    )*
+    : (identifier type_argument_list? | qualified_alias_member) 
+      ( DOT identifier type_argument_list? )*
     ;
 
 //B.2.2 Types
@@ -261,13 +256,13 @@ primary_expression // Null-conditional operators C# 6: https://msdn.microsoft.co
     ;
 
 primary_expression_start
-    : literal                                                             # literalExpression
-    | identifier type_argument_list?                                      # simpleNameExpression
-    | OPEN_PARENS expression CLOSE_PARENS                                 # parenthesisExpressions
-    | predefined_type                                                     # memberAccessExpression
-    | qualified_alias_member                                              # memberAccessExpression
-    | LITERAL_ACCESS                                                      # literalAccessExpression
-    | THIS                                                                # thisReferenceExpression
+    : literal                                                                                # literalExpression
+    | identifier type_argument_list?                                                         # simpleNameExpression
+    | OPEN_PARENS expression CLOSE_PARENS                                                    # parenthesisExpressions
+    | predefined_type                                                                        # memberAccessExpression
+    | qualified_alias_member                                                                 # memberAccessExpression
+    | LITERAL_ACCESS                                                                         # literalAccessExpression
+    | THIS                                                                                   # thisReferenceExpression
     | BASE (DOT identifier type_argument_list? | OPEN_BRACKET expression_list CLOSE_BRACKET) # baseAccessExpression
     | NEW (
         type_? (
@@ -286,8 +281,7 @@ primary_expression_start
     | DEFAULT (OPEN_PARENS type_ CLOSE_PARENS)?                                                     # defaultValueExpression
     | ASYNC? DELEGATE (OPEN_PARENS explicit_anonymous_function_parameter_list? CLOSE_PARENS)? block # anonymousMethodExpression
     | SIZEOF OPEN_PARENS type_ CLOSE_PARENS                                                         # sizeofExpression
-    // C# 6: https://msdn.microsoft.com/en-us/library/dn986596.aspx
-    | NAMEOF OPEN_PARENS (identifier DOT)* identifier CLOSE_PARENS # nameofExpression
+    | NAMEOF OPEN_PARENS (identifier DOT)* identifier CLOSE_PARENS                                  # nameofExpression
     ;
 
 throwable_expression

@@ -24,7 +24,7 @@ namespace CodeUnits.CSharp.Visitors.Common
                     isAbstract = true;
                 else if(modifier == "new")
                     hasNewModifier = true;
-                else MayAddModifier(accessModifiers, modifier);
+                else MayAddAccessModifier(accessModifiers, modifier);
             }
             return (MergeModifiers(accessModifiers), isStatic, isSealed, isAbstract, hasNewModifier);
         }
@@ -42,18 +42,25 @@ namespace CodeUnits.CSharp.Visitors.Common
                     isReadonly = true;
                 else if (modifier == "new")
                     hasNewModifier = true;
-                else MayAddModifier(accessModifiers, modifier);
+                else MayAddAccessModifier(accessModifiers, modifier);
             }
             return (MergeModifiers(accessModifiers), isReadonly, hasNewModifier);
         }
 
-        public static (AccessModifier AccessModifier, bool HasNewModifier) OfEnum(IEnumerable<string> modifiers) => OfType(modifiers);
+        public static (AccessModifier AccessModifier, bool HasNewModifier) 
+            OfEnum(IEnumerable<string> modifiers) => OfAny(modifiers);
 
-        public static (AccessModifier AccessModifier, bool HasNewModifier) OfDelegate(IEnumerable<string> modifiers) => OfType(modifiers);
+        public static (AccessModifier AccessModifier, bool HasNewModifier) 
+            OfDelegate(IEnumerable<string> modifiers) => OfAny(modifiers);
 
-        public static (AccessModifier AccessModifier, bool HasNewModifier) OfInterface(IEnumerable<string> modifiers) => OfType(modifiers);
+        public static (AccessModifier AccessModifier, bool HasNewModifier) 
+            OfInterface(IEnumerable<string> modifiers) => OfAny(modifiers);
 
-        private static (AccessModifier AccessModifier, bool HasNewModifier) OfType(IEnumerable<string> modifiers)
+        public static (AccessModifier AccessModifier, bool HasNewModifier)
+            OfConstant(IEnumerable<string> modifier) => OfAny(modifier);
+
+        private static (AccessModifier AccessModifier, bool HasNewModifier) 
+            OfAny(IEnumerable<string> modifiers)
         {
             var accessModifiers = new List<AccessModifier>();
             var hasNewModifier = false;
@@ -62,13 +69,13 @@ namespace CodeUnits.CSharp.Visitors.Common
             {
                 if(modifier == "new")
                     hasNewModifier = true;
-                else MayAddModifier(accessModifiers, modifier);
+                else MayAddAccessModifier(accessModifiers, modifier);
             }
             return (MergeModifiers(accessModifiers), hasNewModifier);
         }
 
 
-        private static bool MayAddModifier(List<AccessModifier> accessModifiers, string modifier)
+        private static bool MayAddAccessModifier(List<AccessModifier> accessModifiers, string modifier)
         {
             var cnt = accessModifiers.Count;
             if (modifier == "private")

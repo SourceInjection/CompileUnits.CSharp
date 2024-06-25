@@ -8,7 +8,7 @@ using System.IO;
 
 namespace CodeUnits.CSharp
 {
-    public class CodeUnit: NamespaceDefinition
+    public sealed class CodeUnit: NamespaceDefinition
     {
         private CodeUnit(string projectDefaultNamespace,
             IReadOnlyList<UsingDirectiveDefinition> directives, IReadOnlyList<NamespaceDefinition> namespaces,

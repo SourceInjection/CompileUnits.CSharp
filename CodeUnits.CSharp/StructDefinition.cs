@@ -2,9 +2,9 @@
 
 namespace CodeUnits.CSharp
 {
-    internal class StructDefinition: StructuredTypeDefinition
+    public sealed class StructDefinition: StructuredTypeDefinition
     {
-        public StructDefinition(
+        internal StructDefinition(
             string name,
             AccessModifier accessModifier,
             bool hasNewModifier,
@@ -14,7 +14,8 @@ namespace CodeUnits.CSharp
             IReadOnlyList<ConstraintDefinition> constraints,
             bool isRecord, bool isReadonly)
 
-            : base(name, accessModifier, hasNewModifier, attributeGroups, members, genericTypeArguments, constraints)
+            : base(name, accessModifier, hasNewModifier, attributeGroups, 
+                  members, genericTypeArguments, constraints)
         {
             IsRecord = isRecord;
             IsReadonly = isReadonly;

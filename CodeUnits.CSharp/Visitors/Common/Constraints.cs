@@ -42,7 +42,7 @@ namespace CodeUnits.CSharp.Visitors.Common
                 return null;
 
             if (context.class_type() != null)
-                return new ConstraintClause(ConstraintKind.OfType, context.class_type().GetText());
+                return new ConstraintClause(ConstraintKind.OfType, new TypeUsage(context.class_type()));
             else if (context.STRUCT() != null)
                 return new ConstraintClause(ConstraintKind.Struct);
             else if (context.UNMANAGED() != null)
@@ -64,7 +64,7 @@ namespace CodeUnits.CSharp.Visitors.Common
                 yield break;
 
             foreach (var c in context.namespace_or_type_name())
-                yield return new ConstraintClause(ConstraintKind.OfType, c.GetText());
+                yield return new ConstraintClause(ConstraintKind.OfType, new TypeUsage(c));
         }
     }
 }

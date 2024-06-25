@@ -2,9 +2,9 @@
 
 namespace CodeUnits.CSharp
 {
-    public class AttributeUsage
+    public sealed class AttributeUsage
     {
-        public AttributeUsage(string name, IReadOnlyList<Argument> arguments)
+        internal AttributeUsage(string name, IReadOnlyList<Argument> arguments)
         {
             Name = name;
             Arguments = arguments;

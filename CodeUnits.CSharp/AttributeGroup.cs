@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace CodeUnits.CSharp
 {
-    public class AttributeGroup
+    public sealed class AttributeGroup
     {
-        public AttributeGroup(string attributeTarget, IReadOnlyList<AttributeUsage> attributes)
+        internal AttributeGroup(string attributeTarget, IReadOnlyList<AttributeUsage> attributes)
         {
             foreach (var attribute in attributes)
                 attribute.ContainingSection = this;

@@ -13,9 +13,9 @@ namespace CodeUnits.CSharp
         Default 
     }
 
-    public class ConstraintClause
+    public sealed class ConstraintClause
     {
-        public ConstraintClause(ConstraintKind kind, string value = null)
+        internal ConstraintClause(ConstraintKind kind, TypeUsage value = null)
         {
             Kind = kind;
             Value = value;
@@ -23,7 +23,7 @@ namespace CodeUnits.CSharp
 
         public ConstraintKind Kind { get; }
 
-        public string Value { get; }
+        public TypeUsage Value { get; }
 
         public bool IsKind(ConstraintKind kind) => Kind == kind;
     }

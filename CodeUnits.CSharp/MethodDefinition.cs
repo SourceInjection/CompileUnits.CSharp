@@ -3,11 +3,22 @@ namespace CodeUnits.CSharp
 {
     public class MethodDefinition: MemberDefinition
     {
-        public MethodDefinition(string name, AccessModifier accessModifier, bool hasNewModifier,
-            IReadOnlyList<string> genericTypeArguments, IReadOnlyList<ParameterDefinition> parameters,
-            string returnType, bool isAbstract, bool isVirtual, bool isOverride, bool isNew, bool isSealed)
+        protected private MethodDefinition(
+            string name, 
+            AccessModifier accessModifier, 
+            bool hasNewModifier, 
+            IReadOnlyList<AttributeGroup> attributeGroups,
+            IReadOnlyList<string> genericTypeArguments, 
+            IReadOnlyList<ParameterDefinition> parameters,
+            TypeUsage returnType, 
+            bool isAbstract, 
+            bool isVirtual, 
+            bool isOverride, 
+            bool isNew, 
+            bool isSealed,
+            MethodBody body)
 
-            : base(name, accessModifier, hasNewModifier)
+            : base(name, accessModifier, hasNewModifier, attributeGroups)
         {
             GenericTypeArguments = genericTypeArguments;
             Parameters = parameters;
@@ -17,13 +28,12 @@ namespace CodeUnits.CSharp
             IsOverride = isOverride;
             IsNew = isNew;
             IsSealed = isSealed;
+            Body = body;
         }
 
         public override MemberKind MemberKind { get; } = MemberKind.Method;
 
-        public override AccessModifier DefaultAccessability { get; } = CSharp.AccessModifier.Private;
-
-        public string ReturnType { get; }
+        public TypeUsage ReturnType { get; }
 
         public IReadOnlyList<ParameterDefinition> Parameters { get; }
 
@@ -38,5 +48,7 @@ namespace CodeUnits.CSharp
         public bool IsNew { get; }
 
         public bool IsSealed { get; }
+
+        public MethodBody Body { get; }
     }
 }

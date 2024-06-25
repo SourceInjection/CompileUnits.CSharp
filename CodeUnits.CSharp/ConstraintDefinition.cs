@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
 namespace CodeUnits.CSharp
 {
-    public class ConstraintDefinition
+    public sealed class ConstraintDefinition
     {
-        public ConstraintDefinition(string targetedTypeArgument, IReadOnlyList<ConstraintClause> clauses)
+        internal ConstraintDefinition(IReadOnlyList<ConstraintClause> clauses)
         {
-            TargetedTypeArgument = targetedTypeArgument;
             Clauses = clauses;
         }
 
-        public string TargetedTypeArgument { get; }
+        public GenericTypeArgumentDefinition TargetedTypeArgument { get; internal set; }
 
         public IReadOnlyList<ConstraintClause> Clauses { get; }
     }
