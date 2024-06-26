@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 namespace CodeUnits.CSharp
 {
-    public class MethodDefinition: MemberDefinition
+    public sealed class MethodDefinition: InvokableMemberDefinition
     {
-        protected private MethodDefinition(
+        internal MethodDefinition(
             string name, 
             AccessModifier accessModifier, 
             bool hasNewModifier, 
@@ -11,31 +11,23 @@ namespace CodeUnits.CSharp
             IReadOnlyList<string> genericTypeArguments, 
             IReadOnlyList<ParameterDefinition> parameters,
             TypeUsage returnType, 
+            Code body,
             bool isAbstract, 
             bool isVirtual, 
             bool isOverride, 
-            bool isNew, 
-            bool isSealed,
-            MethodBody body)
+            bool isSealed)
 
-            : base(name, accessModifier, hasNewModifier, attributeGroups)
+            : base(name, accessModifier, attributeGroups, returnType, parameters, body)
         {
             GenericTypeArguments = genericTypeArguments;
-            Parameters = parameters;
-            ReturnType = returnType;
             IsAbstract = isAbstract;
             IsVirtual = isVirtual;
             IsOverride = isOverride;
-            IsNew = isNew;
             IsSealed = isSealed;
-            Body = body;
+            HasNewModifier = hasNewModifier;
         }
 
         public override MemberKind MemberKind { get; } = MemberKind.Method;
-
-        public TypeUsage ReturnType { get; }
-
-        public IReadOnlyList<ParameterDefinition> Parameters { get; }
 
         public IReadOnlyList<string> GenericTypeArguments { get; }
 
@@ -45,10 +37,8 @@ namespace CodeUnits.CSharp
 
         public bool IsOverride { get; }
 
-        public bool IsNew { get; }
-
         public bool IsSealed { get; }
 
-        public MethodBody Body { get; }
+        public bool HasNewModifier { get; }
     }
 }

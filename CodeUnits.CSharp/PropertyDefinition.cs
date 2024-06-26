@@ -2,9 +2,9 @@
 
 namespace CodeUnits.CSharp
 {
-    public sealed class PropertyDefinition: MemberDefinition
+    public class PropertyDefinition: MemberDefinition
     {
-        internal PropertyDefinition(
+        private protected PropertyDefinition(
             string name, 
             AccessModifier accessModifier, 
             bool hasNewModifier,
@@ -12,14 +12,21 @@ namespace CodeUnits.CSharp
             TypeUsage type, 
             bool isAbstract, 
             bool isVirtual, 
-            bool isOverride)
+            bool isOverride,
+            bool hasRefModifier,
+            GetterDefinition getter,
+            SetterDefinition setter)
 
-            : base(name, accessModifier, hasNewModifier, attributeGroups)
+            : base(name, accessModifier, attributeGroups)
         {
             Type = type;
             IsAbstract = isAbstract;
             IsVirtual = isVirtual;
             IsOverride = isOverride;
+            HasRefModifier = hasRefModifier;
+            Getter = getter;
+            Setter = setter;
+            HasNewModifier = hasNewModifier;
         }
 
         public override MemberKind MemberKind { get; } = MemberKind.Property;
@@ -31,5 +38,13 @@ namespace CodeUnits.CSharp
         public bool IsVirtual { get; }
 
         public bool IsOverride { get; }
+
+        public bool HasRefModifier { get; }
+
+        public GetterDefinition Getter { get; }
+
+        public SetterDefinition Setter { get; }
+
+        public bool HasNewModifier { get; }
     }
 }

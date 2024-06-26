@@ -3,14 +3,15 @@ using System.Collections.Generic;
 
 namespace CodeUnits.CSharp
 {
-    public sealed class DestructorDefinition : MethodDefinition
+    public sealed class DestructorDefinition : InvokableMemberDefinition
     {
-        internal DestructorDefinition(IReadOnlyList<AttributeGroup> attributeGroups, MethodBody body) 
-            : base("~", AccessModifier.None, false, attributeGroups, 
-                  Array.Empty<string>(), 
-                  Array.Empty<ParameterDefinition>(), 
+        internal DestructorDefinition(IReadOnlyList<AttributeGroup> attributeGroups, Code body) 
+            : base(
+                  "~", 
+                  AccessModifier.None, 
+                  attributeGroups, 
                   TypeUsage.Void, 
-                  false, false, false, false, false,
+                  Array.Empty<ParameterDefinition>(), 
                   body)
         { }
 

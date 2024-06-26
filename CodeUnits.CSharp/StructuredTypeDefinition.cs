@@ -25,11 +25,13 @@ namespace CodeUnits.CSharp
 
             Constructors = members.OfType<ConstructorDefinition>().ToArray();
             Fields = members.OfType<FieldDefinition>().ToArray();
-            Properties = members.OfType<PropertyDefinition>().ToArray();
+            Properties = members.OfType<PropertyDefinition>()
+                .Where(p => p.IsKind(MemberKind.Property)).ToArray();
             Methods = members.OfType<MethodDefinition>()
                 .Where(m => m.IsKind(MemberKind.Method)).ToArray();
             Types = members.OfType<TypeDefinition>().ToArray();
             Constants = members.OfType<ConstantDefinition>().ToArray();
+            Indexers = members.OfType<IndexerDefinition>().ToArray();
         }
 
         public IReadOnlyList<MemberDefinition> Members { get; }
@@ -49,5 +51,7 @@ namespace CodeUnits.CSharp
         public IReadOnlyList<GenericTypeArgumentDefinition> GenericTypeArguments { get; }
 
         public IReadOnlyList<ConstraintDefinition> ConstraintClauses { get; }
+
+        public IReadOnlyList<IndexerDefinition> Indexers { get; }
     }
 }

@@ -12,10 +12,11 @@ namespace CodeUnits.CSharp
             TypeUsage type,
             Expression value) 
 
-            : base(name, modifier, hasNewModifier, attributeGroups)
+            : base(name, modifier, attributeGroups)
         {
             Type = type;
             Value = value;
+            HasNewModifier = hasNewModifier;
         }
 
         public override MemberKind MemberKind { get; } = MemberKind.Constant;
@@ -23,5 +24,7 @@ namespace CodeUnits.CSharp
         public TypeUsage Type { get; }
 
         public Expression Value { get; }
+
+        public bool HasNewModifier { get; }
     }
 }

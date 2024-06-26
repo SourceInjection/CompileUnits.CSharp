@@ -19,7 +19,7 @@ namespace CodeUnits.CSharp.Visitors
             var attributes = AttributeGroups.FromContext(context.attributes());
             var modifiers = context.all_member_modifiers().all_member_modifier().Select(c => c.GetText());
 
-            return FromCommonMemberContext(context.common_member_declaration(), modifiers, attributes)
+            return CommonMembers(context.common_member_declaration(), modifiers, attributes)
                 .ToList();
         }
 
@@ -31,24 +31,33 @@ namespace CodeUnits.CSharp.Visitors
 
             var modifiers = context.all_member_modifiers().all_member_modifier().Select(c => c.GetText());
 
-            return FromCommonMemberContext(context.common_member_declaration(), modifiers, attributes)
+            return CommonMembers(context.common_member_declaration(), modifiers, attributes)
                 .ToList();
         }
 
         private static DestructorDefinition Destructor(Destructor_definitionContext context, List<AttributeGroup> attributeGroups)
         {
-            var body = new MethodBody(context.body());
+            return new DestructorDefinition(attributeGroups, new Code(context.body()));
         }
 
-        private static IEnumerable<MemberDefinition> FromCommonMemberContext(Common_member_declarationContext context, IEnumerable<string> modifiers, List<AttributeGroup> attributeGroups)
+        private static IEnumerable<MemberDefinition> CommonMembers(Common_member_declarationContext context, IEnumerable<string> modifiers, List<AttributeGroup> attributeGroups)
         {
             if (context is null)
                 return Enumerable.Empty<MemberDefinition>();
 
             if (context.constant_declaration() != null)
                 return Constants(context.constant_declaration(), modifiers, attributeGroups);
+            if (context.typed_member_declaration() != null)
+                return TypedMembers(context.typed_member_declaration(), modifiers, attributeGroups);
 
         }
+
+        private static IEnumerable<MemberDefinition> TypedMembers(Typed_member_declarationContext context, IEnumerable<string> modifiers, List<AttributeGroup> attributeGroups)
+        {
+
+        }
+
+        private static MethodDefinition 
 
         private static IEnumerable<ConstantDefinition> Constants(Constant_declarationContext context, IEnumerable<string> modifiers, List<AttributeGroup> attributeGroups)
         {

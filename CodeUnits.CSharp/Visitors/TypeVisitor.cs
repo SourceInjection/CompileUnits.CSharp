@@ -35,6 +35,7 @@ namespace CodeUnits.CSharp.Visitors
         private static DelegateDefinition GetDelegate(Delegate_definitionContext context, List<AttributeGroup> attributeGroups, string[] allModifiers)
         {
             var modifiers = Modifiers.OfDelegate(allModifiers);
+            var genericTypeArguments = GenericTypeArguments.FromContext(context.variant_type_parameter_list());
             var returnType = context.return_type().type_() is null
                 ? TypeUsage.Void
                 : new TypeUsage(context.return_type().type_());
@@ -46,14 +47,15 @@ namespace CodeUnits.CSharp.Visitors
                 attributeGroups:      attributeGroups,
                 returnType:           returnType,
                 parameters:           Parameters.FromContext(context.formal_parameter_list()),
-                genericTypeArguments: GenericTypeArguments.FromContext(context.variant_type_parameter_list()),
-                constraints:          Constraints.FromContext(context.type_parameter_constraints_clauses()));
+                genericTypeArguments: genericTypeArguments,
+                constraints:          Constraints.FromContext(context.type_parameter_constraints_clauses(), genericTypeArguments));
         }
 
         private static StructDefinition GetStruct(Struct_definitionContext context, List<AttributeGroup> attributeGroups, string[] allModifiers)
         {
             var modifiers = Modifiers.OfStruct(allModifiers);
             var isRecord = context.RECORD() != null;
+            var genericTypeArguments = GenericTypeArguments.FromContext(context.type_parameter_list());
 
             return new StructDefinition(
                 name:                 context.identifier().GetText(),
@@ -61,8 +63,8 @@ namespace CodeUnits.CSharp.Visitors
                 hasNewModifier:       modifiers.HasNewModifier,
                 attributeGroups:      attributeGroups,
                 members:              Members.FromContext(context.struct_body()),
-                genericTypeArguments: GenericTypeArguments.FromContext(context.type_parameter_list()),
-                constraints:          Constraints.FromContext(context.type_parameter_constraints_clauses()),
+                genericTypeArguments: genericTypeArguments,
+                constraints:          Constraints.FromContext(context.type_parameter_constraints_clauses(), genericTypeArguments),
                 isRecord:             isRecord,
                 isReadonly:           modifiers.IsReadonly);
         }
@@ -87,6 +89,7 @@ namespace CodeUnits.CSharp.Visitors
         {
             var modifiers = Modifiers.OfClass(allModifiers);
             var isRecord = context.RECORD() != null;
+            var genericTypeArguments = GenericTypeArguments.FromContext(context.type_parameter_list());
 
             return new ClassDefinition(
                 name:                 context.identifier().GetText(),
@@ -94,8 +97,8 @@ namespace CodeUnits.CSharp.Visitors
                 hasNewModifier:       modifiers.HasNewModifier,
                 attributeGroups:      attributeGroups,
                 members:              Members.FromContext(context.class_body()),
-                genericTypeArguments: GenericTypeArguments.FromContext(context.type_parameter_list()),
-                constraints:          Constraints.FromContext(context.type_parameter_constraints_clauses()),
+                genericTypeArguments: genericTypeArguments,
+                constraints:          Constraints.FromContext(context.type_parameter_constraints_clauses(), genericTypeArguments),
                 isRecord:             isRecord,
                 isStatic:             modifiers.IsStatic,
                 isSealed:             modifiers.IsSealed,
@@ -105,14 +108,16 @@ namespace CodeUnits.CSharp.Visitors
         private static InterfaceDefinition GetInterface(Interface_definitionContext context, List<AttributeGroup> attributeGroups, string[] allModifiers)
         {
             var modifiers = Modifiers.OfInterface(allModifiers);
+            var genericTypeArguments = GenericTypeArguments.FromContext(context.variant_type_parameter_list());
+
             return new InterfaceDefinition(
                 name:                 context.identifier().GetText(),
                 accessModifier:       modifiers.AccessModifier,
                 hasNewModifier:       modifiers.HasNewModifier,
                 attributeGroups:      attributeGroups,
                 members:              Members.FromContext(context.class_body()),
-                genericTypeArguments: GenericTypeArguments.FromContext(context.variant_type_parameter_list()),
-                constraints:          Constraints.FromContext(context.type_parameter_constraints_clauses()));
+                genericTypeArguments: genericTypeArguments,
+                constraints:          Constraints.FromContext(context.type_parameter_constraints_clauses(), genericTypeArguments));
         }
 
         private static string[] GetAllMemberModifiers(Type_declarationContext context)

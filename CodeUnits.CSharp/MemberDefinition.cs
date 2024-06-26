@@ -11,6 +11,8 @@ namespace CodeUnits.CSharp
         Method,
         Destructor,
         Constructor,
+        Operator,
+        Indexer,
         Event,
         Constant,
     }
@@ -28,11 +30,10 @@ namespace CodeUnits.CSharp
 
     public abstract class MemberDefinition
     {
-        protected private MemberDefinition(string name, AccessModifier modifier, bool hasNewModifier, IReadOnlyList<AttributeGroup> attributeGroups)
+        protected private MemberDefinition(string name, AccessModifier modifier, IReadOnlyList<AttributeGroup> attributeGroups)
         {
             Name = name;
             AccessModifier = modifier;
-            HasNewModifer = hasNewModifier;
             AttributeGroups = attributeGroups;
             Attributes = attributeGroups.SelectMany(a => a.Attributes).ToArray();
         }
@@ -43,11 +44,9 @@ namespace CodeUnits.CSharp
 
         public IReadOnlyList<AttributeUsage> Attributes { get; }
 
-        public TypeDefinition ContainingType { get; internal set; }
+        public virtual TypeDefinition ContainingType { get; internal set; }
 
         public string Name { get; }
-
-        public bool HasNewModifer { get; }
 
         public AccessModifier AccessModifier { get; }
 

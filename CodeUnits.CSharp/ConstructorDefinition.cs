@@ -1,16 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CodeUnits.CSharp
 {
-    public sealed class ConstructorDefinition : MethodDefinition
+    public sealed class ConstructorDefinition : InvokableMemberDefinition
     {
-        internal ConstructorDefinition(AccessModifier accessModifier, IReadOnlyList<AttributeGroup> attributeGroups, IReadOnlyList<ParameterDefinition> parameters, MethodBody body) 
-            : base(string.Empty, accessModifier, false, attributeGroups, Array.Empty<string>(), parameters, 
-                  null,
-                  false, false, false, false, false,
-                  body)
+        internal ConstructorDefinition(
+            AccessModifier accessModifier, 
+            IReadOnlyList<AttributeGroup> attributeGroups, 
+            IReadOnlyList<ParameterDefinition> parameters, 
+            Code body) 
+            
+            : base(string.Empty, accessModifier, attributeGroups, null, parameters, body)
         { }
+
+        public override TypeDefinition ContainingType 
+        { 
+            get => base.ContainingType; 
+            internal set
+            {
+                base.ContainingType = value;
+                if (value != null)
+                    ReturnType = new TypeUsage(new TerminalSymbol(TerminalSymbolKind.Identifier, value.Name));
+            } 
+        }
 
         public override MemberKind MemberKind { get; } = MemberKind.Constructor;
     }

@@ -3,9 +3,9 @@ using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp
 {
-    public sealed class MethodBody
+    public sealed class Code
     {
-        internal MethodBody(BodyContext context)
+        internal Code(BodyContext context)
         {
             Symbols = Common.Symbols.FromNode(context);
         }

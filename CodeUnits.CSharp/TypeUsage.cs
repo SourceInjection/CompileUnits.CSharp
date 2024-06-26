@@ -6,6 +6,12 @@ namespace CodeUnits.CSharp
 {
     public class TypeUsage
     {
+        internal TypeUsage(TerminalSymbol symbol)
+        {
+            Symbols = new TerminalSymbol[] { symbol };
+            FormatedText = symbol.Value;
+        }
+
         private TypeUsage(ITree context)
         {
             Symbols = Common.Symbols.FromNode(context);
@@ -27,7 +33,6 @@ namespace CodeUnits.CSharp
         internal TypeUsage(Namespace_or_type_nameContext context)
             : this((ITree)context)
         { }
-
 
         private TypeUsage()
         {

@@ -21,8 +21,10 @@ namespace CodeUnits.CSharp
             bool hasNewModifier, 
             IReadOnlyList<AttributeGroup> attributeGroups)
 
-            : base(name, accessModifier, hasNewModifier, attributeGroups)
-        { }
+            : base(name, accessModifier, attributeGroups)
+        {
+            HasNewModifier = hasNewModifier;
+        }
 
         public abstract TypeKind TypeKind { get; }
 
@@ -30,13 +32,6 @@ namespace CodeUnits.CSharp
 
         public NamespaceDefinition ContainingNamespace { get; internal set; }
 
-        public string FullName()
-        {
-            if (ContainingNamespace != null)
-                return $"{ContainingNamespace.FullName()}.{Name}";
-            if (ContainingType != null)
-                return $"{ContainingType.FullName()}.{Name}";
-            return Name;
-        }
+        public bool HasNewModifier { get; }
     }
 }

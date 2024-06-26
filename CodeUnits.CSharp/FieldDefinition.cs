@@ -15,13 +15,14 @@ namespace CodeUnits.CSharp
             bool isNew,
             Expression defaultValue)
 
-            : base(name, accessModifier, hasNewModifier, attributeGroups)
+            : base(name, accessModifier, attributeGroups)
         {
             Type = type;
             IsStatic = isStatic;
             IsReadonly = isReadonly;
             IsNew = isNew;
             DefaultValue = defaultValue;
+            HasNewModifier = hasNewModifier;
         }
 
         public override MemberKind MemberKind { get; } = MemberKind.Field;
@@ -35,5 +36,7 @@ namespace CodeUnits.CSharp
         public bool IsNew { get; }
 
         public Expression DefaultValue { get; }
+
+        public bool HasNewModifier { get; }
     }
 }

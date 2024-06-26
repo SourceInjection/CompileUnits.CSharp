@@ -6,14 +6,16 @@ namespace CodeUnits.CSharp.Visitors.Common
 {
     internal static class Constraints
     {
-        public static List<ConstraintDefinition> FromContext(Type_parameter_constraints_clausesContext context)
+        public static List<ConstraintDefinition> FromContext(
+            Type_parameter_constraints_clausesContext context, 
+            IEnumerable<GenericTypeArgumentDefinition> genericTypeArguments)
         {
             if (context is null)
                 return new List<ConstraintDefinition>();
 
             return context.type_parameter_constraints_clause()
                 .Select(c => new ConstraintDefinition(
-                        c.identifier().GetText(),
+                        genericTypeArguments.FirstOrDefault(ta => ta.Name == c.identifier().GetText()),
                         GetClauses(c.type_parameter_constraints())))
                 .ToList();
         }

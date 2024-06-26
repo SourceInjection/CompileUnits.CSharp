@@ -26,8 +26,6 @@ namespace CodeUnits.CSharp
 
         public string Name { get; }
 
-        public string FullName() => ContainingNamespace is null || ContainingNamespace is CodeUnit ? Name : $"{ContainingNamespace.FullName()}.{Name}";
-
         public IReadOnlyList<UsingDirectiveDefinition> UsingDirectives { get; }
 
         public IReadOnlyList<NamespaceDefinition> Namespaces { get; }

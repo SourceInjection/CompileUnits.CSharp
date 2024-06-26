@@ -25,7 +25,7 @@ namespace CodeUnits.CSharp
             IsSealed = isSealed;
             IsAbstract = isAbstract;
             Destructor = members.OfType<DestructorDefinition>()
-                .FirstOrDefault();
+                .SingleOrDefault();
         }
 
         public override TypeKind TypeKind { get; } = TypeKind.Class;

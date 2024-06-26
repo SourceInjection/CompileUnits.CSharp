@@ -18,7 +18,5 @@ namespace CodeUnits.CSharp
         public Expression Value { get; }
 
         public IReadOnlyList<AttributeGroup> AttributeGroups { get; }
-
-        public string FullName() => $"{ContainingType.FullName()}.{Name}";
     }
 }
