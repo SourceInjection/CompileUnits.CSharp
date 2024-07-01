@@ -14,8 +14,14 @@ namespace CodeUnits.CSharp
             IReadOnlyList<ConstraintDefinition> constraints,
             bool isRecord, bool isReadonly)
 
-            : base(name, accessModifier, hasNewModifier, attributeGroups, 
-                  members, genericTypeArguments, constraints)
+            : base(
+                  name:                 name, 
+                  accessModifier:       accessModifier, 
+                  hasNewModifier:       hasNewModifier, 
+                  attributeGroups:      attributeGroups, 
+                  members:              members, 
+                  genericTypeArguments: genericTypeArguments, 
+                  constraints:          constraints)
         {
             IsRecord = isRecord;
             IsReadonly = isReadonly;

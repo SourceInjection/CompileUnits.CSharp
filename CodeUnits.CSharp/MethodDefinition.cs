@@ -8,37 +8,35 @@ namespace CodeUnits.CSharp
             AccessModifier accessModifier, 
             bool hasNewModifier, 
             IReadOnlyList<AttributeGroup> attributeGroups,
-            IReadOnlyList<string> genericTypeArguments, 
+            IReadOnlyList<GenericTypeArgumentDefinition> genericTypeArguments, 
             IReadOnlyList<ParameterDefinition> parameters,
             TypeUsage returnType, 
+            InheritanceModifier inheritanceModifier,
             Code body,
-            bool isAbstract, 
-            bool isVirtual, 
-            bool isOverride, 
-            bool isSealed)
+            TypeUsage addressedInterface)
 
-            : base(name, accessModifier, attributeGroups, returnType, parameters, body)
+            : base(
+                  name:            name,
+                  modifier:        accessModifier, 
+                  attributeGroups: attributeGroups, 
+                  returnType:      returnType,  
+                  parameters:      parameters, 
+                  body:            body)
         {
             GenericTypeArguments = genericTypeArguments;
-            IsAbstract = isAbstract;
-            IsVirtual = isVirtual;
-            IsOverride = isOverride;
-            IsSealed = isSealed;
             HasNewModifier = hasNewModifier;
+            AddressedInterface = addressedInterface;
+            InheritanceModifier = inheritanceModifier;
         }
 
         public override MemberKind MemberKind { get; } = MemberKind.Method;
 
-        public IReadOnlyList<string> GenericTypeArguments { get; }
+        public IReadOnlyList<GenericTypeArgumentDefinition> GenericTypeArguments { get; }
 
-        public bool IsAbstract { get; }
-
-        public bool IsVirtual { get; }
-
-        public bool IsOverride { get; }
-
-        public bool IsSealed { get; }
+        public InheritanceModifier InheritanceModifier { get; }
 
         public bool HasNewModifier { get; }
+
+        public TypeUsage AddressedInterface { get; }
     }
 }

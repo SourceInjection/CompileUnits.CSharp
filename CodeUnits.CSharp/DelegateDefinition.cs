@@ -14,7 +14,11 @@ namespace CodeUnits.CSharp
             IReadOnlyList<GenericTypeArgumentDefinition> genericTypeArguments, 
             IReadOnlyList<ConstraintDefinition> constraints)
 
-            : base(name, accessModifier, hasNewModifier, attributeGroups)
+            : base(
+                  name: name, 
+                  accessModifier: accessModifier, 
+                  hasNewModifier: hasNewModifier, 
+                  attributeGroups: attributeGroups)
         {
             ReturnType = returnType;
             Parameters = parameters;

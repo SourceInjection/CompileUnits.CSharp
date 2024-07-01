@@ -3,21 +3,28 @@ using System.Collections.Generic;
 
 namespace CodeUnits.CSharp
 {
-    internal class OperatorDefinition : InvokableMemberDefinition
+    public sealed class OperatorDefinition : InvokableMemberDefinition
     {
-        private protected OperatorDefinition(
+        internal OperatorDefinition(
             string name, 
-            AccessModifier accessModifier, 
             IReadOnlyList<AttributeGroup> attributeGroups, 
             IReadOnlyList<ParameterDefinition> parameters, 
             TypeUsage returnType, 
-            Code body) 
+            Code body,
+            TypeUsage addressedInterface) 
 
-            : base(name, accessModifier, attributeGroups,
-                  returnType, parameters,  body)
+            : base(name:           name, 
+                  modifier:        AccessModifier.Public, 
+                  attributeGroups: attributeGroups,
+                  returnType:      returnType, 
+                  parameters:      parameters,  
+                  body:            body)
         {
+            AddressedInterface = addressedInterface;
         }
 
         public override MemberKind MemberKind { get; } = MemberKind.Operator;
+
+        public TypeUsage AddressedInterface { get; }
     }
 }

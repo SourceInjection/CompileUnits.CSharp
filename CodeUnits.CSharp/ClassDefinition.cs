@@ -18,7 +18,14 @@ namespace CodeUnits.CSharp
             bool isSealed,
             bool isAbstract)
 
-            : base(name, accessModifier, hasNewModifier, attributeGroups, members, genericTypeArguments, constraints)
+            : base(
+                  name:                 name, 
+                  accessModifier:       accessModifier,
+                  hasNewModifier:       hasNewModifier, 
+                  attributeGroups:      attributeGroups, 
+                  members:              members, 
+                  genericTypeArguments: genericTypeArguments, 
+                  constraints:          constraints)
         {
             IsStatic = isStatic;
             IsRecord = isRecord;

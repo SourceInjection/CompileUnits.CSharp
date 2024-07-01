@@ -784,7 +784,7 @@ common_member_declaration
 
 typed_member_declaration
     : (REF | READONLY REF | REF READONLY)? type_ (
-        namespace_or_type_name DOT indexer_declaration
+        namespace_or_type_name DOT (operator_declaration | indexer_declaration)
         | method_declaration
         | property_declaration
         | indexer_declaration

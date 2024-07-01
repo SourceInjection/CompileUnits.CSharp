@@ -10,7 +10,13 @@ namespace CodeUnits.CSharp
             IReadOnlyList<ParameterDefinition> parameters, 
             Code body) 
             
-            : base(string.Empty, accessModifier, attributeGroups, null, parameters, body)
+            : base(
+                  name:            string.Empty, 
+                  modifier:        accessModifier, 
+                  attributeGroups: attributeGroups, 
+                  returnType:      null, 
+                  parameters:      parameters, 
+                  body:            body)
         { }
 
         public override TypeDefinition ContainingType 

@@ -10,6 +10,11 @@ namespace CodeUnits.CSharp
             Symbols = Common.Symbols.FromNode(context);
         }
 
+        internal Expression(Array_initializerContext context)
+        {
+            Symbols = Common.Symbols.FromNode(context);
+        }
+
         public IReadOnlyList<TerminalSymbol> Symbols { get; }
     }
 }

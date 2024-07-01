@@ -12,7 +12,11 @@ namespace CodeUnits.CSharp
             IReadOnlyList<EnumMemberDefinition> members, 
             TypeUsage baseType)
             
-            : base(name, accessModifier, hasNewModifier, attributeGroups)
+            : base(
+                  name:            name, 
+                  accessModifier:  accessModifier, 
+                  hasNewModifier:  hasNewModifier, 
+                  attributeGroups: attributeGroups)
         {
             foreach (var member in members)
                 member.ContainingType = this;

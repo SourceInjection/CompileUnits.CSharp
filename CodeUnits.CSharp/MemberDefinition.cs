@@ -3,6 +3,14 @@ using System.Linq;
 
 namespace CodeUnits.CSharp
 {
+    public enum InheritanceModifier
+    {
+        None,
+        Sealed,
+        Virtual,
+        Abstract,
+    }
+
     public enum MemberKind
     {
         Type,

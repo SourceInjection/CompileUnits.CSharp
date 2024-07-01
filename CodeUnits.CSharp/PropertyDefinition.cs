@@ -2,49 +2,52 @@
 
 namespace CodeUnits.CSharp
 {
-    public class PropertyDefinition: MemberDefinition
+    public sealed class PropertyDefinition: MemberDefinition
     {
-        private protected PropertyDefinition(
+        internal PropertyDefinition(
             string name, 
             AccessModifier accessModifier, 
             bool hasNewModifier,
             IReadOnlyList<AttributeGroup> attributeGroups,
             TypeUsage type, 
-            bool isAbstract, 
-            bool isVirtual, 
-            bool isOverride,
+            InheritanceModifier inheritanceModifier,
             bool hasRefModifier,
-            GetterDefinition getter,
-            SetterDefinition setter)
+            AccessorDefinition getter,
+            AccessorDefinition setter, 
+            TypeUsage addressedInterface,
+            Expression defaultValue)
 
-            : base(name, accessModifier, attributeGroups)
+            : base(
+                  name:            name, 
+                  modifier:        accessModifier, 
+                  attributeGroups: attributeGroups)
         {
             Type = type;
-            IsAbstract = isAbstract;
-            IsVirtual = isVirtual;
-            IsOverride = isOverride;
             HasRefModifier = hasRefModifier;
             Getter = getter;
             Setter = setter;
             HasNewModifier = hasNewModifier;
+            AddressedInterface = addressedInterface;
+            InheritanceModifier = inheritanceModifier;
+            DefaultValue = defaultValue;
         }
 
         public override MemberKind MemberKind { get; } = MemberKind.Property;
 
         public TypeUsage Type { get; }
 
-        public bool IsAbstract { get; }
-
-        public bool IsVirtual { get; }
-
-        public bool IsOverride { get; }
+        public InheritanceModifier InheritanceModifier { get; }
 
         public bool HasRefModifier { get; }
 
-        public GetterDefinition Getter { get; }
+        public AccessorDefinition Getter { get; }
 
-        public SetterDefinition Setter { get; }
+        public AccessorDefinition Setter { get; }
 
         public bool HasNewModifier { get; }
+
+        public TypeUsage AddressedInterface { get; }
+
+        public Expression DefaultValue { get; }
     }
 }

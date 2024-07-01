@@ -34,6 +34,12 @@ namespace CodeUnits.CSharp
             : this((ITree)context)
         { }
 
+        internal TypeUsage(IReadOnlyList<TerminalSymbol> symbols)
+        {
+            Symbols = symbols;
+            FormatedText = Common.Text.TypeUsage(Symbols);
+        }
+
         private TypeUsage()
         {
             const string voidType = "void";

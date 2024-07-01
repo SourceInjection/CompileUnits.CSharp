@@ -14,7 +14,11 @@ namespace CodeUnits.CSharp
             IReadOnlyList<GenericTypeArgumentDefinition> genericTypeArguments, 
             IReadOnlyList<ConstraintDefinition> constraints)
             
-            : base(name, accessModifier, hasNewModifier, attributeGroups)
+            : base(
+                  name:            name, 
+                  accessModifier:  accessModifier, 
+                  hasNewModifier:  hasNewModifier, 
+                  attributeGroups: attributeGroups)
         {
             foreach(var member in members)
                 member.ContainingType = this;
@@ -25,13 +29,12 @@ namespace CodeUnits.CSharp
 
             Constructors = members.OfType<ConstructorDefinition>().ToArray();
             Fields = members.OfType<FieldDefinition>().ToArray();
-            Properties = members.OfType<PropertyDefinition>()
-                .Where(p => p.IsKind(MemberKind.Property)).ToArray();
-            Methods = members.OfType<MethodDefinition>()
-                .Where(m => m.IsKind(MemberKind.Method)).ToArray();
+            Properties = members.OfType<PropertyDefinition>().ToArray();
+            Methods = members.OfType<MethodDefinition>().ToArray();
             Types = members.OfType<TypeDefinition>().ToArray();
             Constants = members.OfType<ConstantDefinition>().ToArray();
             Indexers = members.OfType<IndexerDefinition>().ToArray();
+            Events = members.OfType<EventDefinition>().ToArray();
         }
 
         public IReadOnlyList<MemberDefinition> Members { get; }
@@ -53,5 +56,7 @@ namespace CodeUnits.CSharp
         public IReadOnlyList<ConstraintDefinition> ConstraintClauses { get; }
 
         public IReadOnlyList<IndexerDefinition> Indexers { get; }
+
+        public IReadOnlyList<EventDefinition> Events { get; }
     }
 }

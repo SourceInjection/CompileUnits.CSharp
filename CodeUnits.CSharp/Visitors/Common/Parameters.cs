@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Antlr4.Runtime.Tree;
+using System;
+using System.Collections.Generic;
 using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp.Visitors.Common
@@ -15,6 +17,45 @@ namespace CodeUnits.CSharp.Visitors.Common
                 parameters.Add(FromParameterArrayContext(context.parameter_array()));
 
             return parameters;
+        }
+
+        public static List<ParameterDefinition> FromContext(Operator_declarationContext context)
+        {
+            var result = new List<ParameterDefinition>();
+
+            int i = 0;
+            while (i < context.ChildCount && !(context.GetChild(i) is ITerminalNode tn && tn.Symbol.Type == OPEN_PARENS))
+                i++;
+
+            var hasInModifier = false;
+            while(i < context.ChildCount)
+            {
+                var child = context.GetChild(i);
+                if(child is ITerminalNode tn)
+                {
+                    if (tn.Symbol.Type == CLOSE_PARENS)
+                        break;
+                    if(tn.Symbol.Type == IN)
+                        hasInModifier = true;
+                }  
+                else if(child is Arg_declarationContext argDeclaration)
+                {
+                    result.Add(FromArgDeclarationContext(argDeclaration, hasInModifier));
+                    hasInModifier = false;
+                }
+            }
+            return result;
+        }
+
+        private static ParameterDefinition FromArgDeclarationContext(Arg_declarationContext context, bool hasInModifier)
+        {
+            return new ParameterDefinition(
+                type:          new TypeUsage(context.type_()),
+                name:          context.identifier().GetText(),
+                modifier:      hasInModifier ? ParameterModifier.In : ParameterModifier.None,
+                attributes:    Array.Empty<AttributeGroup>(),
+                isParamsArray: false,
+                defaultValue:  null);
         }
 
         private static ParameterDefinition FromParameterArrayContext(Parameter_arrayContext context)

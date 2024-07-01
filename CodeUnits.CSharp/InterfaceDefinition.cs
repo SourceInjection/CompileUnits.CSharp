@@ -13,7 +13,14 @@ namespace CodeUnits.CSharp.Visitors
             IReadOnlyList<GenericTypeArgumentDefinition> genericTypeArguments,
             IReadOnlyList<ConstraintDefinition> constraints)
 
-            : base(name, accessModifier, hasNewModifier, attributeGroups, members, genericTypeArguments, constraints)
+            : base(
+                  name:                 name,
+                  accessModifier:       accessModifier, 
+                  hasNewModifier:       hasNewModifier, 
+                  attributeGroups:      attributeGroups, 
+                  members:              members, 
+                  genericTypeArguments: genericTypeArguments, 
+                  constraints:          constraints)
         { }
 
         public override TypeKind TypeKind { get; } = TypeKind.Interface;

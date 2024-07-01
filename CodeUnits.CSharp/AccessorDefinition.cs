@@ -1,21 +1,25 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace CodeUnits.CSharp
 {
-    public abstract class AccessorDefinition
+    public enum AccessorKind { Getter, Setter }
+
+    public sealed class AccessorDefinition
     {
-        protected private AccessorDefinition(
+        internal AccessorDefinition(
             string name, 
             AccessModifier accessModifier, 
             IReadOnlyList<AttributeGroup> attributeGroups, 
-            IReadOnlyList<AttributeUsage> attributes, 
-            Code body)
+            Code body,
+            AccessorKind kind)
         {
             Name = name;
             AccessModifier = accessModifier;
             AttributeGroups = attributeGroups;
-            Attributes = attributes;
+            Attributes = AttributeGroups.SelectMany(a => a.Attributes).ToArray();
             Body = body;
+            Kind = kind;
         }
 
         public string Name { get; }
@@ -26,6 +30,10 @@ namespace CodeUnits.CSharp
 
         public IReadOnlyList<AttributeUsage> Attributes { get; }
 
+        public AccessorKind Kind { get; }
+
         public Code Body { get; }
+
+        public bool IsKind(AccessorKind kind) => Kind == kind;
     }
 }
