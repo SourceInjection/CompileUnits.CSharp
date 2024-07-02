@@ -1,0 +1,25 @@
+﻿using Antlr4.Runtime.Misc;
+using CodeUnits.CSharp.Generated;
+using CodeUnits.CSharp.Implementation;
+using CodeUnits.CSharp.Implementation.Usings;
+
+namespace CodeUnits.CSharp.Visitors
+{
+    internal class UsingVisitor : CSharpParserBaseVisitor<UsingDirectiveDefinition>
+    {
+        public override UsingDirectiveDefinition VisitUsingAliasDirective([NotNull] CSharpParser.UsingAliasDirectiveContext context)
+        {
+            return new UsingAliasDirectiveDefinition(context.GetText(), context.identifier().GetText(), new TypeUsage(context.namespace_or_type_name()));
+        }
+
+        public override UsingDirectiveDefinition VisitUsingNamespaceDirective([NotNull] CSharpParser.UsingNamespaceDirectiveContext context)
+        {
+            return new UsingNamespaceDirectiveDefinition(context.GetText(), context.namespace_or_type_name().GetText());
+        }
+
+        public override UsingDirectiveDefinition VisitUsingStaticDirective([NotNull] CSharpParser.UsingStaticDirectiveContext context)
+        {
+            return new UsingStaticDirectiveDefinition(context.GetText(), new TypeUsage(context.namespace_or_type_name()));
+        }
+    }
+}

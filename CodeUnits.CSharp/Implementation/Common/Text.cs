@@ -1,0 +1,33 @@
+﻿using System.Collections.Generic;
+using System.Text;
+
+namespace CodeUnits.CSharp.Implementation.Common
+{
+    internal static class Text
+    {
+        public static string TypeUsage(IEnumerable<TerminalSymbol> symbols)
+        {
+            var sb = new StringBuilder();
+
+            TerminalSymbol prev = null;
+
+            foreach (var item in symbols)
+            {
+                if (IsComma(prev) && !IsCommaOrCloseBracket(item))
+                    sb.Append(' ');
+                sb.Append(item.Value);
+                prev = item;
+            }
+            return sb.ToString();
+        }
+
+        private static bool IsComma(TerminalSymbol symbol) => symbol?.Kind is TerminalSymbolKind.Comma;
+
+        private static bool IsCommaOrCloseBracket(TerminalSymbol symbol)
+        {
+            return symbol != null && (
+                symbol.IsKind(TerminalSymbolKind.CloseBracket)
+                || symbol.IsKind(TerminalSymbolKind.Comma));
+        }
+    }
+}
