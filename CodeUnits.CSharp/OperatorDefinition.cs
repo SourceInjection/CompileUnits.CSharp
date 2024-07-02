@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CodeUnits.CSharp
 {
-    public sealed class OperatorDefinition : InvokableMemberDefinition
+    public class OperatorDefinition : InvokableMemberDefinition
     {
         internal OperatorDefinition(
             string name, 

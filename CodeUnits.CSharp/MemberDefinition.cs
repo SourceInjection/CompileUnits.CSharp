@@ -20,6 +20,7 @@ namespace CodeUnits.CSharp
         Destructor,
         Constructor,
         Operator,
+        ConversionOperator,
         Indexer,
         Event,
         Constant,

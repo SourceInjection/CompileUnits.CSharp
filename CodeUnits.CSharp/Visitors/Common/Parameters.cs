@@ -9,6 +9,9 @@ namespace CodeUnits.CSharp.Visitors.Common
     {
         public static List<ParameterDefinition> FromContext(Formal_parameter_listContext context)
         {
+            if (context == null)
+                return new List<ParameterDefinition>();
+
             var parameters = new List<ParameterDefinition>();
             if (context.fixed_parameters() != null)
                 parameters.AddRange(FromFixedParameters(context.fixed_parameters()));
@@ -21,6 +24,9 @@ namespace CodeUnits.CSharp.Visitors.Common
 
         public static List<ParameterDefinition> FromContext(Operator_declarationContext context)
         {
+            if (context == null)
+                return new List<ParameterDefinition>();
+
             var result = new List<ParameterDefinition>();
 
             int i = 0;

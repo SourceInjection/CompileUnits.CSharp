@@ -16,7 +16,7 @@ namespace CodeUnits.CSharp.Visitors.Common
             foreach (var c in context.struct_member_declaration())
             {
                 var definitions = visitor.VisitStruct_member_declaration(c);
-                if (definitions.Count > 0)
+                if (definitions.Length > 0)
                     members.AddRange(definitions);
             }
             return members;
@@ -32,7 +32,7 @@ namespace CodeUnits.CSharp.Visitors.Common
             foreach (var c in context.class_member_declarations().class_member_declaration())
             {
                 var definitions = visitor.VisitClass_member_declaration(c);
-                if (definitions.Count > 0)
+                if (definitions.Length > 0)
                     members.AddRange(definitions);
             }
             return members;

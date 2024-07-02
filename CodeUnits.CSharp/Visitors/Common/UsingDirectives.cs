@@ -7,6 +7,9 @@ namespace CodeUnits.CSharp.Visitors.Common
     {
         public static List<UsingDirectiveDefinition> FromContext(Using_directivesContext context)
         {
+            if(context == null)
+                return new List<UsingDirectiveDefinition>();
+
             var usingDirectives = new List<UsingDirectiveDefinition>();
             var visitor = new UsingVisitor();
             foreach (var c in context.using_directive())

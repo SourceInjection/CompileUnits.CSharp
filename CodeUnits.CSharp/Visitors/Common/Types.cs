@@ -8,6 +8,9 @@ namespace CodeUnits.CSharp.Visitors.Common
     {
         public static List<TypeDefinition> FromContext(Namespace_member_declarationsContext context)
         {
+            if (context == null)
+                return new List<TypeDefinition>();
+
             var types = new List<TypeDefinition>();
             var visitor = new TypeVisitor();
 

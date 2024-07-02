@@ -10,6 +10,9 @@ namespace CodeUnits.CSharp.Visitors.Common
     {
         public static (AccessorDefinition Getter, AccessorDefinition Setter) FromContext(Indexer_declarationContext context)
         {
+            if(context == null)
+                throw new ArgumentNullException(nameof(context));
+
             if (context.throwable_expression() != null)
                 return (GetterFromArrowFunction(context.throwable_expression()), null);
             return AccessorsFromAccessorsDeclaration(context.accessor_declarations());
@@ -17,6 +20,9 @@ namespace CodeUnits.CSharp.Visitors.Common
 
         public static (AccessorDefinition Getter, AccessorDefinition Setter) FromContext(Property_declarationContext context)
         {
+            if (context == null)
+                throw new ArgumentNullException(nameof(context));
+
             if (context.throwable_expression() != null)
                 return (GetterFromArrowFunction(context.throwable_expression()), null);
             return AccessorsFromAccessorsDeclaration(context.accessor_declarations());

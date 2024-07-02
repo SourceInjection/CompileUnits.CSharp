@@ -14,6 +14,10 @@ namespace CodeUnits.CSharp.Visitors.ValueTypes
             AddressedInterface = addressedInterface;
         }
 
+        public ExtendedDefinitionInfo(CommonDefinitionInfo commonInfo)
+            : this(commonInfo, false, false, TypeUsage.Void, null)
+        { }
+
         public TypeUsage AddressedInterface { get; }
 
         public bool IsReadonly { get; }

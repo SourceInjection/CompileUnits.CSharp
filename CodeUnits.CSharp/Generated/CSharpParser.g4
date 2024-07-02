@@ -772,7 +772,7 @@ common_member_declaration
     : constant_declaration
     | typed_member_declaration
     | event_declaration
-    | conversion_operator_declarator (body | RIGHT_ARROW throwable_expression SEMICOLON) // C# 6
+    | conversion_operator_declarator
     | constructor_declaration
     | VOID method_declaration
     | class_definition
@@ -921,7 +921,8 @@ overloadable_operator
     ;
 
 conversion_operator_declarator
-    : (IMPLICIT | EXPLICIT) OPERATOR type_ OPEN_PARENS arg_declaration CLOSE_PARENS
+    : (IMPLICIT | EXPLICIT) OPERATOR type_ OPEN_PARENS arg_declaration CLOSE_PARENS 
+      (body | RIGHT_ARROW throwable_expression SEMICOLON) // C# 6
     ;
 
 constructor_initializer
