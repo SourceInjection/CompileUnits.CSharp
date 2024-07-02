@@ -7,7 +7,7 @@ using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp.Implementation.Members
 {
-    public class OperatorDefinition : InvokableMemberDefinition, IOperator
+    internal class OperatorDefinition : InvokableMemberDefinition, IOperator
     {
         internal OperatorDefinition(
             string name,

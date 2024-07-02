@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CodeUnits.CSharp.Implementation.Attributes
 {
-    public sealed class AttributeGroup: IAttributeGroup
+    internal class AttributeGroup: IAttributeGroup
     {
         internal AttributeGroup(string attributeTarget, IReadOnlyList<AttributeUsage> attributes)
         {

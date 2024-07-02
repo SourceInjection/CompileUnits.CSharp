@@ -1,6 +1,6 @@
 ﻿namespace CodeUnits.CSharp.Implementation.Usings
 {
-    public sealed class UsingAliasDirectiveDefinition : UsingDirectiveDefinition, IUsingAliasDirective
+    internal class UsingAliasDirectiveDefinition : UsingDirectiveDefinition, IUsingAliasDirective
     {
         internal UsingAliasDirectiveDefinition(string value, string name, TypeUsage type)
             : base(value)

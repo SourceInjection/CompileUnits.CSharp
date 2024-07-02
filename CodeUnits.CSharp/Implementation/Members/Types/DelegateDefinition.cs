@@ -8,7 +8,7 @@ using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp.Implementation.Members.Types
 {
-    public sealed class DelegateDefinition : TypeDefinition
+    internal class DelegateDefinition : TypeDefinition, IDelegate
     {
         internal DelegateDefinition(
             string name,
@@ -34,13 +34,13 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
 
         public override TypeKind TypeKind { get; } = TypeKind.Delegate;
 
-        public TypeUsage ReturnType { get; }
+        public ITypeUsage ReturnType { get; }
 
-        public IReadOnlyList<ParameterDefinition> Parameters { get; }
+        public IReadOnlyList<IParameter> Parameters { get; }
 
-        public IReadOnlyList<GenericTypeArgumentDefinition> GenericTypeArguments { get; }
+        public IReadOnlyList<IGenericTypeArgument> GenericTypeArguments { get; }
 
-        public IReadOnlyList<ConstraintDefinition> Constraints { get; }
+        public IReadOnlyList<IConstraint> Constraints { get; }
 
         internal static DelegateDefinition FromContext(Delegate_definitionContext context, CommonDefinitionInfo commonInfo)
         {

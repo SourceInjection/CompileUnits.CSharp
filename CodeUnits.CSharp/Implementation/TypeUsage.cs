@@ -4,7 +4,7 @@ using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp.Implementation
 {
-    public class TypeUsage : ITypeUsage
+    internal class TypeUsage : ITypeUsage
     {
         internal TypeUsage(TerminalSymbol symbol)
         {

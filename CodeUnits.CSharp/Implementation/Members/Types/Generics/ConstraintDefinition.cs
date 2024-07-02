@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 namespace CodeUnits.CSharp.Implementation.Members.Types.Generics
 {
-    public sealed class ConstraintDefinition
+    internal class ConstraintDefinition : IConstraint
     {
         internal ConstraintDefinition(GenericTypeArgumentDefinition targetedTypeArgument, IReadOnlyList<ConstraintClause> clauses)
         {
@@ -9,8 +9,8 @@ namespace CodeUnits.CSharp.Implementation.Members.Types.Generics
             Clauses = clauses;
         }
 
-        public GenericTypeArgumentDefinition TargetedTypeArgument { get; }
+        public IGenericTypeArgument TargetedTypeArgument { get; }
 
-        public IReadOnlyList<ConstraintClause> Clauses { get; }
+        public IReadOnlyList<IConstraintClause> Clauses { get; }
     }
 }

@@ -16,4 +16,9 @@ namespace CodeUnits.CSharp
 
         ICodeFragment Body { get; }
     }
+
+    public static class IAccessorExtensions
+    {
+        public static bool IsKind(this IAccessor accessor, AccessorKind kind) => accessor.Kind == kind;
+    }
 }

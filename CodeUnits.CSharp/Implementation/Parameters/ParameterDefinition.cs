@@ -6,7 +6,7 @@ using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp.Implementation.Parameters
 {
-    public sealed class ParameterDefinition : IParameter
+    internal class ParameterDefinition : IParameter
     {
         internal ParameterDefinition(TypeUsage type, string name, ParameterModifier modifier, IReadOnlyList<AttributeGroup> attributes, bool isParamsArray = false, CodeFragment defaultValue = null)
         {

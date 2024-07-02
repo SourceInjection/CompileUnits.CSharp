@@ -9,7 +9,7 @@ using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp.Implementation.Members
 {
-    public sealed class ConstructorDefinition : InvokableMemberDefinition, IConstructor
+    internal class ConstructorDefinition : InvokableMemberDefinition, IConstructor
     {
         internal ConstructorDefinition(
             AccessModifier accessModifier,

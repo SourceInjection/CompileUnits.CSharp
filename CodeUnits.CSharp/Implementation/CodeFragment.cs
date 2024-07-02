@@ -5,7 +5,7 @@ using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp.Implementation
 {
-    public class CodeFragment : ICodeFragment
+    internal class CodeFragment : ICodeFragment
     {
         private CodeFragment(IReadOnlyList<TerminalSymbol> symbols)
         {

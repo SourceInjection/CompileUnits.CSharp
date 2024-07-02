@@ -3,7 +3,7 @@ using CodeUnits.CSharp.Implementation.Attributes;
 
 namespace CodeUnits.CSharp.Implementation.Members.Types.Generics
 {
-    public sealed class GenericTypeArgumentDefinition : IGenericTypeArgument
+    internal class GenericTypeArgumentDefinition : IGenericTypeArgument
     {
         internal GenericTypeArgumentDefinition(string name, Variance variance, IReadOnlyList<AttributeGroup> attributeGroups)
         {

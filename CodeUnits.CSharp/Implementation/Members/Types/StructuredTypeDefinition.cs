@@ -5,7 +5,7 @@ using CodeUnits.CSharp.Implementation.Members.Types.Generics;
 
 namespace CodeUnits.CSharp.Implementation.Members.Types
 {
-    public abstract class StructuredTypeDefinition : TypeDefinition
+    internal abstract class StructuredTypeDefinition : TypeDefinition, IStructuredType
     {
         protected private StructuredTypeDefinition(
             string name,
@@ -41,30 +41,30 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
             Constants = members.OfType<ConstantDefinition>().ToArray();
         }
 
-        public IReadOnlyList<MemberDefinition> Members { get; }
+        public IReadOnlyList<IMember> Members { get; }
 
-        public IReadOnlyList<TypeDefinition> Types { get; }
+        public IReadOnlyList<IType> Types { get; }
 
-        public IReadOnlyList<ConstantDefinition> Constants { get; }
+        public IReadOnlyList<IConstant> Constants { get; }
 
-        public IReadOnlyList<FieldDefinition> Fields { get; }
+        public IReadOnlyList<IField> Fields { get; }
 
-        public IReadOnlyList<ConstructorDefinition> Constructors { get; }
+        public IReadOnlyList<IConstructor> Constructors { get; }
 
-        public IReadOnlyList<PropertyDefinition> Properties { get; }
+        public IReadOnlyList<IProperty> Properties { get; }
 
-        public IReadOnlyList<MethodDefinition> Methods { get; }
+        public IReadOnlyList<IMethod> Methods { get; }
 
-        public IReadOnlyList<GenericTypeArgumentDefinition> GenericTypeArguments { get; }
+        public IReadOnlyList<IGenericTypeArgument> GenericTypeArguments { get; }
 
-        public IReadOnlyList<ConstraintDefinition> ConstraintClauses { get; }
+        public IReadOnlyList<IConstraint> ConstraintClauses { get; }
 
-        public IReadOnlyList<IndexerDefinition> Indexers { get; }
+        public IReadOnlyList<IIndexer> Indexers { get; }
 
-        public IReadOnlyList<EventDefinition> Events { get; }
+        public IReadOnlyList<IEvent> Events { get; }
 
-        public IReadOnlyList<OperatorDefinition> Operators { get; }
+        public IReadOnlyList<IOperator> Operators { get; }
 
-        public IReadOnlyList<ConversionOperatorDefinition> ConversionOperators { get; }
+        public IReadOnlyList<IConversionOperator> ConversionOperators { get; }
     }
 }

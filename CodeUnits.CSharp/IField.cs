@@ -1,6 +1,6 @@
 ﻿namespace CodeUnits.CSharp
 {
-    internal interface IField : IMember
+    public interface IField : IMember
     {
         ITypeUsage Type { get; }
 

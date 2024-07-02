@@ -11,7 +11,7 @@ using System.IO;
 
 namespace CodeUnits.CSharp
 {
-    public sealed class CodeUnit : NamespaceDefinition, ICodeUnit
+    internal class CodeUnit : NamespaceDefinition, ICodeUnit
     {
         private CodeUnit(string projectDefaultNamespace,
             IReadOnlyList<UsingDirectiveDefinition> directives, IReadOnlyList<NamespaceDefinition> namespaces,

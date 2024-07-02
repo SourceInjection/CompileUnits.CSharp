@@ -3,7 +3,7 @@ using CodeUnits.CSharp.Implementation.Parameters;
 
 namespace CodeUnits.CSharp.Implementation.Attributes
 {
-    public sealed class AttributeUsage : IAttributeUsage
+    internal class AttributeUsage : IAttributeUsage
     {
         internal AttributeUsage(string name, IReadOnlyList<Argument> arguments)
         {

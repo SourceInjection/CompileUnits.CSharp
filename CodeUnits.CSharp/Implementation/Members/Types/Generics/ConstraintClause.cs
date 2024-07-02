@@ -1,6 +1,6 @@
 ﻿namespace CodeUnits.CSharp.Implementation.Members.Types.Generics
 {
-    public sealed class ConstraintClause
+    internal class ConstraintClause : IConstraintClause
     {
         internal ConstraintClause(ConstraintKind kind, TypeUsage value = null)
         {
@@ -10,8 +10,6 @@
 
         public ConstraintKind Kind { get; }
 
-        public TypeUsage Value { get; }
-
-        public bool IsKind(ConstraintKind kind) => Kind == kind;
+        public ITypeUsage Value { get; }
     }
 }

@@ -7,7 +7,7 @@ using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp.Implementation.Members.Types
 {
-    public sealed class EnumDefinition : TypeDefinition, IEnum
+    internal class EnumDefinition : TypeDefinition, IEnum
     {
         internal EnumDefinition(
             string name,
@@ -30,11 +30,11 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
             BaseType = baseType;
         }
 
-        public IReadOnlyList<EnumMemberDefinition> Members { get; }
+        public IReadOnlyList<IEnumMember> Members { get; }
 
         public override TypeKind TypeKind { get; } = TypeKind.Enum;
 
-        public TypeUsage BaseType { get; }
+        public ITypeUsage BaseType { get; }
 
         internal static EnumDefinition FromContext(Enum_definitionContext context, CommonDefinitionInfo commonInfo)
         {

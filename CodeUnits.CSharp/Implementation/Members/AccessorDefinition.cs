@@ -6,7 +6,7 @@ using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp.Implementation.Members
 {
-    public sealed class AccessorDefinition : IAccessor
+    internal class AccessorDefinition : IAccessor
     {
         internal AccessorDefinition(
             string name,
@@ -34,8 +34,6 @@ namespace CodeUnits.CSharp.Implementation.Members
         public AccessorKind Kind { get; }
 
         public ICodeFragment Body { get; }
-
-        public bool IsKind(AccessorKind kind) => Kind == kind;
 
         internal static AccessorDefinition FromContext(Set_accessor_declarationContext context)
         {

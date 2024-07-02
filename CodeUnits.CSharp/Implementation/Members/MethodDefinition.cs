@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using static CodeUnits.CSharp.Generated.CSharpParser;
 namespace CodeUnits.CSharp.Implementation.Members
 {
-    public sealed class MethodDefinition : InvokableMemberDefinition, IMethod
+    internal class MethodDefinition : InvokableMemberDefinition, IMethod
     {
         internal MethodDefinition(
             string name,

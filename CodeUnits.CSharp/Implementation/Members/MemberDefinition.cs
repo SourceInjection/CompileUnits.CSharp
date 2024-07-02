@@ -4,7 +4,7 @@ using CodeUnits.CSharp.Implementation.Attributes;
 
 namespace CodeUnits.CSharp.Implementation.Members
 {
-    public abstract class MemberDefinition : IMember
+    internal abstract class MemberDefinition : IMember
     {
         protected private MemberDefinition(string name, AccessModifier modifier, IReadOnlyList<AttributeGroup> attributeGroups)
         {

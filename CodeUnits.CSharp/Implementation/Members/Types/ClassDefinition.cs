@@ -8,7 +8,7 @@ using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp.Implementation.Members.Types
 {
-    public sealed class ClassDefinition : StructuredTypeDefinition
+    internal class ClassDefinition : StructuredTypeDefinition, IClass
     {
         private ClassDefinition(
             string name,
@@ -50,7 +50,7 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
 
         public bool IsAbstract { get; }
 
-        public DestructorDefinition Destructor { get; }
+        public IDestructor Destructor { get; }
 
         internal static ClassDefinition FromContext(Class_definitionContext context, CommonDefinitionInfo commonInfo)
         {

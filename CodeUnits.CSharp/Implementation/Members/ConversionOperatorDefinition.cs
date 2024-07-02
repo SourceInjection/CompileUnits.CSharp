@@ -7,7 +7,7 @@ using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp.Implementation.Members
 {
-    public sealed class ConversionOperatorDefinition : MemberDefinition
+    internal class ConversionOperatorDefinition : MemberDefinition, IConversionOperator
     {
         internal ConversionOperatorDefinition(
             IReadOnlyList<AttributeGroup> attributeGroups,
@@ -30,13 +30,11 @@ namespace CodeUnits.CSharp.Implementation.Members
 
         public ConversionKind Kind { get; }
 
-        public ParameterDefinition Parameter { get; }
+        public IParameter Parameter { get; }
 
-        public TypeUsage ReturnType { get; }
+        public ITypeUsage ReturnType { get; }
 
-        public CodeFragment Body { get; }
-
-        public bool IsKind(ConversionKind kind) => Kind == kind;
+        public ICodeFragment Body { get; }
 
         internal static ConversionOperatorDefinition FromContext(Conversion_operator_declaratorContext context, CommonDefinitionInfo commonInfo)
         {

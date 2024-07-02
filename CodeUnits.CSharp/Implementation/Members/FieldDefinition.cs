@@ -6,7 +6,7 @@ using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp.Implementation.Members
 {
-    public sealed class FieldDefinition : MemberDefinition, IField
+    internal class FieldDefinition : MemberDefinition, IField
     {
         internal FieldDefinition(
             string name,

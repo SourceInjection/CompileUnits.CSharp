@@ -6,7 +6,7 @@ using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp.Implementation.Members
 {
-    public sealed class IndexerDefinition : MemberDefinition, IIndexer
+    internal class IndexerDefinition : MemberDefinition, IIndexer
     {
         internal IndexerDefinition(
             AccessModifier accessModifier,

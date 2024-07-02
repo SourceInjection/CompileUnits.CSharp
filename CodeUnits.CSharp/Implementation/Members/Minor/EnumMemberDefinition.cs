@@ -3,7 +3,7 @@ using CodeUnits.CSharp.Implementation.Attributes;
 
 namespace CodeUnits.CSharp.Implementation.Members.Minor
 {
-    public sealed class EnumMemberDefinition : IEnumMember
+    internal class EnumMemberDefinition : IEnumMember
     {
         internal EnumMemberDefinition(string name, CodeFragment value, IReadOnlyList<AttributeGroup> attributeGroups)
         {

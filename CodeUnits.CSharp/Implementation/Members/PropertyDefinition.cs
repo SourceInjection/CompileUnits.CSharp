@@ -6,7 +6,7 @@ using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp.Implementation.Members
 {
-    public sealed class PropertyDefinition : MemberDefinition, IProperty
+    internal class PropertyDefinition : MemberDefinition, IProperty
     {
         internal PropertyDefinition(
             string name,

@@ -1,6 +1,6 @@
 ﻿namespace CodeUnits.CSharp.Implementation.Parameters
 {
-    public sealed class Argument: IArgument
+    internal class Argument: IArgument
     {
         internal Argument(CodeFragment expression, string targetedParameter = null)
         {

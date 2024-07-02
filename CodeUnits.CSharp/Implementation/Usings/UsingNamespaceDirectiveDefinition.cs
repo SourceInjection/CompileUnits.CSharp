@@ -1,6 +1,6 @@
 ﻿namespace CodeUnits.CSharp.Implementation.Usings
 {
-    public sealed class UsingNamespaceDirectiveDefinition : UsingDirectiveDefinition, IUsingNamespaceDirective
+    internal class UsingNamespaceDirectiveDefinition : UsingDirectiveDefinition, IUsingNamespaceDirective
     {
         internal UsingNamespaceDirectiveDefinition(string value, string @namespace)
             : base(value)

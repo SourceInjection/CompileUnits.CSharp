@@ -7,7 +7,7 @@ using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp.Implementation.Members.Types
 {
-    public sealed class StructDefinition : StructuredTypeDefinition
+    internal class StructDefinition : StructuredTypeDefinition, IStruct
     {
         internal StructDefinition(
             string name,

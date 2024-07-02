@@ -4,9 +4,9 @@ using CodeUnits.CSharp.Implementation.Usings;
 
 namespace CodeUnits.CSharp.Implementation
 {
-    public class NamespaceDefinition : INamespace
+    internal class NamespaceDefinition : INamespace
     {
-        protected internal NamespaceDefinition(
+        internal NamespaceDefinition(
             string name,
             IReadOnlyList<UsingDirectiveDefinition> directives,
             IReadOnlyList<NamespaceDefinition> namespaces,

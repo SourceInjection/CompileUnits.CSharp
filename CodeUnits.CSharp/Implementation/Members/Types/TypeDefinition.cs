@@ -3,7 +3,7 @@ using CodeUnits.CSharp.Implementation.Attributes;
 
 namespace CodeUnits.CSharp.Implementation.Members.Types
 {
-    public abstract class TypeDefinition : MemberDefinition, IType
+    internal abstract class TypeDefinition : MemberDefinition, IType
     {
         protected private TypeDefinition(
             string name,

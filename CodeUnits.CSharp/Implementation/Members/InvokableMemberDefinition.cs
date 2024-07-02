@@ -4,7 +4,7 @@ using CodeUnits.CSharp.Implementation.Parameters;
 
 namespace CodeUnits.CSharp.Implementation.Members
 {
-    public abstract class InvokableMemberDefinition : MemberDefinition, IInvokableMember
+    internal abstract class InvokableMemberDefinition : MemberDefinition, IInvokableMember
     {
         private protected InvokableMemberDefinition(
             string name,

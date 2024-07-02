@@ -3,7 +3,7 @@ using CodeUnits.CSharp.Implementation.Attributes;
 
 namespace CodeUnits.CSharp.Implementation.Members
 {
-    public sealed class ConstantDefinition : MemberDefinition, IConstant
+    internal class ConstantDefinition : MemberDefinition, IConstant
     {
         internal ConstantDefinition(
             string name,

@@ -1,6 +1,6 @@
 ﻿namespace CodeUnits.CSharp.Implementation
 {
-    public sealed class ExternAliasDefinition : IExternAlias
+    internal class ExternAliasDefinition : IExternAlias
     {
         internal ExternAliasDefinition(string name)
         {

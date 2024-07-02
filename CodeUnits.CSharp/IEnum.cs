@@ -2,18 +2,10 @@
 
 namespace CodeUnits.CSharp
 {
-    public interface IEnum
+    public interface IEnum : IType
     {
-        MemberKind MemberKind { get; }
+        IReadOnlyList<IEnumMember> Members { get; }
 
-        IReadOnlyList<IAttributeGroup> AttributeGroups { get; }
-
-        IReadOnlyList<IAttributeUsage> Attributes { get; }
-
-        IType ContainingType { get; }
-
-        string Name { get; }
-
-        AccessModifier AccessModifier { get; }
+        ITypeUsage BaseType { get; }
     }
 }

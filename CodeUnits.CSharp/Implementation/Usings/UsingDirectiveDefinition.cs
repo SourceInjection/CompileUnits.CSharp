@@ -1,6 +1,6 @@
 ﻿namespace CodeUnits.CSharp.Implementation.Usings
 {
-    public abstract class UsingDirectiveDefinition : IUsingDirective
+    internal abstract class UsingDirectiveDefinition : IUsingDirective
     {
         protected private UsingDirectiveDefinition(string value)
         {

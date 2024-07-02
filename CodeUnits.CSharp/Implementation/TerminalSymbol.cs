@@ -3,7 +3,7 @@ using CodeUnits.CSharp.Implementation.Common;
 
 namespace CodeUnits.CSharp.Implementation
 {
-    public sealed class TerminalSymbol : ITerminalSymbol
+    internal class TerminalSymbol : ITerminalSymbol
     {
         internal TerminalSymbol(TerminalSymbolKind kind, string value)
         {

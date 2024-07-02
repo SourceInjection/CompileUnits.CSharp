@@ -7,7 +7,7 @@ using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp.Implementation.Members.Types
 {
-    public sealed class InterfaceDefinition : StructuredTypeDefinition
+    internal class InterfaceDefinition : StructuredTypeDefinition, IInterface
     {
         internal InterfaceDefinition(
             string name,

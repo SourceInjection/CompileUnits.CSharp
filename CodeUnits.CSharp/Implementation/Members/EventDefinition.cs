@@ -3,7 +3,7 @@ using CodeUnits.CSharp.Implementation.Attributes;
 
 namespace CodeUnits.CSharp.Implementation.Members
 {
-    public sealed class EventDefinition : MemberDefinition, IEvent
+    internal class EventDefinition : MemberDefinition, IEvent
     {
         public EventDefinition(
             string name,
