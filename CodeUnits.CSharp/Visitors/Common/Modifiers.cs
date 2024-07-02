@@ -17,6 +17,18 @@ namespace CodeUnits.CSharp.Visitors.Common
         private const string Internal = "internal";
         private const string Public = "public";
 
+        public static (AccessModifier AccessModifier, bool HasNewModifier, bool IsStatic, InheritanceModifier InheritanceModifier)
+            OfEvent(IEnumerable<string> modifiers)
+        {
+            var overwritableModifiers = OfOverwriteable(modifiers);
+            var hasStaticModifier = modifiers.Any(s => s == Static);
+
+            return (overwritableModifiers.AccessModifier, 
+                overwritableModifiers.HasNewModifier, 
+                hasStaticModifier, 
+                overwritableModifiers.InheritanceModifier);
+        }
+
         public static (AccessModifier AccessModifier, bool HasNewModifier, bool IsStatic, bool IsSealed, bool IsAbstract) 
             OfClass(IEnumerable<string> modifiers)
         {
@@ -54,16 +66,16 @@ namespace CodeUnits.CSharp.Visitors.Common
             OfConstant(IEnumerable<string> modifier) => OfAny(modifier);
 
         public static (AccessModifier AccessModifier, bool HasNewModifier, InheritanceModifier InheritanceModifier)
-            OfProperty(IEnumerable<string> modifiers) => OfOverwriteAble(modifiers);
+            OfProperty(IEnumerable<string> modifiers) => OfOverwriteable(modifiers);
 
         public static (AccessModifier AccessModifier, bool HasNewModifier, InheritanceModifier InheritanceModifier)
-            OfMethod(IEnumerable<string> modifiers) => OfOverwriteAble(modifiers);
+            OfMethod(IEnumerable<string> modifiers) => OfOverwriteable(modifiers);
 
         public static (AccessModifier AccessModifier, bool HasNewModifier, InheritanceModifier InheritanceModifier)
-            OfIndexer(IEnumerable<string> modifiers) => OfOverwriteAble(modifiers);
+            OfIndexer(IEnumerable<string> modifiers) => OfOverwriteable(modifiers);
 
         private static (AccessModifier AccessModifier, bool HasNewModifier, InheritanceModifier InheritanceModifier)
-            OfOverwriteAble(IEnumerable<string> modifiers)
+            OfOverwriteable(IEnumerable<string> modifiers)
         {
             var commonModifiers = OfAny(modifiers);
             var inheritanceModifiers = new HashSet<InheritanceModifier>();
@@ -97,7 +109,6 @@ namespace CodeUnits.CSharp.Visitors.Common
             return result;
         }
 
-
         private static void MayAddInheritanceModifier(HashSet<InheritanceModifier> inheritanceModifiers, string modifier)
         {
             if (modifier == Sealed)
@@ -126,7 +137,8 @@ namespace CodeUnits.CSharp.Visitors.Common
                 return InheritanceModifier.None;
             if (inheritanceModifiers.Count == 1)
                 return inheritanceModifiers.First();
-            throw new ArgumentException($"multiple definition of inheritance modifiers found in argument '{inheritanceModifiers}'");
+            throw new ArgumentException(
+                $"multiple definition of inheritance modifiers found in argument '{inheritanceModifiers}'");
         }
 
         private static AccessModifier MergeAccessModifiers(HashSet<AccessModifier> modifiers)

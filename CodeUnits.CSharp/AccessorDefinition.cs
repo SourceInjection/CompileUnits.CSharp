@@ -3,7 +3,13 @@ using System.Linq;
 
 namespace CodeUnits.CSharp
 {
-    public enum AccessorKind { Getter, Setter }
+    public enum AccessorKind 
+    { 
+        Getter, 
+        Setter,
+        Add,
+        Remove,
+    }
 
     public sealed class AccessorDefinition
     {
