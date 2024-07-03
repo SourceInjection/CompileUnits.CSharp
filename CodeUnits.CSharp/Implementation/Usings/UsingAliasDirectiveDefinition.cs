@@ -2,14 +2,13 @@
 {
     internal class UsingAliasDirectiveDefinition : UsingDirectiveDefinition, IUsingAliasDirective
     {
-        internal UsingAliasDirectiveDefinition(string value, string name, TypeUsage type)
-            : base(value)
+        internal UsingAliasDirectiveDefinition(string name, TypeUsage type)
         {
-            Name = name;
+            Alias = name;
             Type = type;
         }
 
-        public string Name { get; }
+        public string Alias { get; }
 
         public ITypeUsage Type { get; }
 

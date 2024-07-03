@@ -2,8 +2,7 @@
 {
     internal class UsingStaticDirectiveDefinition : UsingDirectiveDefinition, IUsingStaticDirective
     {
-        internal UsingStaticDirectiveDefinition(string value, TypeUsage type)
-            : base(value)
+        internal UsingStaticDirectiveDefinition(TypeUsage type)
         {
             Type = type;
         }

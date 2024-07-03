@@ -2,8 +2,7 @@
 {
     internal class UsingNamespaceDirectiveDefinition : UsingDirectiveDefinition, IUsingNamespaceDirective
     {
-        internal UsingNamespaceDirectiveDefinition(string value, string @namespace)
-            : base(value)
+        internal UsingNamespaceDirectiveDefinition(string @namespace)
         {
             Namespace = @namespace;
         }

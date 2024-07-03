@@ -7,19 +7,19 @@ namespace CodeUnits.CSharp.Visitors
 {
     internal class UsingVisitor : CSharpParserBaseVisitor<UsingDirectiveDefinition>
     {
-        public override UsingDirectiveDefinition VisitUsingAliasDirective([NotNull] CSharpParser.UsingAliasDirectiveContext context)
+        public override UsingDirectiveDefinition VisitUsing_alias_directive([NotNull] CSharpParser.Using_alias_directiveContext context)
         {
-            return new UsingAliasDirectiveDefinition(context.GetText(), context.identifier().GetText(), new TypeUsage(context.namespace_or_type_name()));
+            return new UsingAliasDirectiveDefinition(context.identifier().GetText(), new TypeUsage(context.namespace_or_type_name()));
         }
 
-        public override UsingDirectiveDefinition VisitUsingNamespaceDirective([NotNull] CSharpParser.UsingNamespaceDirectiveContext context)
+        public override UsingDirectiveDefinition VisitUsing_namespace_directive([NotNull] CSharpParser.Using_namespace_directiveContext context)
         {
-            return new UsingNamespaceDirectiveDefinition(context.GetText(), context.namespace_or_type_name().GetText());
+            return new UsingNamespaceDirectiveDefinition(context.namespace_or_type_name().GetText());
         }
 
-        public override UsingDirectiveDefinition VisitUsingStaticDirective([NotNull] CSharpParser.UsingStaticDirectiveContext context)
+        public override UsingDirectiveDefinition VisitUsing_static_directive([NotNull] CSharpParser.Using_static_directiveContext context)
         {
-            return new UsingStaticDirectiveDefinition(context.GetText(), new TypeUsage(context.namespace_or_type_name()));
+            return new UsingStaticDirectiveDefinition(new TypeUsage(context.namespace_or_type_name()));
         }
     }
 }

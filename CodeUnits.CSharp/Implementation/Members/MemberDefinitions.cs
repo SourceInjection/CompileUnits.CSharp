@@ -12,7 +12,7 @@ namespace CodeUnits.CSharp.Implementation.Members
         public static List<MemberDefinition> FromContext(Struct_bodyContext context)
         {
             var members = new List<MemberDefinition>();
-            if (context is null)
+            if (context?.struct_member_declaration() is null)
                 return members;
 
             var visitor = new MemberVisitor();
@@ -28,7 +28,7 @@ namespace CodeUnits.CSharp.Implementation.Members
         public static List<MemberDefinition> FromContext(Class_bodyContext context)
         {
             var members = new List<MemberDefinition>();
-            if (context is null)
+            if (context?.class_member_declarations() is null)
                 return members;
 
             var visitor = new MemberVisitor();
@@ -43,7 +43,7 @@ namespace CodeUnits.CSharp.Implementation.Members
 
         public static List<EnumMemberDefinition> FromContext(Enum_bodyContext context)
         {
-            if (context is null)
+            if (context?.enum_member_declaration() is null)
                 return new List<EnumMemberDefinition>();
 
             return context.enum_member_declaration()

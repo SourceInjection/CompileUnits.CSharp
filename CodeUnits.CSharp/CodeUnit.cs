@@ -1,14 +1,14 @@
 ﻿using Antlr4.Runtime;
+using CodeUnits.CSharp.Exceptions;
 using CodeUnits.CSharp.Generated;
-using CodeUnits.CSharp.Implementation;
 using CodeUnits.CSharp.Implementation.Members.Types;
 using CodeUnits.CSharp.Implementation.Usings;
+using CodeUnits.CSharp.Implementation;
 using CodeUnits.CSharp.Listeners;
 using CodeUnits.CSharp.Visitors;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using CodeUnits.CSharp.Exceptions;
 
 namespace CodeUnits.CSharp
 {
@@ -16,19 +16,8 @@ namespace CodeUnits.CSharp
     /// The main entry point for this library.<br/>
     /// A factory to get a code unit from a <see cref="Stream"/> or a <see langword="string"/>.
     /// </summary>
-    internal class CodeUnit : NamespaceDefinition, ICodeUnit
+    public class CodeUnit
     {
-        private CodeUnit(string projectDefaultNamespace,
-            IReadOnlyList<UsingDirectiveDefinition> directives, IReadOnlyList<NamespaceDefinition> namespaces,
-            IReadOnlyList<TypeDefinition> types, IReadOnlyList<ExternAliasDefinition> externAliases)
-
-            : base(name: projectDefaultNamespace,
-                  directives: directives,
-                  namespaces: namespaces,
-                  types: types,
-                  externAliases: externAliases)
-        { }
-
         /// <summary>
         /// Serializes C# code.
         /// </summary>
@@ -56,7 +45,7 @@ namespace CodeUnits.CSharp
 
         private static ICodeUnit FromStream(ICharStream stream, string projectDefaultNamespace = null)
         {
-            if(projectDefaultNamespace == null)
+            if (projectDefaultNamespace == null)
                 projectDefaultNamespace = string.Empty;
 
             try
@@ -71,7 +60,7 @@ namespace CodeUnits.CSharp
                 var ns = visitor.VisitCompilation_unit(parser.compilation_unit())
                     ?? throw new InvalidOperationException("something went wrong during parsing");
 
-                return new CodeUnit(projectDefaultNamespace,
+                return new Implementation.CodeUnit(projectDefaultNamespace,
                     (IReadOnlyList<UsingDirectiveDefinition>)ns.UsingDirectives,
                     (IReadOnlyList<NamespaceDefinition>)ns.Namespaces,
                     (IReadOnlyList<TypeDefinition>)ns.Types,

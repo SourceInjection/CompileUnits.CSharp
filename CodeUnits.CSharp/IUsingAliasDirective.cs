@@ -9,7 +9,7 @@
         /// <summary>
         /// The alias name.
         /// </summary>
-        string Name { get; }
+        string Alias { get; }
 
         /// <summary>
         /// The type for which the alias is defined.

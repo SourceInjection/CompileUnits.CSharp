@@ -12,11 +12,6 @@
         INamespace ContainingNamespace { get; }
 
         /// <summary>
-        /// The using directive as string.
-        /// </summary>
-        string Value { get; }
-
-        /// <summary>
         /// The kind of the using directive.
         /// </summary>
         UsingDirectiveKind Kind { get; }

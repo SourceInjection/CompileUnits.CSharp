@@ -21,4 +21,12 @@
     <Using Include="NUnit.Framework" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Members\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CodeUnits.CSharp\CodeUnits.CSharp.csproj" />
+  </ItemGroup>
+
 </Project>

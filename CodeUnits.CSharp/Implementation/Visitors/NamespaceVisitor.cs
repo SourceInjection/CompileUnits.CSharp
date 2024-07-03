@@ -40,6 +40,8 @@ namespace CodeUnits.CSharp.Visitors
         private List<NamespaceDefinition> GetNamespacesFromContext(Namespace_member_declarationsContext context)
         {
             var namespaces = new List<NamespaceDefinition>();
+            if (context == null)
+                return namespaces;
 
             var nsContexts = context.namespace_member_declaration()
                 .Where(c => c.namespace_declaration() != null)

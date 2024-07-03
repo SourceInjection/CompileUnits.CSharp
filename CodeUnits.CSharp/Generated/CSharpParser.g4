@@ -656,10 +656,21 @@ using_directives
     ;
 
 using_directive
-    : USING identifier ASSIGNMENT namespace_or_type_name SEMICOLON # usingAliasDirective
-    | USING namespace_or_type_name SEMICOLON                # usingNamespaceDirective
-    // C# 6: https://msdn.microsoft.com/en-us/library/ms228593.aspx
-    | USING STATIC namespace_or_type_name SEMICOLON # usingStaticDirective
+    : using_alias_directive
+    | using_static_directive
+    | using_namespace_directive
+    ;
+
+using_alias_directive
+    : USING identifier ASSIGNMENT namespace_or_type_name SEMICOLON
+    ;
+
+using_static_directive
+    : USING STATIC namespace_or_type_name SEMICOLON
+    ;
+
+using_namespace_directive
+    : USING namespace_or_type_name SEMICOLON
     ;
 
 namespace_member_declarations
