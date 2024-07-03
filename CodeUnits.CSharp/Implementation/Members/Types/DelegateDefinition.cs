@@ -38,7 +38,7 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
 
         public IReadOnlyList<IParameter> Parameters { get; }
 
-        public IReadOnlyList<IGenericTypeArgument> GenericTypeArguments { get; }
+        public IReadOnlyList<IGenericTypeParameter> GenericTypeArguments { get; }
 
         public IReadOnlyList<IConstraint> Constraints { get; }
 

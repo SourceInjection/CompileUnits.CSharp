@@ -33,7 +33,7 @@ namespace CodeUnits.CSharp.Implementation.Members
             HasNewModifier = hasNewModifier;
             AddressedInterface = addressedInterface;
             InheritanceModifier = inheritanceModifier;
-            DefaultValue = defaultValue;
+            Initialization = defaultValue;
         }
 
         public override MemberKind MemberKind { get; } = MemberKind.Property;
@@ -52,7 +52,7 @@ namespace CodeUnits.CSharp.Implementation.Members
 
         public ITypeUsage AddressedInterface { get; }
 
-        public ICodeFragment DefaultValue { get; }
+        public ICodeFragment Initialization { get; }
 
         internal static PropertyDefinition FromContext(Property_declarationContext context, ExtendedDefinitionInfo extendedInfo)
         {

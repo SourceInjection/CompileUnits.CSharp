@@ -37,7 +37,7 @@ namespace CodeUnits.CSharp.Implementation.Members
 
         public override MemberKind MemberKind { get; } = MemberKind.Method;
 
-        public IReadOnlyList<IGenericTypeArgument> GenericTypeArguments { get; }
+        public IReadOnlyList<IGenericTypeParameter> GenericTypeArguments { get; }
 
         public InheritanceModifier InheritanceModifier { get; }
 

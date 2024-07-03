@@ -3,7 +3,8 @@
 namespace CodeUnits.CSharp
 {
     /// <summary>
-    /// Represents the definition of an <see langword="enum"/>.
+    /// Represents the definition of an <see langword="enum"/>.<br/>
+    /// See <see href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum">enum</see>.
     /// </summary>
     public interface IEnum : IType
     {

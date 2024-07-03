@@ -2,7 +2,7 @@
 {
     /// <summary>
     /// Represents the constructor of a structured type.<br/>
-    /// See <see cref="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/constructors">constructors</see>.
+    /// See <see href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/constructors">constructors</see>.
     /// </summary>
     public interface IConstructor : IInvokableMember
     {

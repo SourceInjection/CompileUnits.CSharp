@@ -16,7 +16,6 @@ namespace CodeUnits.CSharp.Implementation.Members
             TypeUsage type,
             bool isStatic,
             bool isReadonly,
-            bool isNew,
             CodeFragment defaultValue)
 
             : base(
@@ -27,8 +26,7 @@ namespace CodeUnits.CSharp.Implementation.Members
             Type = type;
             IsStatic = isStatic;
             IsReadonly = isReadonly;
-            IsNew = isNew;
-            DefaultValue = defaultValue;
+            Initialization = defaultValue;
             HasNewModifier = hasNewModifier;
         }
 
@@ -40,9 +38,7 @@ namespace CodeUnits.CSharp.Implementation.Members
 
         public bool IsReadonly { get; }
 
-        public bool IsNew { get; }
-
-        public ICodeFragment DefaultValue { get; }
+        public ICodeFragment Initialization { get; }
 
         public bool HasNewModifier { get; }
 
@@ -68,7 +64,6 @@ namespace CodeUnits.CSharp.Implementation.Members
                 type: fieldInfo.Type,
                 isStatic: fieldInfo.Modifiers.IsStatic,
                 isReadonly: fieldInfo.Modifiers.IsReadonly,
-                isNew: fieldInfo.Modifiers.HasNewModifier,
                 defaultValue: defaultValue);
         }
     }

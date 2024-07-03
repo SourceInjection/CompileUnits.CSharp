@@ -9,7 +9,7 @@ namespace CodeUnits.CSharp.Implementation.Members.Types.Generics
             Clauses = clauses;
         }
 
-        public IGenericTypeArgument TargetedTypeArgument { get; }
+        public IGenericTypeParameter TargetedTypeArgument { get; }
 
         public IReadOnlyList<IConstraintClause> Clauses { get; }
     }

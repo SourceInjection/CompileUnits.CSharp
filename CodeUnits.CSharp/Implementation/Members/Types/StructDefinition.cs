@@ -3,6 +3,7 @@ using CodeUnits.CSharp.Implementation.Common;
 using CodeUnits.CSharp.Implementation.Members.Types.Generics;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp.Implementation.Members.Types
@@ -30,7 +31,17 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
         {
             IsRecord = isRecord;
             IsReadonly = isReadonly;
+
+            Fields = members.OfType<FieldDefinition>().ToArray();
+            Constructors = members.OfType<ConstructorDefinition>().ToArray();
+            ConversionOperators = members.OfType<ConversionOperatorDefinition>().ToArray();
         }
+
+        public IReadOnlyList<IField> Fields { get; }
+
+        public IReadOnlyList<IConstructor> Constructors { get; }
+
+        public IReadOnlyList<IConversionOperator> ConversionOperators { get; }
 
         public override TypeKind TypeKind { get; } = TypeKind.Struct;
 

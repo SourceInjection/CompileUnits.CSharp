@@ -11,7 +11,7 @@ namespace CodeUnits.CSharp
         /// <summary>
         /// The targeted type argument.
         /// </summary>
-        IGenericTypeArgument TargetedTypeArgument { get; }
+        IGenericTypeParameter TargetedTypeArgument { get; }
 
         /// <summary>
         /// Lists all constraint causes within the type parameter constraint.

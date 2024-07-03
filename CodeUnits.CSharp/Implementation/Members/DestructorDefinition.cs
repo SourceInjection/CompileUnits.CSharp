@@ -6,7 +6,7 @@ using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp.Implementation.Members
 {
-    internal class DestructorDefinition : InvokableMemberDefinition, IDestructor
+    internal class DestructorDefinition : InvokableMemberDefinition, IFinalizer
     {
         private DestructorDefinition(IReadOnlyList<AttributeGroup> attributeGroups, CodeFragment body)
             : base(

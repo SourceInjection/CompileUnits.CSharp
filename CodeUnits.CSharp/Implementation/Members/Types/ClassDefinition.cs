@@ -36,9 +36,19 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
             IsRecord = isRecord;
             IsSealed = isSealed;
             IsAbstract = isAbstract;
-            Destructor = members.OfType<DestructorDefinition>()
+            Finalizer = members.OfType<DestructorDefinition>()
                 .SingleOrDefault();
+
+            Fields = members.OfType<FieldDefinition>().ToArray();
+            Constructors = members.OfType<ConstructorDefinition>().ToArray();
+            ConversionOperators = members.OfType<ConversionOperatorDefinition>().ToArray();
         }
+
+        public IReadOnlyList<IField> Fields { get; }
+
+        public IReadOnlyList<IConstructor> Constructors { get; }
+
+        public IReadOnlyList<IConversionOperator> ConversionOperators { get; }
 
         public override TypeKind TypeKind { get; } = TypeKind.Class;
 
@@ -50,7 +60,7 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
 
         public bool IsAbstract { get; }
 
-        public IDestructor Destructor { get; }
+        public IFinalizer Finalizer { get; }
 
         internal static ClassDefinition FromContext(Class_definitionContext context, CommonDefinitionInfo commonInfo)
         {

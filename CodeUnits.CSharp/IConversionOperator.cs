@@ -29,6 +29,12 @@
 
     public static class IConversionOperatorExtensions
     {
+        /// <summary>
+        /// Checks if the conversion operator is of the desired kind.
+        /// </summary>
+        /// <param name="op">The operator to be checked.</param>
+        /// <param name="kind">The desired kind.</param>
+        /// <returns><see langword="true"/> if the conversion operator is of the desired kind else <see langword="false"/>.</returns>
         public static bool IsKind(this IConversionOperator op, ConversionKind kind) => op.Kind == kind;
     }
 }

@@ -24,7 +24,7 @@ namespace CodeUnits.CSharp.Implementation.Members
                   modifier: accessModifier,
                   attributeGroups: attributeGroups)
         {
-            Type = type;
+            ReturnType = type;
             HasRefModifier = hasRefModifier;
             Getter = getter;
             Setter = setter;
@@ -35,7 +35,7 @@ namespace CodeUnits.CSharp.Implementation.Members
 
         public override MemberKind MemberKind { get; } = MemberKind.Indexer;
 
-        public ITypeUsage Type { get; }
+        public ITypeUsage ReturnType { get; }
 
         public InheritanceModifier InheritanceModifier { get; }
 

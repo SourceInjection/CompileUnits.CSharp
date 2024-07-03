@@ -1,7 +1,8 @@
 ﻿namespace CodeUnits.CSharp
 {
     /// <summary>
-    /// Represents a constant definition.
+    /// Represents a constant definition.<br/>
+    /// See <see href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/constants">constants</see>
     /// </summary>
     public interface IConstant : IMember
     {
