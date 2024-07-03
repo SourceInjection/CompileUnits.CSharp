@@ -12,7 +12,7 @@ namespace CodeUnits.CSharp
 
         IReadOnlyList<IAttributeGroup> AttributeGroups { get; }
 
-        IReadOnlyList<IAttributeUsage> Attributes { get; }
+        IReadOnlyList<IAttribute> Attributes { get; }
 
         ICodeFragment DefaultValue { get; }
 

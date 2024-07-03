@@ -28,7 +28,7 @@ namespace CodeUnits.CSharp.Implementation.Parameters
 
         public IReadOnlyList<IAttributeGroup> AttributeGroups { get; }
 
-        public IReadOnlyList<IAttributeUsage> Attributes { get; }
+        public IReadOnlyList<IAttribute> Attributes { get; }
 
         public ICodeFragment DefaultValue { get; }
 

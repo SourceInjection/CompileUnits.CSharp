@@ -3,17 +3,17 @@ using CodeUnits.CSharp.Implementation.Parameters;
 
 namespace CodeUnits.CSharp.Implementation.Attributes
 {
-    internal class AttributeUsage : IAttributeUsage
+    internal class AttributeUsage : IAttribute
     {
-        internal AttributeUsage(string name, IReadOnlyList<Argument> arguments)
+        internal AttributeUsage(TypeUsage type, IReadOnlyList<Argument> arguments)
         {
-            Name = name;
+            Type = type;
             Arguments = arguments;
         }
 
-        public IAttributeGroup ContainingSection { get; internal set; }
+        public IAttributeGroup ParentGroup { get; internal set; }
 
-        public string Name { get; }
+        public ITypeUsage Type { get; }
 
         public IReadOnlyList<IArgument> Arguments { get; }
     }

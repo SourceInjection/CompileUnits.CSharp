@@ -23,9 +23,9 @@ namespace CodeUnits.CSharp.Implementation.Attributes
                 {
                     foreach (var attributeContext in attributeContexts)
                     {
-                        var name = attributeContext.namespace_or_type_name().GetText();
+                        var type = new TypeUsage(attributeContext.namespace_or_type_name());
                         var args = Arguments.FromContext(attributeContext.attribute_argument()).ToArray();
-                        attributes.Add(new AttributeUsage(name, args));
+                        attributes.Add(new AttributeUsage(type, args));
                     }
                 }
                 sections.Add(new AttributeGroup(attributeTarget, attributes));

@@ -8,13 +8,13 @@ namespace CodeUnits.CSharp.Implementation.Attributes
         internal AttributeGroup(string attributeTarget, IReadOnlyList<AttributeUsage> attributes)
         {
             foreach (var attribute in attributes)
-                attribute.ContainingSection = this;
+                attribute.ParentGroup = this;
             AttributeTarget = attributeTarget;
             Attributes = attributes;
         }
 
         public string AttributeTarget { get; }
 
-        public IReadOnlyList<IAttributeUsage> Attributes { get; }
+        public IReadOnlyList<IAttribute> Attributes { get; }
     }
 }

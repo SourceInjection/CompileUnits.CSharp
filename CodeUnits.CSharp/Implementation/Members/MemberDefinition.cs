@@ -18,7 +18,7 @@ namespace CodeUnits.CSharp.Implementation.Members
 
         public IReadOnlyList<IAttributeGroup> AttributeGroups { get; }
 
-        public IReadOnlyList<IAttributeUsage> Attributes { get; }
+        public IReadOnlyList<IAttribute> Attributes { get; }
 
         public virtual IType ContainingType { get; internal set; }
 
