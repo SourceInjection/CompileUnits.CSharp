@@ -1,7 +1,7 @@
 ﻿namespace CodeUnits.CSharp.Test.Namespaces
 {
     [TestFixture]
-    internal class CodeUnitTests
+    internal class NamespaceTests
     {
         [Test]
         public void ParsingEmptyString_DoesNotThrowAnyException()
