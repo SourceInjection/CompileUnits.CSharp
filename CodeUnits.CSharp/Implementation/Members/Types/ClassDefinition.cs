@@ -18,6 +18,7 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
             IReadOnlyList<MemberDefinition> members,
             IReadOnlyList<GenericTypeArgumentDefinition> genericTypeArguments,
             IReadOnlyList<ConstraintDefinition> constraints,
+            IReadOnlyList<TypeUsage> implementedInterfaces,
             bool isRecord,
             bool isStatic,
             bool isSealed,
@@ -30,7 +31,8 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
                   attributeGroups: attributeGroups,
                   members: members,
                   genericTypeArguments: genericTypeArguments,
-                  constraints: constraints)
+                  constraints: constraints,
+                  implementedInterfaces: implementedInterfaces)
         {
             IsStatic = isStatic;
             IsRecord = isRecord;

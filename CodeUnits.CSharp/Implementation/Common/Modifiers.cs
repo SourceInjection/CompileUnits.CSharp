@@ -150,7 +150,7 @@ namespace CodeUnits.CSharp.Implementation.Common
 
             if (modifiers.Count == 2 && modifiers.Contains(AccessModifier.Protected))
             {
-                if (modifiers.Contains(AccessModifier.Protected))
+                if (modifiers.Contains(AccessModifier.Internal))
                     return AccessModifier.ProtectedInternal;
                 if (modifiers.Contains(AccessModifier.Private))
                     return AccessModifier.PrivateProtected;

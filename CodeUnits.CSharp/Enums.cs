@@ -56,11 +56,9 @@
     {
         Enum,
         Class,
-        Record,
         Struct,
         Interface,
         Delegate,
-        Tuple
     }
 
     public enum TerminalSymbolKind

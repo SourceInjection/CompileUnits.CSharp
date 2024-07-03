@@ -14,7 +14,8 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
             IReadOnlyList<AttributeGroup> attributeGroups,
             IReadOnlyList<MemberDefinition> members,
             IReadOnlyList<GenericTypeArgumentDefinition> genericTypeArguments,
-            IReadOnlyList<ConstraintDefinition> constraints)
+            IReadOnlyList<ConstraintDefinition> constraints,
+            IReadOnlyList<TypeUsage> implementedInterfaces)
 
             : base(
                   name: name,
@@ -28,6 +29,7 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
             GenericTypeArguments = genericTypeArguments;
             Constraints = constraints;
             Members = members;
+            ImplementedInterfaces = implementedInterfaces;
 
             Types = members.OfType<TypeDefinition>().ToArray();
             Properties = members.OfType<PropertyDefinition>().ToArray();
@@ -57,5 +59,7 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
         public IReadOnlyList<IEvent> Events { get; }
 
         public IReadOnlyList<IOperator> Operators { get; }
+
+        public IReadOnlyList<ITypeUsage> ImplementedInterfaces { get; }
     }
 }

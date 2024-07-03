@@ -1,4 +1,4 @@
-﻿namespace CodeUnits.CSharp.Test.Namespaces
+﻿namespace CodeUnits.CSharp.Test.Namespace
 {
     [TestFixture]
     internal class NamespaceTests

@@ -56,5 +56,10 @@ namespace CodeUnits.CSharp
         /// Lists the operators within a structured type.
         /// </summary>
         IReadOnlyList<IOperator> Operators { get; }
+
+        /// <summary>
+        /// Lists the implemented interfaces within a structured type.
+        /// </summary>
+        IReadOnlyList<ITypeUsage> ImplementedInterfaces { get; }
     }
 }

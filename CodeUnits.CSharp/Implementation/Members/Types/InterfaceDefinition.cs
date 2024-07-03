@@ -3,6 +3,7 @@ using CodeUnits.CSharp.Implementation.Common;
 using CodeUnits.CSharp.Implementation.Members.Types.Generics;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp.Implementation.Members.Types
@@ -16,7 +17,8 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
             IReadOnlyList<AttributeGroup> attributeGroups,
             IReadOnlyList<MemberDefinition> members,
             IReadOnlyList<GenericTypeArgumentDefinition> genericTypeArguments,
-            IReadOnlyList<ConstraintDefinition> constraints)
+            IReadOnlyList<ConstraintDefinition> constraints,
+            IReadOnlyList<TypeUsage> implementedInterfaces)
 
             : base(
                   name: name,
@@ -25,7 +27,8 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
                   attributeGroups: attributeGroups,
                   members: members,
                   genericTypeArguments: genericTypeArguments,
-                  constraints: constraints)
+                  constraints: constraints,
+                  implementedInterfaces: implementedInterfaces)
         { }
 
         public override TypeKind TypeKind { get; } = TypeKind.Interface;
@@ -45,7 +48,8 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
                 attributeGroups: commonInfo.AttributeGroups,
                 members: MemberDefinitions.FromContext(context.class_body()),
                 genericTypeArguments: genericTypeArguments,
-                constraints: ConstraintDefinitions.FromContext(context.type_parameter_constraints_clauses(), genericTypeArguments));
+                constraints: ConstraintDefinitions.FromContext(context.type_parameter_constraints_clauses(), genericTypeArguments),
+                implementedInterfaces: Common.ImplementedInterfaces.FromContext(context.interface_base()?.interface_type_list()).ToArray());
         }
     }
 }
