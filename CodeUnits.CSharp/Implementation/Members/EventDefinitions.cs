@@ -11,7 +11,7 @@ namespace CodeUnits.CSharp.Implementation.Members
             if (context == null)
                 yield break;
 
-            var type = new TypeUsage(context.type_());
+            var type = TypeUsage.FromContext(context.type_());
 
             if (context.member_name() != null)
             {

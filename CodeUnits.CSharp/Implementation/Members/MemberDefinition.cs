@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using CodeUnits.CSharp.Implementation.Attributes;
 
 namespace CodeUnits.CSharp.Implementation.Members
@@ -11,14 +10,11 @@ namespace CodeUnits.CSharp.Implementation.Members
             Name = name;
             AccessModifier = modifier;
             AttributeGroups = attributeGroups;
-            Attributes = attributeGroups.SelectMany(a => a.Attributes).ToArray();
         }
 
         public abstract MemberKind MemberKind { get; }
 
         public IReadOnlyList<IAttributeGroup> AttributeGroups { get; }
-
-        public IReadOnlyList<IAttribute> Attributes { get; }
 
         public virtual IType ContainingType { get; internal set; }
 

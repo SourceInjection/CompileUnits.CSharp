@@ -1,7 +1,6 @@
 ﻿using Antlr4.Runtime;
 using CodeUnits.CSharp.Exceptions;
 using CodeUnits.CSharp.Generated;
-using CodeUnits.CSharp.Implementation.Members.Types;
 using CodeUnits.CSharp.Implementation.Usings;
 using CodeUnits.CSharp.Implementation;
 using CodeUnits.CSharp.Listeners;
@@ -61,9 +60,8 @@ namespace CodeUnits.CSharp
                     ?? throw new InvalidOperationException("something went wrong during parsing");
 
                 return new Implementation.CodeUnit(projectDefaultNamespace,
-                    (IReadOnlyList<UsingDirectiveDefinition>)ns.UsingDirectives,
-                    (IReadOnlyList<NamespaceDefinition>)ns.Namespaces,
-                    (IReadOnlyList<TypeDefinition>)ns.Types,
+                    directives: (IReadOnlyList<UsingDirectiveDefinition>)ns.UsingDirectives,
+                    members: ns.Members,
                     (IReadOnlyList<ExternAliasDefinition>)ns.ExternAliases);
             }
             catch (MalformedCodeException)

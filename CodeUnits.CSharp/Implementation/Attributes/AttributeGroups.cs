@@ -23,7 +23,7 @@ namespace CodeUnits.CSharp.Implementation.Attributes
                 {
                     foreach (var attributeContext in attributeContexts)
                     {
-                        var type = new TypeUsage(attributeContext.namespace_or_type_name());
+                        var type = TypeUsage.FromContext(attributeContext.namespace_or_type_name());
                         var args = Arguments.FromContext(attributeContext.attribute_argument()).ToArray();
                         attributes.Add(new AttributeUsage(type, args));
                     }

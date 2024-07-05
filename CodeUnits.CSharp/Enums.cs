@@ -37,6 +37,12 @@
         Public
     }
 
+    public enum NamespaceMemberKind
+    {
+        Type,
+        Namespace,
+    }
+
     public enum MemberKind
     {
         Type,

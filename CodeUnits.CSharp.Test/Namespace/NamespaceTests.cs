@@ -24,7 +24,7 @@
             var ns = $"namespace {nsName} {{ }}";
 
             var cu = CodeUnit.FromString(ns);
-            var result = cu.Namespaces[0];
+            var result = cu.Namespaces().First();
 
             Assert.Multiple(() =>
             {
@@ -116,7 +116,7 @@
             var code = $"class {type} {{ }}";
 
             var cu = CodeUnit.FromString(code);
-            var result = cu.Types[0];
+            var result = cu.Types().First();
 
             Assert.Multiple(() =>
             {

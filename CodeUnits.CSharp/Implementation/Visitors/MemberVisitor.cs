@@ -75,21 +75,17 @@ namespace CodeUnits.CSharp.Visitors
 
         private static MemberDefinition[] GetTypedMembers(Typed_member_declarationContext context, CommonDefinitionInfo commonInfo)
         {
-            var type = new TypeUsage(context.type_());
+            var type = TypeUsage.FromContext(context.type_());
 
             if (context.field_declaration() != null)
                 return FieldDefinitions(context.field_declaration(), commonInfo, type).ToArray();
-
-            var addressedInterface = context.namespace_or_type_name() == null
-                ? null
-                : new TypeUsage(context.namespace_or_type_name());
 
             var extendedInfo = new ExtendedDefinitionInfo(
                 commonInfo:         commonInfo,
                 hasRefModifier:     context.REF() != null,
                 isReadonly:         context.READONLY() != null,
                 type:               type,
-                addressedInterface: addressedInterface);
+                addressedInterface: TypeUsage.FromContext(context.namespace_or_type_name()));
 
             if (context.method_declaration() != null)
                 return new MethodDefinition[] { MethodDefinition.FromContext(context.method_declaration(), extendedInfo) };

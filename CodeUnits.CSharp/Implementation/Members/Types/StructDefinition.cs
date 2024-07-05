@@ -34,17 +34,7 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
         {
             IsRecord = isRecord;
             IsReadonly = isReadonly;
-
-            Fields = members.OfType<FieldDefinition>().ToArray();
-            Constructors = members.OfType<ConstructorDefinition>().ToArray();
-            ConversionOperators = members.OfType<ConversionOperatorDefinition>().ToArray();
         }
-
-        public IReadOnlyList<IField> Fields { get; }
-
-        public IReadOnlyList<IConstructor> Constructors { get; }
-
-        public IReadOnlyList<IConversionOperator> ConversionOperators { get; }
 
         public override TypeKind TypeKind { get; } = TypeKind.Struct;
 

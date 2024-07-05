@@ -1,4 +1,5 @@
 ﻿using Antlr4.Runtime.Tree;
+using CodeUnits.CSharp.Implementation.Common;
 using System.Collections.Generic;
 using static CodeUnits.CSharp.Generated.CSharpParser;
 
@@ -6,47 +7,10 @@ namespace CodeUnits.CSharp.Implementation
 {
     internal class TypeUsage : ITypeUsage
     {
-        internal TypeUsage(TerminalSymbol symbol)
-        {
-            Symbols = new TerminalSymbol[] { symbol };
-            FormatedText = symbol.Value;
-        }
-
-        private TypeUsage(ITree context)
-        {
-            var symbols = Common.Symbols.FromNode(context);
-            Symbols = symbols;
-            FormatedText = Common.Text.TypeUsage(symbols);
-        }
-
-        internal TypeUsage(Class_typeContext context)
-            : this((ITree)context)
-        { }
-
-        internal TypeUsage(Type_Context context)
-            : this((ITree)context)
-        { }
-
-        internal TypeUsage(Array_typeContext context)
-            : this((ITree)context)
-        { }
-
-        internal TypeUsage(Namespace_or_type_nameContext context)
-            : this((ITree)context)
-        { }
-
-        internal TypeUsage(IReadOnlyList<TerminalSymbol> symbols)
+        private TypeUsage(IReadOnlyList<TerminalSymbol> symbols, string formatedText)
         {
             Symbols = symbols;
-            FormatedText = Common.Text.TypeUsage(symbols);
-        }
-
-        private TypeUsage()
-        {
-            const string voidType = "void";
-            var voidSymbol = new TerminalSymbol(TerminalSymbolKind.Void, voidType);
-            Symbols = new TerminalSymbol[] { voidSymbol };
-            FormatedText = voidType;
+            FormatedText = formatedText;
         }
 
         public IReadOnlyList<ITerminalSymbol> Symbols { get; }
@@ -58,6 +22,38 @@ namespace CodeUnits.CSharp.Implementation
             return FormatedText;
         }
 
-        internal static TypeUsage Void { get; } = new TypeUsage();
+        internal static TypeUsage Void { get; } = CreateVoidType();
+
+        private static TypeUsage CreateVoidType()
+        {
+            const string voidType = "void";
+            var voidSymbol = new TerminalSymbol(TerminalSymbolKind.Void, voidType);
+            return FromSymbol(voidSymbol);
+        }
+
+        private static TypeUsage FromTree(ITree tree)
+        {
+            if(tree == null)
+                return null;
+            return FromSymbols(Common.Symbols.FromNode(tree));
+        }
+
+        internal static TypeUsage FromSymbol(TerminalSymbol symbol)
+        {
+            if(symbol == null) 
+                return null;
+            return FromSymbols(new TerminalSymbol[] { symbol });
+        }
+
+        internal static TypeUsage FromSymbols(IReadOnlyList<TerminalSymbol> symbols) 
+            => new TypeUsage(symbols, Text.TypeUsage(symbols));
+
+        internal static TypeUsage FromContext(Namespace_or_type_nameContext context) => FromTree(context);
+
+        internal static TypeUsage FromContext(Array_typeContext context) => FromTree(context);
+
+        internal static TypeUsage FromContext(Type_Context context) => FromTree(context);
+
+        internal static TypeUsage FromContext(Class_typeContext context) => FromTree(context);
     }
 }

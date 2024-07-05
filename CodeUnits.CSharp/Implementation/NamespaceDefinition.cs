@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CodeUnits.CSharp.Implementation.Members.Types;
 using CodeUnits.CSharp.Implementation.Usings;
 
@@ -9,17 +10,15 @@ namespace CodeUnits.CSharp.Implementation
         internal NamespaceDefinition(
             string name,
             IReadOnlyList<UsingDirectiveDefinition> directives,
-            IReadOnlyList<NamespaceDefinition> namespaces,
-            IReadOnlyList<TypeDefinition> types,
+            IReadOnlyList<INamespaceMember> members,
             IReadOnlyList<ExternAliasDefinition> externAliases)
         {
             Name = name;
-            foreach (var ns in namespaces)
+            Members = members;
+            foreach (var ns in members.OfType<NamespaceDefinition>())
                 ns.ContainingNamespace = this;
-            Namespaces = namespaces;
-            foreach (var type in types)
+            foreach (var type in members.OfType<TypeDefinition>())
                 type.ContainingNamespace = this;
-            Types = types;
             foreach (var directive in directives)
                 directive.ContainingNamespace = this;
             UsingDirectives = directives;
@@ -32,12 +31,12 @@ namespace CodeUnits.CSharp.Implementation
 
         public string Name { get; }
 
+        public IReadOnlyList<INamespaceMember> Members { get; }
+
         public IReadOnlyList<IUsingDirective> UsingDirectives { get; }
 
-        public IReadOnlyList<INamespace> Namespaces { get; }
-
-        public IReadOnlyList<IType> Types { get; }
-
         public IReadOnlyList<IExternAlias> ExternAliases { get; }
+
+        public NamespaceMemberKind NamespaceMemberKind { get; } = NamespaceMemberKind.Namespace;
     }
 }

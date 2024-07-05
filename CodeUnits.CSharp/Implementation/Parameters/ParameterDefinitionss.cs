@@ -57,7 +57,7 @@ namespace CodeUnits.CSharp.Implementation.Parameters
         private static ParameterDefinition FromArgDeclarationContext(Arg_declarationContext context, bool hasInModifier)
         {
             return new ParameterDefinition(
-                type: new TypeUsage(context.type_()),
+                type: TypeUsage.FromContext(context.type_()),
                 name: context.identifier().GetText(),
                 modifier: hasInModifier ? ParameterModifier.In : ParameterModifier.None,
                 attributes: Array.Empty<AttributeGroup>(),
@@ -68,7 +68,7 @@ namespace CodeUnits.CSharp.Implementation.Parameters
         private static ParameterDefinition FromParameterArrayContext(Parameter_arrayContext context)
         {
             return new ParameterDefinition(
-                type: new TypeUsage(context.array_type()),
+                type: TypeUsage.FromContext(context.array_type()),
                 name: context.identifier().GetText(),
                 modifier: ParameterModifier.None,
                 attributes: AttributeGroups.FromContext(context.attributes()),
@@ -84,7 +84,7 @@ namespace CodeUnits.CSharp.Implementation.Parameters
                 {
                     var expression = CodeFragment.FromContext(c.arg_declaration().expression());
                     yield return new ParameterDefinition(
-                        type: new TypeUsage(c.arg_declaration().type_()),
+                        type: TypeUsage.FromContext(c.arg_declaration().type_()),
                         name: c.arg_declaration().identifier().GetText(),
                         modifier: FromModifierContext(c.parameter_modifier()),
                         attributes: AttributeGroups.FromContext(c.attributes()),

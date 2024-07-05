@@ -8,7 +8,7 @@ namespace CodeUnits.CSharp.Implementation.Members
 {
     internal class PropertyDefinition : MemberDefinition, IProperty
     {
-        internal PropertyDefinition(
+        private PropertyDefinition(
             string name,
             AccessModifier accessModifier,
             bool hasNewModifier,

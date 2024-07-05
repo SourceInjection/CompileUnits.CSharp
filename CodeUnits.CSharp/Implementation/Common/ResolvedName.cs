@@ -31,7 +31,7 @@ namespace CodeUnits.CSharp.Implementation.Common
 
             return symbols.Count == 0
                 ? null
-                : new TypeUsage(symbols);
+                : TypeUsage.FromSymbols(symbols);
         }
     }
 }

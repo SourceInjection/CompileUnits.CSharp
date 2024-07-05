@@ -1,10 +1,8 @@
 ﻿using Antlr4.Runtime.Misc;
 using CodeUnits.CSharp.Generated;
 using CodeUnits.CSharp.Implementation;
-using CodeUnits.CSharp.Implementation.Members.Types;
 using CodeUnits.CSharp.Implementation.Usings;
 using System.Collections.Generic;
-using System.Linq;
 using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp.Visitors
@@ -16,8 +14,7 @@ namespace CodeUnits.CSharp.Visitors
             return new NamespaceDefinition(
                 name:          string.Empty,
                 directives:    UsingDirectives.FromContext(context.using_directives()),
-                namespaces:    GetNamespacesFromContext(context.namespace_member_declarations()),
-                types:         TypeDefinitions.FromContext(context.namespace_member_declarations()),
+                members:       GetNamespaceMembers(context.namespace_member_declarations()),
                 externAliases: ExternAliasDefinitions.FromContext(context.extern_alias_directives()));
         }
 
@@ -27,33 +24,31 @@ namespace CodeUnits.CSharp.Visitors
             return GetNamespaceFromBody(name, context.namespace_body());
         }
 
+        private List<INamespaceMember> GetNamespaceMembers(Namespace_member_declarationsContext context)
+        {
+            var result = new List<INamespaceMember>();
+            if (context?.namespace_member_declaration() == null)
+                return result;
+
+            var typeVisitor = new TypeVisitor();
+
+            foreach(var c in context.namespace_member_declaration())
+            {
+                if (c.namespace_declaration() != null)
+                    result.Add(VisitNamespace_declaration(c.namespace_declaration()));
+                else if(c.type_declaration() != null)
+                    result.Add(typeVisitor.VisitType_declaration(c.type_declaration()));
+            }
+            return result;
+        }
+
         private NamespaceDefinition GetNamespaceFromBody(string name, Namespace_bodyContext context)
         {
             return new NamespaceDefinition(
                 name:          name,
                 directives:    UsingDirectives.FromContext(context.using_directives()),
-                namespaces:    GetNamespacesFromContext(context.namespace_member_declarations()),
-                types:         TypeDefinitions.FromContext(context.namespace_member_declarations()),
+                members:       GetNamespaceMembers(context.namespace_member_declarations()),
                 externAliases: ExternAliasDefinitions.FromContext(context.extern_alias_directives()));
-        }
-
-        private List<NamespaceDefinition> GetNamespacesFromContext(Namespace_member_declarationsContext context)
-        {
-            var namespaces = new List<NamespaceDefinition>();
-            if (context == null)
-                return namespaces;
-
-            var nsContexts = context.namespace_member_declaration()
-                .Where(c => c.namespace_declaration() != null)
-                .Select(c => c.namespace_declaration());
-
-            foreach (var c in nsContexts)
-            {
-                var ns = VisitNamespace_declaration(c);
-                if(ns != null)
-                    namespaces.Add(ns);
-            }
-            return namespaces;
         }
     }
 }

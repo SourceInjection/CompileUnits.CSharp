@@ -45,7 +45,7 @@ namespace CodeUnits.CSharp.Implementation.Members
                 ? ConversionKind.Explicit
                 : ConversionKind.Implicit;
 
-            var type = new TypeUsage(context.type_());
+            var type = TypeUsage.FromContext(context.type_());
             var parameter = ParameterDefinition.FromContext(context.arg_declaration());
             var body = CodeFragment.FromContext(context.body());
 

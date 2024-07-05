@@ -49,16 +49,13 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
 
             var modifiers = Modifiers.OfDelegate(commonInfo.Modifiers);
             var genericTypeArguments = GenericTypeArgumentDefinitions.FromContext(context.variant_type_parameter_list());
-            var returnType = context.return_type().type_() is null
-                ? TypeUsage.Void
-                : new TypeUsage(context.return_type().type_());
 
             return new DelegateDefinition(
                 name: context.identifier().GetText(),
                 accessModifier: modifiers.AccessModifier,
                 hasNewModifier: modifiers.HasNewModifier,
                 attributeGroups: commonInfo.AttributeGroups,
-                returnType: returnType,
+                returnType: TypeUsage.FromContext(context.return_type()?.type_()),
                 parameters: ParameterDefinitionss.FromContext(context.formal_parameter_list()),
                 genericTypeArguments: genericTypeArguments,
                 constraints: ConstraintDefinitions.FromContext(context.type_parameter_constraints_clauses(), genericTypeArguments));

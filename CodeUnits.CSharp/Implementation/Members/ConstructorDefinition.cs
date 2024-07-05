@@ -36,7 +36,7 @@ namespace CodeUnits.CSharp.Implementation.Members
             {
                 base.ContainingType = value;
                 if (value != null)
-                    ReturnType = new TypeUsage(new TerminalSymbol(TerminalSymbolKind.Identifier, value.Name));
+                    ReturnType = TypeUsage.FromSymbol(new TerminalSymbol(TerminalSymbolKind.Identifier, value.Name));
             }
         }
         public override MemberKind MemberKind { get; } = MemberKind.Constructor;

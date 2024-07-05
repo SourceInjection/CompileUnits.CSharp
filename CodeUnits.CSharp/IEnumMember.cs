@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-
-namespace CodeUnits.CSharp
+﻿namespace CodeUnits.CSharp
 {
     /// <summary>
     /// Represents a member of an <see langword="enum"/>.<br/>
     /// See <see href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum">enum</see>.
     /// </summary>
-    public interface IEnumMember
+    public interface IEnumMember : IAttributeable
     {
         /// <summary>
         /// The parent <see langword="enum"/> type.
@@ -23,16 +21,5 @@ namespace CodeUnits.CSharp
         /// This might be <see langword="null"/> if not explicitely defined.
         /// </summary>
         ICodeFragment Value { get; }
-
-        /// <summary>
-        /// The attribute groups placed over the <see langword="enum"/> member.
-        /// </summary>
-        IReadOnlyList<IAttributeGroup> AttributeGroups { get; }
-
-        /// <summary>
-        /// Lists the attributes placed over a <see langword="enum"/> member.<br/>
-        /// This is the same as <see cref="AttributeGroups"/>.SelectMany(ag => ag.Attributes).
-        /// </summary>
-        IReadOnlyList<IAttribute> Attributes { get; }
     }
 }

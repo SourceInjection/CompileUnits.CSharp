@@ -26,5 +26,7 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
         public INamespace ContainingNamespace { get; internal set; }
 
         public bool HasNewModifier { get; }
+
+        public NamespaceMemberKind NamespaceMemberKind { get; } = NamespaceMemberKind.Type;
     }
 }

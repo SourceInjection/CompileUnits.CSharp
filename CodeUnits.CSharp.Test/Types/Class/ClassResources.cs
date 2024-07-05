@@ -4,8 +4,8 @@
     {
         private readonly static string EmptyClass = "class MyClass {}";
 
-        public static readonly object[] Configurations =
-        {
+        public static readonly object[] ModifierConfigs =
+        [
             new object[] { EmptyClass, nameof(IClass.AccessModifier), AccessModifier.None, },
             new object[] { $"public {EmptyClass}", nameof(IClass.AccessModifier), AccessModifier.Public, },
             new object[] { $"internal {EmptyClass}", nameof(IClass.AccessModifier), AccessModifier.Internal, },
@@ -29,6 +29,13 @@
             new object[] { $"abstract {EmptyClass}", nameof(IClass.IsAbstract), true, },
             new object[] { EmptyClass, nameof(IClass.HasNewModifier), false, },
             new object[] { $"new {EmptyClass}", nameof(IClass.HasNewModifier), true, },
-        };
+        ];
+
+        public static readonly object[] CollectionConfigs =
+        [
+            new object[] { $"[MyAttribute] {EmptyClass}", nameof(IClass.AttributeGroups) },
+        ];
+
+
     }
 }

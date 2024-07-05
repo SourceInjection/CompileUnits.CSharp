@@ -44,7 +44,7 @@ namespace CodeUnits.CSharp.Implementation.Members.Types.Generics
                 return null;
 
             if (context.class_type() != null)
-                return new ConstraintClause(ConstraintKind.OfType, new TypeUsage(context.class_type()));
+                return new ConstraintClause(ConstraintKind.OfType, TypeUsage.FromContext(context.class_type()));
             else if (context.STRUCT() != null)
                 return new ConstraintClause(ConstraintKind.Struct);
             else if (context.UNMANAGED() != null)
@@ -66,7 +66,7 @@ namespace CodeUnits.CSharp.Implementation.Members.Types.Generics
                 yield break;
 
             foreach (var c in context.namespace_or_type_name())
-                yield return new ConstraintClause(ConstraintKind.OfType, new TypeUsage(c));
+                yield return new ConstraintClause(ConstraintKind.OfType, TypeUsage.FromContext(c));
         }
     }
 }

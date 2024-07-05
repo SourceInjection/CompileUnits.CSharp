@@ -38,17 +38,7 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
             IsRecord = isRecord;
             IsSealed = isSealed;
             IsAbstract = isAbstract;
-            Finalizer = members.OfType<FinalizerDefinition>()
-                .SingleOrDefault();
-
-            Fields = members.OfType<FieldDefinition>().ToArray();
-            Constructors = members.OfType<ConstructorDefinition>().ToArray();
-            ConversionOperators = members.OfType<ConversionOperatorDefinition>().ToArray();
         }
-
-        public IReadOnlyList<IField> Fields { get; }
-
-        public IReadOnlyList<IConstructor> Constructors { get; }
 
         public IReadOnlyList<IConversionOperator> ConversionOperators { get; }
 
@@ -62,15 +52,12 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
 
         public bool IsAbstract { get; }
 
-        public IFinalizer Finalizer { get; }
-
         internal static ClassDefinition FromContext(Class_definitionContext context, CommonDefinitionInfo commonInfo)
         {
             if (context == null)
                 throw new ArgumentNullException(nameof(context));
 
             var modifiers = Modifiers.OfClass(commonInfo.Modifiers);
-            var isRecord = context.RECORD() != null;
             var genericTypeArguments = GenericTypeArgumentDefinitions.FromContext(context.type_parameter_list());
 
             return new ClassDefinition(
@@ -81,7 +68,7 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
                 members: MemberDefinitions.FromContext(context.class_body()),
                 genericTypeArguments: genericTypeArguments,
                 constraints: ConstraintDefinitions.FromContext(context.type_parameter_constraints_clauses(), genericTypeArguments),
-                isRecord: isRecord,
+                isRecord: context.RECORD() != null,
                 isStatic: modifiers.IsStatic,
                 isSealed: modifiers.IsSealed,
                 isAbstract: modifiers.IsAbstract,

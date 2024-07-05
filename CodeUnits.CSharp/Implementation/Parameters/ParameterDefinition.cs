@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using CodeUnits.CSharp.Implementation.Attributes;
 using static CodeUnits.CSharp.Generated.CSharpParser;
 
@@ -15,7 +14,6 @@ namespace CodeUnits.CSharp.Implementation.Parameters
             IsParamsArray = isParamsArray;
             DefaultValue = defaultValue;
             AttributeGroups = attributes;
-            Attributes = attributes.SelectMany(a => a.Attributes).ToArray();
             IsOptional = defaultValue == null;
             Modifier = modifier;
         }
@@ -27,8 +25,6 @@ namespace CodeUnits.CSharp.Implementation.Parameters
         public ParameterModifier Modifier { get; }
 
         public IReadOnlyList<IAttributeGroup> AttributeGroups { get; }
-
-        public IReadOnlyList<IAttribute> Attributes { get; }
 
         public ICodeFragment DefaultValue { get; }
 
@@ -42,7 +38,7 @@ namespace CodeUnits.CSharp.Implementation.Parameters
                 throw new ArgumentNullException(nameof(context));
 
             return new ParameterDefinition(
-                    type: new TypeUsage(context.type_()),
+                    type: TypeUsage.FromContext(context.type_()),
                     name: context.identifier().GetText(),
                     modifier: ParameterModifier.None,
                     attributes: Array.Empty<AttributeGroup>(),

@@ -1,29 +1,16 @@
-﻿using System.Collections.Generic;
-
-namespace CodeUnits.CSharp
+﻿namespace CodeUnits.CSharp
 {
     /// <summary>
     /// Represents a member of a structured type.<br/>
     /// Types, properties, fields, methods, destructors, constructors, operators, conversion operators, indexers, events and constants are members.<br/>
     /// See <see href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/members">members</see>
     /// </summary>
-    public interface IMember
+    public interface IMember : IAttributeable
     {
         /// <summary>
         /// The kind of the member.
         /// </summary>
         MemberKind MemberKind { get; }
-
-        /// <summary>
-        /// Lists the attribute groups placed right before a member.
-        /// </summary>
-        IReadOnlyList<IAttributeGroup> AttributeGroups { get; }
-
-        /// <summary>
-        /// Lists the attributes placed over a member.<br/>
-        /// This is the same as <see cref="AttributeGroups"/>.SelectMany(ag => ag.Attributes).
-        /// </summary>
-        IReadOnlyList<IAttribute> Attributes { get; }
 
         /// <summary>
         /// The parent type where the member is defined.

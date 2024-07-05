@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using CodeUnits.CSharp.Implementation.Attributes;
 using CodeUnits.CSharp.Implementation.Common;
 using static CodeUnits.CSharp.Generated.CSharpParser;
@@ -18,7 +17,6 @@ namespace CodeUnits.CSharp.Implementation.Members
             Name = name;
             AccessModifier = accessModifier;
             AttributeGroups = attributeGroups;
-            Attributes = AttributeGroups.SelectMany(a => a.Attributes).ToArray();
             Body = body;
             Kind = kind;
         }
@@ -28,8 +26,6 @@ namespace CodeUnits.CSharp.Implementation.Members
         public AccessModifier AccessModifier { get; }
 
         public IReadOnlyList<IAttributeGroup> AttributeGroups { get; }
-
-        public IReadOnlyList<IAttribute> Attributes { get; }
 
         public AccessorKind Kind { get; }
 

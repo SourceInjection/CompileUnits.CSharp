@@ -9,7 +9,7 @@ namespace CodeUnits.CSharp.Visitors
     {
         public override UsingDirectiveDefinition VisitUsing_alias_directive([NotNull] CSharpParser.Using_alias_directiveContext context)
         {
-            return new UsingAliasDirectiveDefinition(context.identifier().GetText(), new TypeUsage(context.namespace_or_type_name()));
+            return new UsingAliasDirectiveDefinition(context.identifier().GetText(), TypeUsage.FromContext(context.namespace_or_type_name()));
         }
 
         public override UsingDirectiveDefinition VisitUsing_namespace_directive([NotNull] CSharpParser.Using_namespace_directiveContext context)
@@ -19,7 +19,7 @@ namespace CodeUnits.CSharp.Visitors
 
         public override UsingDirectiveDefinition VisitUsing_static_directive([NotNull] CSharpParser.Using_static_directiveContext context)
         {
-            return new UsingStaticDirectiveDefinition(new TypeUsage(context.namespace_or_type_name()));
+            return new UsingStaticDirectiveDefinition(TypeUsage.FromContext(context.namespace_or_type_name()));
         }
     }
 }

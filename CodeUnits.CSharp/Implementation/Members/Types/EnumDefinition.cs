@@ -42,9 +42,6 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
                 throw new ArgumentNullException(nameof(context));
 
             var modifiers = Modifiers.OfEnum(commonInfo.Modifiers);
-            var baseType = context.enum_base()?.type_() is null
-                ? null
-                : new TypeUsage(context.enum_base().type_());
 
             return new EnumDefinition(
                 name: context.identifier().GetText(),
@@ -52,7 +49,7 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
                 hasNewModifier: modifiers.HasNewModifier,
                 attributeGroups: commonInfo.AttributeGroups,
                 members: MemberDefinitions.FromContext(context.enum_body()),
-                baseType: baseType);
+                baseType: TypeUsage.FromContext(context.enum_base()?.type_()));
         }
     }
 }

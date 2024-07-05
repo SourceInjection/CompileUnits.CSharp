@@ -12,7 +12,7 @@ namespace CodeUnits.CSharp.Implementation.Members
                 yield break;
 
             var declarators = ConstantDeclarators(context.constant_declarators()?.constant_declarator());
-            var type = new TypeUsage(context.type_());
+            var type = TypeUsage.FromContext(context.type_());
             (var accessModifier, var hasNewModifier) = Modifiers.OfConstant(commonInfo.Modifiers);
 
             foreach (var (ident, expression) in declarators)

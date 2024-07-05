@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using CodeUnits.CSharp.Implementation.Attributes;
 
 namespace CodeUnits.CSharp.Implementation.Members.Minor
@@ -11,7 +10,6 @@ namespace CodeUnits.CSharp.Implementation.Members.Minor
             Name = name;
             Value = value;
             AttributeGroups = attributeGroups;
-            Attributes = attributeGroups.SelectMany(ag => ag.Attributes).ToArray();
         }
 
         public IEnum ContainingType { get; internal set; }
@@ -21,7 +19,5 @@ namespace CodeUnits.CSharp.Implementation.Members.Minor
         public ICodeFragment Value { get; }
 
         public IReadOnlyList<IAttributeGroup> AttributeGroups { get; }
-
-        public IReadOnlyList<IAttribute> Attributes { get; }
     }
 }

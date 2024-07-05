@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace CodeUnits.CSharp
+﻿namespace CodeUnits.CSharp
 {
     /// <summary>
     /// This interface represents accessors like <see langword="get"/> and <see langword="set"/> of properties 
@@ -9,7 +7,7 @@ namespace CodeUnits.CSharp
     /// <see href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/add">keyword add</see>
     /// and <see href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/remove">keyword remove</see>.
     /// </summary>
-    public interface IAccessor
+    public interface IAccessor: IAttributeable
     {
         /// <summary>
         /// The name modifier of the accessor.
@@ -20,17 +18,6 @@ namespace CodeUnits.CSharp
         /// The access modifier of the accessor.
         /// </summary>
         AccessModifier AccessModifier { get; }
-
-        /// <summary>
-        /// Lists the attribute groups placed over a accessor.
-        /// </summary>
-        IReadOnlyList<IAttributeGroup> AttributeGroups { get; }
-
-        /// <summary>
-        /// Lists the attributes placed over a accessor.<br/>
-        /// This is the same as <see cref="AttributeGroups"/>.SelectMany(ag => ag.Attributes).
-        /// </summary>
-        IReadOnlyList<IAttribute> Attributes { get; }
 
         /// <summary>
         /// The accessor kind.
