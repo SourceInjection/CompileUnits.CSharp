@@ -18,8 +18,9 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
             IReadOnlyList<MemberDefinition> members,
             IReadOnlyList<GenericTypeArgumentDefinition> genericTypeArguments,
             IReadOnlyList<ConstraintDefinition> constraints,
-            IReadOnlyList<TypeUsage> implementedInterfaces,
-            bool isRecord, bool isReadonly)
+            IReadOnlyList<TypeUsage> inheritance,
+            bool isRecord, 
+            bool isReadonly)
 
             : base(
                   name: name,
@@ -29,7 +30,7 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
                   members: members,
                   genericTypeArguments: genericTypeArguments,
                   constraints: constraints,
-                  implementedInterfaces: implementedInterfaces)
+                  inheritance: inheritance)
         {
             IsRecord = isRecord;
             IsReadonly = isReadonly;
@@ -69,7 +70,8 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
                 genericTypeArguments: genericTypeArguments,
                 constraints: ConstraintDefinitions.FromContext(context.type_parameter_constraints_clauses(), genericTypeArguments),
                 isRecord: isRecord,
-                isReadonly: modifiers.IsReadonly);
+                isReadonly: modifiers.IsReadonly,
+                inheritance: TypeUsages.FromContext(context.struct_interfaces()).ToArray());
         }
     }
 }

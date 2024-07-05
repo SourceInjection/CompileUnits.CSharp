@@ -18,7 +18,7 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
             IReadOnlyList<MemberDefinition> members,
             IReadOnlyList<GenericTypeArgumentDefinition> genericTypeArguments,
             IReadOnlyList<ConstraintDefinition> constraints,
-            IReadOnlyList<TypeUsage> implementedInterfaces,
+            IReadOnlyList<TypeUsage> inheritance,
             bool isRecord,
             bool isStatic,
             bool isSealed,
@@ -32,13 +32,13 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
                   members: members,
                   genericTypeArguments: genericTypeArguments,
                   constraints: constraints,
-                  implementedInterfaces: implementedInterfaces)
+                  inheritance: inheritance)
         {
             IsStatic = isStatic;
             IsRecord = isRecord;
             IsSealed = isSealed;
             IsAbstract = isAbstract;
-            Finalizer = members.OfType<DestructorDefinition>()
+            Finalizer = members.OfType<FinalizerDefinition>()
                 .SingleOrDefault();
 
             Fields = members.OfType<FieldDefinition>().ToArray();
@@ -84,7 +84,8 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
                 isRecord: isRecord,
                 isStatic: modifiers.IsStatic,
                 isSealed: modifiers.IsSealed,
-                isAbstract: modifiers.IsAbstract);
+                isAbstract: modifiers.IsAbstract,
+                inheritance: TypeUsages.FromContext(context.class_base()).ToArray());
         }
     }
 }

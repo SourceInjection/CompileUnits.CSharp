@@ -6,9 +6,9 @@ using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp.Implementation.Members
 {
-    internal class DestructorDefinition : InvokableMemberDefinition, IFinalizer
+    internal class FinalizerDefinition : InvokableMemberDefinition, IFinalizer
     {
-        private DestructorDefinition(IReadOnlyList<AttributeGroup> attributeGroups, CodeFragment body)
+        private FinalizerDefinition(IReadOnlyList<AttributeGroup> attributeGroups, CodeFragment body)
             : base(
                   "~",
                   AccessModifier.None,
@@ -20,11 +20,11 @@ namespace CodeUnits.CSharp.Implementation.Members
 
         public override MemberKind MemberKind { get; } = MemberKind.Destructor;
 
-        internal static DestructorDefinition FromContext(Destructor_definitionContext context, List<AttributeGroup> attributeGroups)
+        internal static FinalizerDefinition FromContext(Destructor_definitionContext context, List<AttributeGroup> attributeGroups)
         {
             if (context == null)
                 throw new ArgumentNullException(nameof(context));
-            return new DestructorDefinition(attributeGroups, CodeFragment.FromContext(context.body()));
+            return new FinalizerDefinition(attributeGroups, CodeFragment.FromContext(context.body()));
         }
     }
 }

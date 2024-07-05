@@ -60,6 +60,6 @@ namespace CodeUnits.CSharp
         /// <summary>
         /// Lists the implemented interfaces within a structured type.
         /// </summary>
-        IReadOnlyList<ITypeUsage> ImplementedInterfaces { get; }
+        IReadOnlyList<ITypeUsage> Inheritance { get; }
     }
 }

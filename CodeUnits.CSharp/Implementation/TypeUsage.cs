@@ -19,15 +19,15 @@ namespace CodeUnits.CSharp.Implementation
             FormatedText = Common.Text.TypeUsage(symbols);
         }
 
+        internal TypeUsage(Class_typeContext context)
+            : this((ITree)context)
+        { }
+
         internal TypeUsage(Type_Context context)
             : this((ITree)context)
         { }
 
         internal TypeUsage(Array_typeContext context)
-            : this((ITree)context)
-        { }
-
-        internal TypeUsage(Class_typeContext context)
             : this((ITree)context)
         { }
 

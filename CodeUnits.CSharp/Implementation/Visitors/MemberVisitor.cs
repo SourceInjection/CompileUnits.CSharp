@@ -31,7 +31,7 @@ namespace CodeUnits.CSharp.Visitors
         {
             var attributes = AttributeGroups.FromContext(context.attributes());
             if (context.destructor_definition() != null)
-                return new MemberDefinition[] { DestructorDefinition.FromContext(context.destructor_definition(), attributes) };
+                return new MemberDefinition[] { FinalizerDefinition.FromContext(context.destructor_definition(), attributes) };
 
             var commonInfo = new CommonDefinitionInfo(
                     attributeGroups: attributes,

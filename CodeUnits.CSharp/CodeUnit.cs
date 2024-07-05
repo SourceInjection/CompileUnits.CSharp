@@ -16,7 +16,7 @@ namespace CodeUnits.CSharp
     /// The main entry point for this library.<br/>
     /// A factory to get a code unit from a <see cref="Stream"/> or a <see langword="string"/>.
     /// </summary>
-    public class CodeUnit
+    public static class CodeUnit
     {
         /// <summary>
         /// Serializes C# code.

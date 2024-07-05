@@ -18,7 +18,7 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
             IReadOnlyList<MemberDefinition> members,
             IReadOnlyList<GenericTypeArgumentDefinition> genericTypeArguments,
             IReadOnlyList<ConstraintDefinition> constraints,
-            IReadOnlyList<TypeUsage> implementedInterfaces)
+            IReadOnlyList<TypeUsage> inheritance)
 
             : base(
                   name: name,
@@ -28,7 +28,7 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
                   members: members,
                   genericTypeArguments: genericTypeArguments,
                   constraints: constraints,
-                  implementedInterfaces: implementedInterfaces)
+                  inheritance: inheritance)
         { }
 
         public override TypeKind TypeKind { get; } = TypeKind.Interface;
@@ -49,7 +49,7 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
                 members: MemberDefinitions.FromContext(context.class_body()),
                 genericTypeArguments: genericTypeArguments,
                 constraints: ConstraintDefinitions.FromContext(context.type_parameter_constraints_clauses(), genericTypeArguments),
-                implementedInterfaces: Common.ImplementedInterfaces.FromContext(context.interface_base()?.interface_type_list()).ToArray());
+                inheritance: TypeUsages.FromContext(context.interface_base()?.interface_type_list()).ToArray());
         }
     }
 }
