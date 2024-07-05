@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace CodeUnits.CSharp
+﻿namespace CodeUnits.CSharp
 {
     /// <summary>
     /// Represents a parameter definition.<br/>
@@ -33,15 +31,15 @@ namespace CodeUnits.CSharp
         /// If the parameter has the <see langword="params"/> keyword followed by brackets ('[]') this is <see langword="true"/>.
         /// </summary>
         bool IsParamsArray { get; }
-
-        /// <summary>
-        /// If the parameter has a defined default value it is optional and this is <see langword="true"/>.
-        /// </summary>
-        bool IsOptional { get; }
     }
 
     public static class IParameterExtensions
     {
+        /// <summary>
+        /// If the parameter has a defined default value it is optional and this is <see langword="true"/>.
+        /// </summary>
+        /// <param name="parameter">The parameter to be checked.</param>
+        /// <returns><see langword="true"/> if the parameter is optional else <see langword="false"/>.</returns>
         public static bool IsOptional(this IParameter parameter) => parameter.DefaultValue != null;
     }
 }
