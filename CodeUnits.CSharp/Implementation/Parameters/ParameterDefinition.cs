@@ -14,7 +14,6 @@ namespace CodeUnits.CSharp.Implementation.Parameters
             IsParamsArray = isParamsArray;
             DefaultValue = defaultValue;
             AttributeGroups = attributes;
-            IsOptional = defaultValue == null;
             Modifier = modifier;
         }
 
@@ -29,8 +28,6 @@ namespace CodeUnits.CSharp.Implementation.Parameters
         public ICodeFragment DefaultValue { get; }
 
         public bool IsParamsArray { get; }
-
-        public bool IsOptional { get; }
 
         public static ParameterDefinition FromContext(Arg_declarationContext context)
         {

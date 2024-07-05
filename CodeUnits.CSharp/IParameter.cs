@@ -1,4 +1,6 @@
-﻿namespace CodeUnits.CSharp
+﻿using System.Runtime.CompilerServices;
+
+namespace CodeUnits.CSharp
 {
     /// <summary>
     /// Represents a parameter definition.<br/>
@@ -36,5 +38,10 @@
         /// If the parameter has a defined default value it is optional and this is <see langword="true"/>.
         /// </summary>
         bool IsOptional { get; }
+    }
+
+    public static class IParameterExtensions
+    {
+        public static bool IsOptional(this IParameter parameter) => parameter.DefaultValue != null;
     }
 }
