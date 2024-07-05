@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CodeUnits.CSharp.Implementation.Attributes;
 using CodeUnits.CSharp.Implementation.Common;
 using static CodeUnits.CSharp.Generated.CSharpParser;
@@ -19,7 +20,14 @@ namespace CodeUnits.CSharp.Implementation.Members
             AttributeGroups = attributeGroups;
             Body = body;
             Kind = kind;
+
+            foreach(var ag in attributeGroups)
+                ag.ParentNode = this;
+            if (body != null)
+                body.ParentNode = this;
         }
+
+        public ITreeNode ParentNode { get; internal set; }
 
         public string Name { get; }
 
@@ -31,6 +39,14 @@ namespace CodeUnits.CSharp.Implementation.Members
 
         public ICodeFragment Body { get; }
 
+        public IEnumerable<ITreeNode> ChildNodes()
+        {
+            IEnumerable<ITreeNode> result = AttributeGroups;
+            if (Body != null)
+                result = result.Append(Body);
+            return result;
+        }
+
         internal static AccessorDefinition FromContext(Set_accessor_declarationContext context)
         {
             if (context == null)
@@ -39,7 +55,7 @@ namespace CodeUnits.CSharp.Implementation.Members
             return new AccessorDefinition(
                 name: "set",
                 accessModifier: GetAccessModifier(context.accessor_modifier()),
-                attributeGroups: Implementation.Attributes.AttributeGroups.FromContext(context.attributes()),
+                attributeGroups: Attributes.AttributeGroups.FromContext(context.attributes()),
                 body: CodeFragment.FromContext(context.accessor_body()?.block()),
                 kind: AccessorKind.Setter);
         }
@@ -52,7 +68,7 @@ namespace CodeUnits.CSharp.Implementation.Members
             return new AccessorDefinition(
                 name: "get",
                 accessModifier: GetAccessModifier(context.accessor_modifier()),
-                attributeGroups: Implementation.Attributes.AttributeGroups.FromContext(context.attributes()),
+                attributeGroups: Attributes.AttributeGroups.FromContext(context.attributes()),
                 body: CodeFragment.FromContext(context.accessor_body()?.block()),
                 kind: AccessorKind.Getter);
         }

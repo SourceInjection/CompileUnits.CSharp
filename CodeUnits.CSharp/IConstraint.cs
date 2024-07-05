@@ -6,7 +6,7 @@ namespace CodeUnits.CSharp
     /// Represents a type parameter constraint.<br/>
     /// See <see href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/constraints-on-type-parameters">constraints on type parameters</see>.
     /// </summary>
-    public interface IConstraint
+    public interface IConstraint : ITreeNode
     {
         /// <summary>
         /// The targeted type argument.

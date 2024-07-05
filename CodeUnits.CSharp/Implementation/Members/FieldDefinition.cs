@@ -2,6 +2,7 @@
 using CodeUnits.CSharp.Implementation.Common;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp.Implementation.Members
@@ -28,6 +29,9 @@ namespace CodeUnits.CSharp.Implementation.Members
             IsReadonly = isReadonly;
             Initialization = defaultValue;
             HasNewModifier = hasNewModifier;
+            type.ParentNode = this;
+            if (defaultValue != null)
+                defaultValue.ParentNode = this;
         }
 
         public override MemberKind MemberKind { get; } = MemberKind.Field;
@@ -41,6 +45,15 @@ namespace CodeUnits.CSharp.Implementation.Members
         public ICodeFragment Initialization { get; }
 
         public bool HasNewModifier { get; }
+
+        public override IEnumerable<ITreeNode> ChildNodes()
+        {
+            var result = base.ChildNodes()
+                .Append(Type);
+            if (Initialization != null)
+                result = result.Append(Initialization);
+            return result;
+        }
 
         internal static FieldDefinition FromContext(Variable_declaratorContext context, FieldDefinitionInfo fieldInfo)
         {

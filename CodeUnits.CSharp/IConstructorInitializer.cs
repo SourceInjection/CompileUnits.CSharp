@@ -7,7 +7,7 @@ namespace CodeUnits.CSharp
     /// E.g.: base(arg1, arg2) or this(arg1, arg2).<br/>
     /// See <see href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/constructors">constructors</see>.
     /// </summary>
-    public interface IConstructorInitializer
+    public interface IConstructorInitializer : ITreeNode
     {
         /// <summary>
         /// The constructor initializer kind.

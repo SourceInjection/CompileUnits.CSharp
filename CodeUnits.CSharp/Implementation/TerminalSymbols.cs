@@ -1,9 +1,11 @@
 ﻿using Antlr4.Runtime.Tree;
+using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace CodeUnits.CSharp.Implementation.Common
+namespace CodeUnits.CSharp.Implementation
 {
-    internal class Symbols
+    internal static class TerminalSymbols
     {
         public static IReadOnlyList<TerminalSymbol> FromNode(ITree context)
         {
@@ -12,7 +14,7 @@ namespace CodeUnits.CSharp.Implementation.Common
             {
                 var symbol = context.GetChild(i);
                 if (symbol is ITerminalNode node)
-                    result.Add(new TerminalSymbol(node.Symbol));
+                    result.Add(TerminalSymbol.FromToken(node.Symbol));
                 else
                     result.AddRange(FromNode(symbol));
             }

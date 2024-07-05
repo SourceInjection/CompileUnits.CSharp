@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CodeUnits.CSharp.Implementation.Attributes;
 using CodeUnits.CSharp.Implementation.Members.Types.Generics;
 
@@ -22,13 +23,19 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
                   hasNewModifier: hasNewModifier,
                   attributeGroups: attributeGroups)
         {
-            foreach (var member in members)
-                member.ContainingType = this;
-
             GenericTypeArguments = genericTypeArguments;
             Constraints = constraints;
             Members = members;
             Inheritance = inheritance;
+
+            foreach (var member in members)
+                member.ContainingType = this;
+            foreach (var genAttr in genericTypeArguments)
+                genAttr.ParentNode = this;
+            foreach(var constraint in constraints)
+                constraint.ParentNode = this;
+            foreach (var item in inheritance)
+                item.ParentNode = this;
         }
 
         public IReadOnlyList<IMember> Members { get; }
@@ -38,5 +45,14 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
         public IReadOnlyList<IConstraint> Constraints { get; }
 
         public IReadOnlyList<ITypeUsage> Inheritance { get; }
+
+        public override IEnumerable<ITreeNode> ChildNodes()
+        {
+            return base.ChildNodes()
+                .Concat(GenericTypeArguments)
+                .Concat(Inheritance)
+                .Concat(Constraints)
+                .Concat(Members);
+        }
     }
 }

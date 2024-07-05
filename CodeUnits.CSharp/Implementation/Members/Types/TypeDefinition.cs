@@ -21,6 +21,8 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
 
         public abstract TypeKind TypeKind { get; }
 
+        public override ITreeNode ParentNode => base.ParentNode ?? ContainingNamespace;
+
         public override MemberKind MemberKind { get; } = MemberKind.Type;
 
         public INamespace ContainingNamespace { get; internal set; }

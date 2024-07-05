@@ -4,7 +4,7 @@
     /// This interface represents arguments.<br/>
     /// See <see href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/method-parameters">Method parameters</see>.
     /// </summary>
-    public interface IArgument
+    public interface IArgument : ITreeNode
     {
         /// <summary>
         /// The expression which is passed to a e.g. method or constructor.

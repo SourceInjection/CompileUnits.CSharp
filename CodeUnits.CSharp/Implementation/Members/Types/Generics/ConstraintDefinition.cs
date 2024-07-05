@@ -7,10 +7,16 @@ namespace CodeUnits.CSharp.Implementation.Members.Types.Generics
         {
             TargetedTypeArgument = targetedTypeArgument;
             Clauses = clauses;
+            foreach(var clause in clauses)
+                clause.ParentNode = this;
         }
+
+        public ITreeNode ParentNode { get; internal set; }
 
         public IGenericTypeParameter TargetedTypeArgument { get; }
 
         public IReadOnlyList<IConstraintClause> Clauses { get; }
+
+        public IEnumerable<ITreeNode> ChildNodes() => Clauses;
     }
 }

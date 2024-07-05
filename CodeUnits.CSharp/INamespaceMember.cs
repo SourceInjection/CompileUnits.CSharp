@@ -1,6 +1,6 @@
 ﻿namespace CodeUnits.CSharp
 {
-    public interface INamespaceMember
+    public interface INamespaceMember : ITreeNode
     {
         /// <summary>
         /// The parent <see langword="namespace"/> where the namespace member is defined.

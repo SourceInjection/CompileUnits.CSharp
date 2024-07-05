@@ -7,14 +7,18 @@ namespace CodeUnits.CSharp.Implementation.Attributes
     {
         internal AttributeGroup(string attributeTarget, IReadOnlyList<AttributeUsage> attributes)
         {
-            foreach (var attribute in attributes)
-                attribute.ParentGroup = this;
             AttributeTarget = attributeTarget;
             Attributes = attributes;
+            foreach (var attribute in attributes)
+                attribute.ParentGroup = this;
         }
+
+        public ITreeNode ParentNode { get; internal set; }
 
         public string AttributeTarget { get; }
 
         public IReadOnlyList<IAttribute> Attributes { get; }
+
+        public IEnumerable<ITreeNode> ChildNodes() => Attributes;
     }
 }

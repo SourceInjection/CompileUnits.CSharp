@@ -29,6 +29,8 @@ namespace CodeUnits.CSharp.Implementation
 
         public INamespace ContainingNamespace { get; internal set; }
 
+        public ITreeNode ParentNode => ContainingNamespace;
+
         public string Name { get; }
 
         public IReadOnlyList<INamespaceMember> Members { get; }
@@ -38,5 +40,12 @@ namespace CodeUnits.CSharp.Implementation
         public IReadOnlyList<IExternAlias> ExternAliases { get; }
 
         public NamespaceMemberKind NamespaceMemberKind { get; } = NamespaceMemberKind.Namespace;
+
+        public IEnumerable<ITreeNode> ChildNodes()
+        {
+            return ((IReadOnlyList<ITreeNode>)ExternAliases)
+                .Concat(UsingDirectives)
+                .Concat(Members);
+        }
     }
 }

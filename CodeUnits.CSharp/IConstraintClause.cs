@@ -4,7 +4,7 @@
     /// Represents a constraint clause within a constraint.
     /// See <see href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/constraints-on-type-parameters">constraints on type parameters</see>.
     /// </summary>
-    public interface IConstraintClause
+    public interface IConstraintClause : ITreeNode
     {
         /// <summary>
         /// The kind of the constraint clause.

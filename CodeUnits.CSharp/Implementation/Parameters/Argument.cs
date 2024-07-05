@@ -1,4 +1,6 @@
-﻿namespace CodeUnits.CSharp.Implementation.Parameters
+﻿using System.Collections.Generic;
+
+namespace CodeUnits.CSharp.Implementation.Parameters
 {
     internal class Argument: IArgument
     {
@@ -6,10 +8,18 @@
         {
             Expression = expression;
             TargetedParameter = targetedParameter;
+            expression.ParentNode = this;
         }
+
+        public ITreeNode ParentNode { get; internal set; }
 
         public ICodeFragment Expression { get; }
 
         public string TargetedParameter { get; }
+
+        public IEnumerable<ITreeNode> ChildNodes()
+        {
+            yield return Expression;
+        }
     }
 }

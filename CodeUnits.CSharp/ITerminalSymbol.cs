@@ -4,7 +4,7 @@
     /// Represents a terminal symbol.
     /// Terminal symbols are all symbols that can apear within a .cs file.
     /// </summary>
-    public interface ITerminalSymbol
+    public interface ITerminalSymbol : ITreeNode
     {
         /// <summary>
         /// The value of the terminal symbol.

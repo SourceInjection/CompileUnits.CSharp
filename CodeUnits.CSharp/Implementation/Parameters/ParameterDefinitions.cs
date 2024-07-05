@@ -6,7 +6,7 @@ using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp.Implementation.Parameters
 {
-    internal static class ParameterDefinitionss
+    internal static class ParameterDefinitions
     {
         public static List<ParameterDefinition> FromContext(Formal_parameter_listContext context)
         {

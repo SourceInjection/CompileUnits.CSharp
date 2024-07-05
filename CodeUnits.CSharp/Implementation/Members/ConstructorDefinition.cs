@@ -27,6 +27,9 @@ namespace CodeUnits.CSharp.Implementation.Members
                   body: body)
         {
             Initializer = initializer;
+            body.ParentNode = this;
+            if (initializer != null)
+                initializer.ParentNode = this;
         }
 
         public override IType ContainingType
@@ -35,13 +38,26 @@ namespace CodeUnits.CSharp.Implementation.Members
             internal set
             {
                 base.ContainingType = value;
-                if (value != null)
-                    ReturnType = TypeUsage.FromSymbol(new TerminalSymbol(TerminalSymbolKind.Identifier, value.Name));
+                var returnType = TypeUsage.FromSymbol(new TerminalSymbol(TerminalSymbolKind.Identifier, value.Name));
+                ReturnType = returnType;
+                returnType.ParentNode = this;
             }
         }
         public override MemberKind MemberKind { get; } = MemberKind.Constructor;
 
         public IConstructorInitializer Initializer { get; }
+
+        public override IEnumerable<ITreeNode> ChildNodes()
+        {
+            var result = ((IReadOnlyList<ITreeNode>)AttributeGroups)
+                .Append(ReturnType)
+                .Concat(Parameters);
+            if (Initializer != null)
+                result = result.Append(Initializer);
+            if (Body != null)
+                result = result.Append(Body);
+            return result;
+        }
 
         internal static ConstructorDefinition FromContext(Constructor_declarationContext context, CommonDefinitionInfo commonInfo)
         {
@@ -49,7 +65,7 @@ namespace CodeUnits.CSharp.Implementation.Members
                 throw new ArgumentNullException(nameof(context));
 
             var accessModifier = Modifiers.Accessibility(commonInfo.Modifiers);
-            var parameters = ParameterDefinitionss.FromContext(context.formal_parameter_list());
+            var parameters = ParameterDefinitions.FromContext(context.formal_parameter_list());
             var body = CodeFragment.FromContext(context.body());
             var initializer = context.constructor_initializer() == null
                 ? null

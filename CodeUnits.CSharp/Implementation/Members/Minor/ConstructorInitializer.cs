@@ -9,10 +9,16 @@ namespace CodeUnits.CSharp.Implementation.Members.Minor
         {
             Kind = kind;
             Arguments = arguments;
+            foreach (var arg in arguments)
+                arg.ParentNode = this;
         }
+
+        public ITreeNode ParentNode { get; internal set; }
 
         public ConstructorInitializerKind Kind { get; }
 
         public IReadOnlyList<IArgument> Arguments { get; }
+
+        public IEnumerable<ITreeNode> ChildNodes() => Arguments;
     }
 }

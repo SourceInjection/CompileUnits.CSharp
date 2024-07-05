@@ -10,9 +10,15 @@ namespace CodeUnits.CSharp.Implementation
         private CodeFragment(IReadOnlyList<TerminalSymbol> symbols)
         {
             Symbols = symbols;
+            foreach (var symbol in symbols)
+                symbol.ParentNode = this;
         }
 
+        public ITreeNode ParentNode { get; internal set; }
+
         public IReadOnlyList<ITerminalSymbol> Symbols { get; }
+
+        public IEnumerable<ITreeNode> ChildNodes() => Symbols;
 
         public static CodeFragment FromContext(Throwable_expressionContext context)
         {
@@ -21,7 +27,7 @@ namespace CodeUnits.CSharp.Implementation
 
             var arrow = new TerminalSymbol(TerminalSymbolKind.RightArrow, "=>");
             var semiColon = new TerminalSymbol(TerminalSymbolKind.Semicolon, ";");
-            var tokens = Common.Symbols.FromNode(context)
+            var tokens = TerminalSymbols.FromNode(context)
                 .Prepend(arrow)
                 .Append(semiColon)
                 .ToArray();
@@ -53,7 +59,7 @@ namespace CodeUnits.CSharp.Implementation
         {
             if (context == null)
                 return null;
-            return new CodeFragment(Common.Symbols.FromNode(context));
+            return new CodeFragment(TerminalSymbols.FromNode(context));
         }
     }
 }

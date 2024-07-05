@@ -1,6 +1,4 @@
-﻿using CodeUnits.CSharp.Implementation;
-
-namespace CodeUnits.CSharp
+﻿namespace CodeUnits.CSharp
 {
     /// <summary>
     /// Represents a <see langword="struct"/> definition.<br/>

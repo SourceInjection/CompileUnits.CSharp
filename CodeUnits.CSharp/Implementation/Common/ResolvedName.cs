@@ -26,7 +26,7 @@ namespace CodeUnits.CSharp.Implementation.Common
             {
                 var child = context.GetChild(i);
                 if (child != excludedChild)
-                    symbols.AddRange(Symbols.FromNode(child));
+                    symbols.AddRange(TerminalSymbols.FromNode(child));
             }
 
             return symbols.Count == 0

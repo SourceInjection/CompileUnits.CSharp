@@ -11,7 +11,7 @@ namespace CodeUnits.CSharp
         /// <summary>
         /// Lists the generic type parameters of the method.
         /// </summary>
-        IReadOnlyList<IGenericTypeParameter> GenericTypeArguments { get; }
+        IReadOnlyList<IGenericTypeParameter> GenericTypeParameters { get; }
 
         /// <summary>
         /// The inheritance modifier of the method.

@@ -5,7 +5,7 @@ namespace CodeUnits.CSharp
     /// <summary>
     /// Represents the usage of a type.
     /// </summary>
-    public interface ITypeUsage
+    public interface ITypeUsage : ITreeNode
     {
         /// <summary>
         /// Lists all terminal symbol within the type usage.

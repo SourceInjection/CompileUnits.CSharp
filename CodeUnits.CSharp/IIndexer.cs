@@ -1,4 +1,6 @@
-﻿namespace CodeUnits.CSharp
+﻿using System.Collections.Generic;
+
+namespace CodeUnits.CSharp
 {
     /// <summary>
     /// Represents an indexer ('[]') of a type.<br/>
@@ -10,6 +12,11 @@
         /// The return type of the indexer.
         /// </summary>
         ITypeUsage ReturnType { get; }
+
+        /// <summary>
+        /// Lists all parameters of this indexer.
+        /// </summary>
+        IReadOnlyList<IParameter> Parameters { get; }
 
         /// <summary>
         /// The inheritance modifier of the indexer.

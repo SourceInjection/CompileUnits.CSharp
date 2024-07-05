@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace CodeUnits.CSharp.Implementation
+namespace CodeUnits.CSharp
 {
     public interface IInstanceable : IStructuredType { }
 

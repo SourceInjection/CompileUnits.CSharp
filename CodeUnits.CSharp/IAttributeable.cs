@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace CodeUnits.CSharp
 {
-    public interface IAttributeable
+    public interface IAttributeable : ITreeNode
     {
         IReadOnlyList<IAttributeGroup> AttributeGroups { get; }
     }

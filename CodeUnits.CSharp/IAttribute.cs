@@ -7,7 +7,7 @@ namespace CodeUnits.CSharp
     /// See <see href="https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/reflection-and-attributes/attribute-tutorial">attribute tutorial</see>
     /// and <see href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/attributes">language specification</see>.
     /// </summary>
-    public interface IAttribute
+    public interface IAttribute : ITreeNode
     {
         /// <summary>
         /// The attribute group where the attribute is placed.

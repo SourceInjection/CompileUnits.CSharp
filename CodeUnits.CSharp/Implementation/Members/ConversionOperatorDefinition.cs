@@ -3,6 +3,7 @@ using CodeUnits.CSharp.Implementation.Common;
 using CodeUnits.CSharp.Implementation.Parameters;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp.Implementation.Members
@@ -24,6 +25,9 @@ namespace CodeUnits.CSharp.Implementation.Members
             Parameter = parameter;
             ReturnType = returnType;
             Body = body;
+            returnType.ParentNode = this;
+            parameter.ParentNode = this;
+            body.ParentNode = this;
         }
 
         public override MemberKind MemberKind { get; } = MemberKind.ConversionOperator;
@@ -35,6 +39,14 @@ namespace CodeUnits.CSharp.Implementation.Members
         public ITypeUsage ReturnType { get; }
 
         public ICodeFragment Body { get; }
+
+        public override IEnumerable<ITreeNode> ChildNodes()
+        {
+            return base.ChildNodes()
+                .Append(ReturnType)
+                .Append(Parameter)
+                .Append(Body);
+        }
 
         internal static ConversionOperatorDefinition FromContext(Conversion_operator_declaratorContext context, CommonDefinitionInfo commonInfo)
         {

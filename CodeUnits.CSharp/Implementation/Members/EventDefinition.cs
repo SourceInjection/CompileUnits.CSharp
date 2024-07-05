@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CodeUnits.CSharp.Implementation.Attributes;
 
 namespace CodeUnits.CSharp.Implementation.Members
@@ -25,6 +26,10 @@ namespace CodeUnits.CSharp.Implementation.Members
             InheritanceModifier = inheritanceModifier;
             AddAccessor = addAccessor;
             RemoveAccessor = removeAccessor;
+            if (addAccessor != null)
+                addAccessor.ParentNode = this;
+            if(removeAccessor != null)
+                removeAccessor.ParentNode = this;
         }
 
         public override MemberKind MemberKind { get; } = MemberKind.Event;
@@ -38,5 +43,15 @@ namespace CodeUnits.CSharp.Implementation.Members
         public IAccessor AddAccessor { get; }
 
         public IAccessor RemoveAccessor { get; }
+
+        public override IEnumerable<ITreeNode> ChildNodes()
+        {
+            var result = base.ChildNodes();
+            if(AddAccessor != null)
+                result = result.Append(AddAccessor);
+            if(RemoveAccessor != null)
+                result = result.Append(RemoveAccessor);
+            return result;
+        }
     }
 }

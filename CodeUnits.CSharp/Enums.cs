@@ -4,7 +4,14 @@
 
     public enum ConversionKind { Implicit, Explicit }
 
-    public enum Variance { None, In, Out }
+    public enum Variance 
+    { 
+        None, 
+        /// <summary>Covariant</summary>
+        In,
+        /// <summary>Contravariant</summary>
+        Out
+    }
 
     public enum AccessorKind { Getter, Setter, Add, Remove, }
 

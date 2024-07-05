@@ -4,7 +4,7 @@
     /// Represents a using directive.<br/>
     /// See <see href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-directive">using directive</see>.
     /// </summary>
-    public interface IUsingDirective
+    public interface IUsingDirective : ITreeNode
     {
         /// <summary>
         /// The namespace where the using directive is defined.

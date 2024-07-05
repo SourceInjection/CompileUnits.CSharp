@@ -5,7 +5,7 @@ namespace CodeUnits.CSharp
     /// <summary>
     /// Represents code fragments like method bodies, expressions, arrow functions etc..
     /// </summary>
-    public interface ICodeFragment
+    public interface ICodeFragment : ITreeNode
     {
         /// <summary>
         /// Lists the terminal symbols of the code fragment.

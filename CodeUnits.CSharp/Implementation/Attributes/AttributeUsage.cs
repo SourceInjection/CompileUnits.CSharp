@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CodeUnits.CSharp.Implementation.Parameters;
 
 namespace CodeUnits.CSharp.Implementation.Attributes
@@ -9,12 +10,23 @@ namespace CodeUnits.CSharp.Implementation.Attributes
         {
             Type = type;
             Arguments = arguments;
+            type.ParentNode = this;
+            foreach (var arg in arguments)
+                arg.ParentNode = this;
         }
 
         public IAttributeGroup ParentGroup { get; internal set; }
 
+        public ITreeNode ParentNode => ParentGroup;
+
         public ITypeUsage Type { get; }
 
         public IReadOnlyList<IArgument> Arguments { get; }
+
+        public IEnumerable<ITreeNode> ChildNodes()
+        {
+            return ((IReadOnlyList<ITreeNode>)Arguments)
+                .Prepend(Type);
+        }
     }
 }

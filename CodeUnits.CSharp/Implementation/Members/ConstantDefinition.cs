@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CodeUnits.CSharp.Implementation.Attributes;
 
 namespace CodeUnits.CSharp.Implementation.Members
@@ -21,6 +22,8 @@ namespace CodeUnits.CSharp.Implementation.Members
             Type = type;
             Value = value;
             HasNewModifier = hasNewModifier;
+            type.ParentNode = this;
+            value.ParentNode = this;
         }
 
         public override MemberKind MemberKind { get; } = MemberKind.Constant;
@@ -30,5 +33,12 @@ namespace CodeUnits.CSharp.Implementation.Members
         public ICodeFragment Value { get; }
 
         public bool HasNewModifier { get; }
+
+        public override IEnumerable<ITreeNode> ChildNodes()
+        {
+            return base.ChildNodes()
+                .Append(Type)
+                .Append(Value);
+        }
     }
 }

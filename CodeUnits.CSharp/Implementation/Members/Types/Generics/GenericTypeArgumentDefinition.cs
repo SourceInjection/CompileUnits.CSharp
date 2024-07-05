@@ -10,12 +10,18 @@ namespace CodeUnits.CSharp.Implementation.Members.Types.Generics
             Name = name;
             Variance = variance;
             AttributeGroups = attributeGroups;
+            foreach(var attr in attributeGroups)
+                attr.ParentNode = this;
         }
+
+        public ITreeNode ParentNode { get; internal set; }
 
         public string Name { get; }
 
         public Variance Variance { get; }
 
         public IReadOnlyList<IAttributeGroup> AttributeGroups { get; }
+
+        public IEnumerable<ITreeNode> ChildNodes() => AttributeGroups;
     }
 }

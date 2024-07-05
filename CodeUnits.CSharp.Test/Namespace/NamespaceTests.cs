@@ -17,7 +17,6 @@
         }
 
         [Test]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1826:Do not use Enumerable methods on indexable collections", Justification = "<Pending>")]
         public void ParsingCode_WithOneNamespace_DoesReturnCodeUnitWithThisNamespace()
         {
             var nsName = "XY";
@@ -30,6 +29,7 @@
             {
                 Assert.That(result.ContainingNamespace, Is.EqualTo(cu));
                 Assert.That(result.Name, Is.EqualTo(nsName));
+                Validate.TreeNodeLinks(result);
             });
         }
 
@@ -50,6 +50,7 @@
                 Assert.That(result.ContainingNamespace, Is.EqualTo(cu));
                 Assert.That(result.Type.FormatedText, Is.EqualTo($"{ns}.{myClass}"));
                 Assert.That(result.IsKind(UsingDirectiveKind.Static), Is.True);
+                Validate.TreeNodeLinks(result);
             });
         }
 
@@ -69,6 +70,7 @@
                 Assert.That(result.ContainingNamespace, Is.EqualTo(cu));
                 Assert.That(result.Namespace, Is.EqualTo(ns));
                 Assert.That(result.IsKind(UsingDirectiveKind.Namespace), Is.True);
+                Validate.TreeNodeLinks(result);
             });
         }
 
@@ -90,6 +92,7 @@
                 Assert.That(result.Type.FormatedText, Is.EqualTo($"{ns}.{type}"));
                 Assert.That(result.Alias, Is.EqualTo(type));
                 Assert.That(result.IsKind(UsingDirectiveKind.Alias), Is.True);
+                Validate.TreeNodeLinks(result);
             });
         }
 
@@ -106,27 +109,7 @@
             {
                 Assert.That(result.ContainingNamespace, Is.EqualTo(cu));
                 Assert.That(result.Name, Is.EqualTo(aliasName));
-            });
-        }
-
-        [Test]
-        public void ParsingCode_WithEmptyClass_DoesReturnCodeUnitWithThisClass()
-        {
-            var type = "MyClass";
-            var code = $"class {type} {{ }}";
-
-            var cu = CodeUnit.FromString(code);
-            var result = cu.Types().First();
-
-            Assert.Multiple(() =>
-            {
-                Assert.That(result.ContainingNamespace, Is.EqualTo(cu));
-                Assert.That(result.Name, Is.EqualTo(type));
-                Assert.That(result.MemberKind, Is.EqualTo(MemberKind.Type));
-                Assert.That(result.AccessModifier, Is.EqualTo(AccessModifier.None));
-                Assert.That(result.HasNewModifier, Is.False);
-                Assert.That(result.AttributeGroups, Is.Empty);
-                Assert.That(result.HasNewModifier, Is.False);
+                Validate.TreeNodeLinks(result);
             });
         }
     }

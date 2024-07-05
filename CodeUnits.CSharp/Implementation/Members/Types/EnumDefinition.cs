@@ -3,6 +3,7 @@ using CodeUnits.CSharp.Implementation.Common;
 using CodeUnits.CSharp.Implementation.Members.Minor;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp.Implementation.Members.Types
@@ -23,11 +24,13 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
                   hasNewModifier: hasNewModifier,
                   attributeGroups: attributeGroups)
         {
-            foreach (var member in members)
-                member.ContainingType = this;
-
             Members = members;
             BaseType = baseType;
+
+            foreach (var member in members)
+                member.ContainingType = this;
+            if(baseType != null)
+                baseType.ParentNode = this;
         }
 
         public IReadOnlyList<IEnumMember> Members { get; }
@@ -35,6 +38,14 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
         public override TypeKind TypeKind { get; } = TypeKind.Enum;
 
         public ITypeUsage BaseType { get; }
+
+        public override IEnumerable<ITreeNode> ChildNodes()
+        {
+            var result = base.ChildNodes();
+            if(BaseType != null)
+                result = result.Append(BaseType);
+            return result.Concat(Members);
+        }
 
         internal static EnumDefinition FromContext(Enum_definitionContext context, CommonDefinitionInfo commonInfo)
         {

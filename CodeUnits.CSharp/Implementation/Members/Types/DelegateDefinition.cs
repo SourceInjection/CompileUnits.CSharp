@@ -4,6 +4,7 @@ using CodeUnits.CSharp.Implementation.Members.Types.Generics;
 using CodeUnits.CSharp.Implementation.Parameters;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp.Implementation.Members.Types
@@ -30,6 +31,14 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
             Parameters = parameters;
             GenericTypeArguments = genericTypeArguments;
             Constraints = constraints;
+            if (returnType != null)
+                returnType.ParentNode = this;
+            foreach (var parameter in parameters)
+                parameter.ParentNode = this;
+            foreach(var genArg in genericTypeArguments)
+                genArg.ParentNode = this;
+            foreach(var constraint in constraints)
+                constraint.ParentNode = this;
         }
 
         public override TypeKind TypeKind { get; } = TypeKind.Delegate;
@@ -41,6 +50,17 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
         public IReadOnlyList<IGenericTypeParameter> GenericTypeArguments { get; }
 
         public IReadOnlyList<IConstraint> Constraints { get; }
+
+        public override IEnumerable<ITreeNode> ChildNodes()
+        {
+            var result = base.ChildNodes();
+            if (ReturnType != null)
+                result = result.Append(ReturnType);
+            return result
+                .Concat(GenericTypeArguments)
+                .Concat(Parameters)
+                .Concat(Constraints);
+        }
 
         internal static DelegateDefinition FromContext(Delegate_definitionContext context, CommonDefinitionInfo commonInfo)
         {
@@ -56,7 +76,7 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
                 hasNewModifier: modifiers.HasNewModifier,
                 attributeGroups: commonInfo.AttributeGroups,
                 returnType: TypeUsage.FromContext(context.return_type()?.type_()),
-                parameters: ParameterDefinitionss.FromContext(context.formal_parameter_list()),
+                parameters: ParameterDefinitions.FromContext(context.formal_parameter_list()),
                 genericTypeArguments: genericTypeArguments,
                 constraints: ConstraintDefinitions.FromContext(context.type_parameter_constraints_clauses(), genericTypeArguments));
         }

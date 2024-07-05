@@ -11,11 +11,17 @@ namespace CodeUnits.CSharp.Implementation
         {
             Symbols = symbols;
             FormatedText = formatedText;
+            foreach (var symbol in symbols)
+                symbol.ParentNode = this;
         }
+
+        public ITreeNode ParentNode { get; internal set; }
 
         public IReadOnlyList<ITerminalSymbol> Symbols { get; }
 
         public string FormatedText { get; }
+
+        public IEnumerable<ITreeNode> ChildNodes() => Symbols;
 
         public override string ToString()
         {
@@ -35,7 +41,7 @@ namespace CodeUnits.CSharp.Implementation
         {
             if(tree == null)
                 return null;
-            return FromSymbols(Common.Symbols.FromNode(tree));
+            return FromSymbols(TerminalSymbols.FromNode(tree));
         }
 
         internal static TypeUsage FromSymbol(TerminalSymbol symbol)

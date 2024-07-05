@@ -10,6 +10,8 @@ namespace CodeUnits.CSharp.Implementation.Members
             Name = name;
             AccessModifier = modifier;
             AttributeGroups = attributeGroups;
+            foreach (var attributeGroup in attributeGroups)
+                attributeGroup.ParentNode = this;
         }
 
         public abstract MemberKind MemberKind { get; }
@@ -18,8 +20,15 @@ namespace CodeUnits.CSharp.Implementation.Members
 
         public virtual IType ContainingType { get; internal set; }
 
+        public virtual ITreeNode ParentNode => ContainingType;
+
         public string Name { get; }
 
         public AccessModifier AccessModifier { get; }
+
+        public virtual IEnumerable<ITreeNode> ChildNodes()
+        {
+            return AttributeGroups;
+        }
     }
 }
