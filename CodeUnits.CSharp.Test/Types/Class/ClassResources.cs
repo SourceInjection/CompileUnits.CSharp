@@ -34,6 +34,20 @@
         public static readonly object[] CollectionConfigs =
         [
             new object[] { $"[MyAttribute] {EmptyClass}", nameof(IClass.AttributeGroups) },
+            new object[] { "class MyClass<T> { }", nameof(IClass.GenericTypeArguments) },
+            new object[] { "class MyClass<T> where T : XY { }", nameof(IClass.Constraints) },
+            new object[] { "class MyClass : BaseClass { }", nameof(IClass.Inheritance) },
+            new object[] { "class MyClass { int _xy; }", nameof(IClass.Members) },
+            new object[] { "class MyClass { int Xy { get; set; } }", nameof(IClass.Members) },
+            new object[] { "class MyClass { int Xy() => 3; }", nameof(IClass.Members) },
+            new object[] { "class MyClass { public MyClass() {} }", nameof(IClass.Members) },
+            new object[] { "class MyClass { ~MyClass() {} }", nameof(IClass.Members) },
+            new object[] { "class MyClass { int this[int idx] { get; set; } }", nameof(IClass.Members) },
+            new object[] { "class MyClass { event PropertyChangedEventHandler PropertyChanged; }", nameof(IClass.Members) },
+            new object[] { "class MyClass { const string s = \"ABC\"; }", nameof(IClass.Members) },
+            new object[] { "class MyClass { public static int operator+(MyClass lhs, int rhs) { } }", nameof(IClass.Members) },
+            new object[] { "class MyClass { public static explicit operator bool(MyClass lhs) { } }", nameof(IClass.Members) },
+            new object[] { "class MyClass { class MyNestedClass { } }", nameof(IClass.Members) },
         ];
 
 

@@ -1,8 +1,8 @@
 ﻿namespace CodeUnits.CSharp.Test
 {
-    internal static class Validate
+    internal static class TreeNodeAssert
     {
-        internal static void TreeNodeLinks(ITreeNode node)
+        internal static void LinksAreValid(ITreeNode node)
         {
             Assert.Multiple(() =>
             {

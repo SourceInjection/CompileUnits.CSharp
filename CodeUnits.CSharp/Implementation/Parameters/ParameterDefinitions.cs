@@ -50,6 +50,7 @@ namespace CodeUnits.CSharp.Implementation.Parameters
                     result.Add(FromArgDeclarationContext(argDeclaration, hasInModifier));
                     hasInModifier = false;
                 }
+                i++;
             }
             return result;
         }

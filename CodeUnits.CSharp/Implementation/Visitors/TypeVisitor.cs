@@ -1,5 +1,4 @@
 ﻿using Antlr4.Runtime.Misc;
-using CodeUnits.CSharp.Exceptions;
 using CodeUnits.CSharp.Generated;
 using System;
 using System.Linq;
@@ -26,12 +25,8 @@ namespace CodeUnits.CSharp.Visitors
                 return StructDefinition.FromContext(context.struct_definition(), commonInfo);
             if (context.enum_definition() != null)
                 return EnumDefinition.FromContext(context.enum_definition(), commonInfo);
-            if (context.delegate_definition() != null)
-                return DelegateDefinition.FromContext(context.delegate_definition(), commonInfo);
 
-            var line = context.Start.Line;
-            var col = context.Start.Column;
-            throw new MalformedCodeException($"Syntax error at line {line} column {col}: malformed type definition.");
+            return DelegateDefinition.FromContext(context.delegate_definition(), commonInfo);
         }
 
         private static string[] GetAllMemberModifiers(Type_declarationContext context)

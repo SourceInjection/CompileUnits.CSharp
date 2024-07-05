@@ -29,7 +29,7 @@
             {
                 Assert.That(result.ContainingNamespace, Is.EqualTo(cu));
                 Assert.That(result.Name, Is.EqualTo(nsName));
-                Validate.TreeNodeLinks(result);
+                TreeNodeAssert.LinksAreValid(result);
             });
         }
 
@@ -50,7 +50,7 @@
                 Assert.That(result.ContainingNamespace, Is.EqualTo(cu));
                 Assert.That(result.Type.FormatedText, Is.EqualTo($"{ns}.{myClass}"));
                 Assert.That(result.IsKind(UsingDirectiveKind.Static), Is.True);
-                Validate.TreeNodeLinks(result);
+                TreeNodeAssert.LinksAreValid(result);
             });
         }
 
@@ -70,7 +70,7 @@
                 Assert.That(result.ContainingNamespace, Is.EqualTo(cu));
                 Assert.That(result.Namespace, Is.EqualTo(ns));
                 Assert.That(result.IsKind(UsingDirectiveKind.Namespace), Is.True);
-                Validate.TreeNodeLinks(result);
+                TreeNodeAssert.LinksAreValid(result);
             });
         }
 
@@ -92,7 +92,7 @@
                 Assert.That(result.Type.FormatedText, Is.EqualTo($"{ns}.{type}"));
                 Assert.That(result.Alias, Is.EqualTo(type));
                 Assert.That(result.IsKind(UsingDirectiveKind.Alias), Is.True);
-                Validate.TreeNodeLinks(result);
+                TreeNodeAssert.LinksAreValid(result);
             });
         }
 
@@ -109,7 +109,7 @@
             {
                 Assert.That(result.ContainingNamespace, Is.EqualTo(cu));
                 Assert.That(result.Name, Is.EqualTo(aliasName));
-                Validate.TreeNodeLinks(result);
+                TreeNodeAssert.LinksAreValid(result);
             });
         }
     }

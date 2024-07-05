@@ -40,8 +40,6 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
             IsAbstract = isAbstract;
         }
 
-        public IReadOnlyList<IConversionOperator> ConversionOperators { get; }
-
         public override TypeKind TypeKind { get; } = TypeKind.Class;
 
         public bool IsStatic { get; }

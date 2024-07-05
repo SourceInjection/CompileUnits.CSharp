@@ -12,7 +12,7 @@ namespace CodeUnits.CSharp.Test.Types.Class
                 Assert.That(sut.ContainingNamespace, Is.EqualTo(cu));
                 Assert.That(sut.ContainingType, Is.Null);
                 Assert.That(sut.TypeKind, Is.EqualTo(TypeKind.Class));
-                Validate.TreeNodeLinks(sut);
+                TreeNodeAssert.LinksAreValid(sut);
             });
         }
 
@@ -29,7 +29,6 @@ namespace CodeUnits.CSharp.Test.Types.Class
             {
                 CommonTest(cu, sut);
                 Assert.That(value, Is.EqualTo(expectedValue));
-                Validate.TreeNodeLinks(sut);
             });
         }
 
@@ -45,7 +44,6 @@ namespace CodeUnits.CSharp.Test.Types.Class
             {
                 CommonTest(cu, sut);
                 CollectionAssert.IsNotEmpty(value);
-                Validate.TreeNodeLinks(sut);
             });
         }
     }
