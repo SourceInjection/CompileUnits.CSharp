@@ -31,7 +31,7 @@ namespace CodeUnits.CSharp.Visitors
 
         private static string[] GetAllMemberModifiers(Type_declarationContext context)
         {
-            if (context?.all_member_modifiers()?.all_member_modifier() is null)
+            if (context.all_member_modifiers()?.all_member_modifier() is null)
                 return Array.Empty<string>();
 
             return context.all_member_modifiers().all_member_modifier()

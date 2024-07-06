@@ -22,6 +22,7 @@ namespace CodeUnits.CSharp.Implementation.Parameters
             DefaultValue = defaultValue;
             AttributeGroups = attributes;
             Modifier = modifier;
+            type.ParentNode = this;
             if (defaultValue != null)
                 defaultValue.ParentNode = this;
             foreach (var ag in attributes)
@@ -44,9 +45,11 @@ namespace CodeUnits.CSharp.Implementation.Parameters
 
         public IEnumerable<ITreeNode> ChildNodes()
         {
-            return ((IReadOnlyList<ITreeNode>)AttributeGroups)
-                .Append(Type)
-                .Append(DefaultValue);
+            var result = ((IReadOnlyList<ITreeNode>)AttributeGroups)
+                .Append(Type);
+            if(DefaultValue != null)
+                result = result.Append(DefaultValue);
+            return result;
         }
 
         public static ParameterDefinition FromContext(Arg_declarationContext context)

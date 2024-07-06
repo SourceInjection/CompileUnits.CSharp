@@ -28,7 +28,6 @@
   <ItemGroup>
     <Folder Include="Types\Enum\" />
     <Folder Include="Types\Interface\" />
-    <Folder Include="Types\Delegate\" />
     <Folder Include="Types\Struct\" />
   </ItemGroup>
 
