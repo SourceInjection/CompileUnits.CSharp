@@ -1,5 +1,4 @@
 ﻿using Antlr4.Runtime.Misc;
-using CodeUnits.CSharp.Exceptions;
 using CodeUnits.CSharp.Generated;
 using CodeUnits.CSharp.Implementation;
 using CodeUnits.CSharp.Implementation.Attributes;
@@ -65,12 +64,7 @@ namespace CodeUnits.CSharp.Visitors
                 return new InterfaceDefinition[] { InterfaceDefinition.FromContext(context.interface_definition(), commonInfo) };
             if (context.enum_definition() != null)
                 return new EnumDefinition[] { EnumDefinition.FromContext(context.enum_definition(), commonInfo) };
-            if (context.delegate_definition() != null)
-                return new DelegateDefinition[] { DelegateDefinition.FromContext(context.delegate_definition(), commonInfo) };
-
-            var line = context.Start.Line;
-            var col = context.Start.Column;
-            throw new MalformedCodeException($"Syntax error at line {line} column {col}: malformed member definition.");
+            return new DelegateDefinition[] { DelegateDefinition.FromContext(context.delegate_definition(), commonInfo) };
         }
 
         private static IEnumerable<string> GetModifiers(All_member_modifiersContext context)
@@ -103,12 +97,8 @@ namespace CodeUnits.CSharp.Visitors
                 return new PropertyDefinition[] { PropertyDefinition.FromContext(context.property_declaration(), extendedInfo) };
             if (context.indexer_declaration() != null)
                 return new IndexerDefinition[] { IndexerDefinition.FromContext(context.indexer_declaration(), extendedInfo) };
-            if (context.operator_declaration() != null)
-                return new OperatorDefinition[] { OperatorDefinition.FromContext(context.operator_declaration(), extendedInfo) };
 
-            var line = context.Start.Line;
-            var col = context.Start.Column;
-            throw new MalformedCodeException($"Syntax error at line {line} column {col}: malformed typed member definition.");
+            return new OperatorDefinition[] { OperatorDefinition.FromContext(context.operator_declaration(), extendedInfo) };
         }
 
         private static IEnumerable<FieldDefinition> FieldDefinitions(Field_declarationContext context, CommonDefinitionInfo commonInfo, TypeUsage type)

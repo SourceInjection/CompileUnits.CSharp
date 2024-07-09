@@ -5,12 +5,12 @@ namespace CodeUnits.CSharp.Implementation
 {
     internal class CodeUnit : NamespaceDefinition, ICodeUnit
     {
-        internal CodeUnit(string projectDefaultNamespace,
+        internal CodeUnit(
             IReadOnlyList<UsingDirectiveDefinition> directives, 
             IReadOnlyList<INamespaceMember> members,
             IReadOnlyList<ExternAliasDefinition> externAliases)
 
-            : base(name: projectDefaultNamespace,
+            : base(name: string.Empty,
                   directives: directives,
                   members: members,
                   externAliases: externAliases)

@@ -21,32 +21,27 @@ namespace CodeUnits.CSharp
         /// Serializes C# code.
         /// </summary>
         /// <param name="stream">The code to parse.</param>
-        /// <param name="projectDefaultNamespace">The default namespace where types and namespaces land if they aren't within a namespace.</param>
         /// <returns>A <see cref="ICodeUnit"/> which represents serialized C# code.</returns>
         /// <exception cref="MalformedCodeException"/>
         /// <exception cref="IOException"/>
-        public static ICodeUnit FromStream(Stream stream, string projectDefaultNamespace = null)
+        public static ICodeUnit FromStream(Stream stream)
         {
-            return FromStream(new AntlrInputStream(stream), projectDefaultNamespace);
+            return FromStream(new AntlrInputStream(stream));
         }
 
         /// <summary>
         /// Serializes C# code.
         /// </summary>
         /// <param name="text">The code to parse.</param>
-        /// <param name="projectDefaultNamespace">The default namespace where types and members land if they aren't within a namespace.</param>
         /// <returns>A <see cref="ICodeUnit"/> which represents serialized C# code.</returns>
         /// <exception cref="MalformedCodeException"/>
-        public static ICodeUnit FromString(string text, string projectDefaultNamespace = null)
+        public static ICodeUnit FromString(string text)
         {
-            return FromStream(new AntlrInputStream(text), projectDefaultNamespace);
+            return FromStream(new AntlrInputStream(text));
         }
 
-        private static ICodeUnit FromStream(ICharStream stream, string projectDefaultNamespace = null)
+        private static ICodeUnit FromStream(ICharStream stream)
         {
-            if (projectDefaultNamespace == null)
-                projectDefaultNamespace = string.Empty;
-
             try
             {
                 var lexer = new CSharpLexer(stream);
@@ -59,10 +54,10 @@ namespace CodeUnits.CSharp
                 var ns = visitor.VisitCompilation_unit(parser.compilation_unit())
                     ?? throw new InvalidOperationException("something went wrong during parsing");
 
-                return new Implementation.CodeUnit(projectDefaultNamespace,
+                return new Implementation.CodeUnit(
                     directives: (IReadOnlyList<UsingDirectiveDefinition>)ns.UsingDirectives,
                     members: ns.Members,
-                    (IReadOnlyList<ExternAliasDefinition>)ns.ExternAliases);
+                    externAliases: (IReadOnlyList<ExternAliasDefinition>)ns.ExternAliases);
             }
             catch (MalformedCodeException)
             {

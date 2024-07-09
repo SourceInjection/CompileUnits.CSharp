@@ -75,7 +75,7 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
                 accessModifier: modifiers.AccessModifier,
                 hasNewModifier: modifiers.HasNewModifier,
                 attributeGroups: commonInfo.AttributeGroups,
-                returnType: TypeUsage.FromContext(context.return_type()?.type_()),
+                returnType: TypeUsage.FromContext(context.return_type().type_()),
                 parameters: ParameterDefinitions.FromContext(context.formal_parameter_list()),
                 genericTypeArguments: genericTypeArguments,
                 constraints: ConstraintDefinitions.FromContext(context.type_parameter_constraints_clauses(), genericTypeArguments));

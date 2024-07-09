@@ -23,7 +23,7 @@ namespace CodeUnits.CSharp.Test.Types.Class
         {
             var cu = CodeUnit.FromString(code);
             var sut = cu.Types().OfType<IClass>().Single();
-            var value = sut.GetType().GetProperty(propertyName)?.GetValue(sut);
+            var value = sut.GetType().GetProperty(propertyName)!.GetValue(sut);
 
             Assert.Multiple(() =>
             {
@@ -38,7 +38,7 @@ namespace CodeUnits.CSharp.Test.Types.Class
         {
             var cu = CodeUnit.FromString(code);
             var sut = cu.Types().OfType<IClass>().Single();
-            var value = sut.GetType().GetProperty(propertyName)?.GetValue(sut) as IEnumerable;
+            var value = sut.GetType().GetProperty(propertyName)!.GetValue(sut) as IEnumerable;
 
             Assert.Multiple(() =>
             {
