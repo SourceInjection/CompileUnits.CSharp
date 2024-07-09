@@ -25,9 +25,4 @@
     <ProjectReference Include="..\CodeUnits.CSharp\CodeUnits.CSharp.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Types\Interface\" />
-    <Folder Include="Types\Struct\" />
-  </ItemGroup>
-
 </Project>
