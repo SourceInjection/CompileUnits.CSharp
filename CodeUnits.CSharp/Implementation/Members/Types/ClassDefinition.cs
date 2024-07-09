@@ -38,6 +38,7 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
             IsRecord = isRecord;
             IsSealed = isSealed;
             IsAbstract = isAbstract;
+            Finalizer = members.OfType<FinalizerDefinition>().SingleOrDefault();
         }
 
         public override TypeKind TypeKind { get; } = TypeKind.Class;
@@ -49,6 +50,8 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
         public bool IsSealed { get; }
 
         public bool IsAbstract { get; }
+
+        public IFinalizer Finalizer { get; }
 
         internal static ClassDefinition FromContext(Class_definitionContext context, CommonDefinitionInfo commonInfo)
         {

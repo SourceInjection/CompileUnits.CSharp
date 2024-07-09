@@ -27,6 +27,12 @@ namespace CodeUnits.CSharp
         /// If the <see langword="class"/> has a <see langword="abstract"/> modifier this is <see langword="true"/>.
         /// </summary>
         bool IsAbstract { get; }
+
+        /// <summary>
+        /// The finalizer of the class.
+        /// This might be <see langword="null"/> since finalizers are optional.
+        /// </summary>
+        IFinalizer Finalizer { get; }
     }
 
     public static class IClassExtension

@@ -3,9 +3,9 @@ using CodeUnits.CSharp.Implementation.Attributes;
 
 namespace CodeUnits.CSharp.Implementation.Common
 {
-    internal readonly struct ExtendedDefinitionInfo
+    internal readonly struct TypedDefinitionInfo
     {
-        public ExtendedDefinitionInfo(CommonDefinitionInfo commonInfo, bool isReadonly, bool hasRefModifier, TypeUsage type, TypeUsage addressedInterface)
+        public TypedDefinitionInfo(CommonDefinitionInfo commonInfo, bool isReadonly, bool hasRefModifier, TypeUsage type, TypeUsage addressedInterface)
         {
             IsReadonly = isReadonly;
             HasRefModifier = hasRefModifier;
@@ -15,7 +15,7 @@ namespace CodeUnits.CSharp.Implementation.Common
             AddressedInterface = addressedInterface;
         }
 
-        public ExtendedDefinitionInfo(CommonDefinitionInfo commonInfo)
+        public TypedDefinitionInfo(CommonDefinitionInfo commonInfo)
             : this(commonInfo, false, false, TypeUsage.Void, null)
         { }
 

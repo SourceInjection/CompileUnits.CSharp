@@ -1,4 +1,5 @@
 ﻿using Antlr4.Runtime.Misc;
+using CodeUnits.CSharp.Exceptions;
 using CodeUnits.CSharp.Generated;
 using CodeUnits.CSharp.Implementation;
 using CodeUnits.CSharp.Implementation.Attributes;
@@ -21,7 +22,7 @@ namespace CodeUnits.CSharp.Visitors
 
             var commonInfo = new CommonDefinitionInfo(
                     attributeGroups: AttributeGroups.FromContext(context.attributes()),
-                    modifiers: GetModifiers(context.all_member_modifiers()));
+                    modifiers:       GetModifiers(context.all_member_modifiers()));
 
             return GetCommonMembers(context.common_member_declaration(), commonInfo);
         }
@@ -55,7 +56,7 @@ namespace CodeUnits.CSharp.Visitors
             if (context.constructor_declaration() != null)
                 return new ConstructorDefinition[] { ConstructorDefinition.FromContext(context.constructor_declaration(), commonInfo) };
             if (context.method_declaration() != null)
-                return new MethodDefinition[] { MethodDefinition.FromContext(context.method_declaration(), new ExtendedDefinitionInfo(commonInfo)) };
+                return new MethodDefinition[] { MethodDefinition.FromContext(context.method_declaration(), new TypedDefinitionInfo(commonInfo)) };
             if (context.class_definition() != null)
                 return new ClassDefinition[] { ClassDefinition.FromContext(context.class_definition(), commonInfo) };
             if (context.struct_definition() != null)
@@ -64,8 +65,19 @@ namespace CodeUnits.CSharp.Visitors
                 return new InterfaceDefinition[] { InterfaceDefinition.FromContext(context.interface_definition(), commonInfo) };
             if (context.enum_definition() != null)
                 return new EnumDefinition[] { EnumDefinition.FromContext(context.enum_definition(), commonInfo) };
+            if (context.delegate_definition() != null)
+                return new DelegateDefinition[] { DelegateDefinition.FromContext(context.delegate_definition(), commonInfo) };
 
-            return new DelegateDefinition[] { DelegateDefinition.FromContext(context.delegate_definition(), commonInfo) };
+            var line = context.Start.Line;
+            var col = context.Start.Column;
+            throw new MalformedCodeException($"Syntax error at line {line} column {col}: malformed member definition.");
+        }
+
+        private static IEnumerable<string> GetModifiers(All_member_modifiersContext context)
+        {
+            if(context?.all_member_modifier() == null)
+                return Enumerable.Empty<string>();
+            return context.all_member_modifier().Select(c => c.GetText());
         }
 
         private static MemberDefinition[] GetTypedMembers(Typed_member_declarationContext context, CommonDefinitionInfo commonInfo)
@@ -75,12 +87,15 @@ namespace CodeUnits.CSharp.Visitors
             if (context.field_declaration() != null)
                 return FieldDefinitions(context.field_declaration(), commonInfo, type).ToArray();
 
-            var extendedInfo = new ExtendedDefinitionInfo(
+
+            var addressedInterface = TypeUsage.FromContext(context.namespace_or_type_name());
+
+            var extendedInfo = new TypedDefinitionInfo(
                 commonInfo:         commonInfo,
                 hasRefModifier:     context.REF() != null,
                 isReadonly:         context.READONLY() != null,
                 type:               type,
-                addressedInterface: TypeUsage.FromContext(context.namespace_or_type_name()));
+                addressedInterface: addressedInterface);
 
             if (context.method_declaration() != null)
                 return new MethodDefinition[] { MethodDefinition.FromContext(context.method_declaration(), extendedInfo) };
@@ -88,8 +103,12 @@ namespace CodeUnits.CSharp.Visitors
                 return new PropertyDefinition[] { PropertyDefinition.FromContext(context.property_declaration(), extendedInfo) };
             if (context.indexer_declaration() != null)
                 return new IndexerDefinition[] { IndexerDefinition.FromContext(context.indexer_declaration(), extendedInfo) };
+            if (context.operator_declaration() != null)
+                return new OperatorDefinition[] { OperatorDefinition.FromContext(context.operator_declaration(), extendedInfo) };
 
-            return new OperatorDefinition[] { OperatorDefinition.FromContext(context.operator_declaration(), extendedInfo) };
+            var line = context.Start.Line;
+            var col = context.Start.Column;
+            throw new MalformedCodeException($"Syntax error at line {line} column {col}: malformed typed member definition.");
         }
 
         private static IEnumerable<FieldDefinition> FieldDefinitions(Field_declarationContext context, CommonDefinitionInfo commonInfo, TypeUsage type)
@@ -98,13 +117,6 @@ namespace CodeUnits.CSharp.Visitors
 
             foreach(var fieldContext in context.variable_declarators().variable_declarator())
                 yield return FieldDefinition.FromContext(fieldContext, fieldDefinitionInfo);
-        }
-
-        private static IEnumerable<string> GetModifiers(All_member_modifiersContext context)
-        {
-            if (context?.all_member_modifier() == null)
-                return Enumerable.Empty<string>();
-            return context.all_member_modifier().Select(c => c.GetText());
         }
     }
 }

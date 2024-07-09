@@ -2,14 +2,13 @@
 using CodeUnits.CSharp.Implementation.Common;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using static CodeUnits.CSharp.Generated.CSharpParser;
 
 namespace CodeUnits.CSharp.Implementation.Members
 {
     internal class PropertyDefinition : MemberDefinition, IProperty
     {
-        private PropertyDefinition(
+        internal PropertyDefinition(
             string name,
             AccessModifier accessModifier,
             bool hasNewModifier,
@@ -35,15 +34,6 @@ namespace CodeUnits.CSharp.Implementation.Members
             AddressedInterface = addressedInterface;
             InheritanceModifier = inheritanceModifier;
             Initialization = defaultValue;
-            type.ParentNode = this;
-            if (getter != null)
-                getter.ParentNode = this;
-            if(setter != null)
-                setter.ParentNode = this;
-            if (defaultValue != null)
-                defaultValue.ParentNode = this;
-            if (addressedInterface != null)
-                addressedInterface.ParentNode = this;
         }
 
         public override MemberKind MemberKind { get; } = MemberKind.Property;
@@ -64,22 +54,7 @@ namespace CodeUnits.CSharp.Implementation.Members
 
         public ICodeFragment Initialization { get; }
 
-        public override IEnumerable<ITreeNode> ChildNodes()
-        {
-            IEnumerable<ITreeNode> result = AttributeGroups;
-            if(AddressedInterface != null)
-                result = result.Append(AddressedInterface);
-            result = result.Append(Type);
-            if(Getter != null)
-                result = result.Append(Getter);
-            if(Setter != null)
-                result = result.Append(Setter);
-            if(Initialization != null)
-                result = result.Append(Initialization);
-            return result;
-        }
-
-        internal static PropertyDefinition FromContext(Property_declarationContext context, ExtendedDefinitionInfo extendedInfo)
+        internal static PropertyDefinition FromContext(Property_declarationContext context, TypedDefinitionInfo extendedInfo)
         {
             if (context == null)
                 throw new ArgumentNullException(nameof(context));
