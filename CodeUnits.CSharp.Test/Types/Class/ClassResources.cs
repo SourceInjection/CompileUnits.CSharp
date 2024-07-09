@@ -49,7 +49,5 @@
             new object[] { "class MyClass { public static explicit operator bool(MyClass lhs) { } }", nameof(IClass.Members) },
             new object[] { "class MyClass { class MyNestedClass { } }", nameof(IClass.Members) },
         ];
-
-
     }
 }
