@@ -1,7 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using CodeUnits.CSharp.Implementation.Attributes;
-using CodeUnits.CSharp.Implementation.Members.Minor;
 using CodeUnits.CSharp.Visitors;
 using static CodeUnits.CSharp.Generated.CSharpParser;
 
@@ -39,19 +36,6 @@ namespace CodeUnits.CSharp.Implementation.Members
                     members.AddRange(definitions);
             }
             return members;
-        }
-
-        public static List<EnumMemberDefinition> FromContext(Enum_bodyContext context)
-        {
-            if (context?.enum_member_declaration() is null)
-                return new List<EnumMemberDefinition>();
-
-            return context.enum_member_declaration()
-                .Select(c => new EnumMemberDefinition(
-                    c.identifier().GetText(),
-                    CodeFragment.FromContext(c.expression()),
-                    AttributeGroups.FromContext(c.attributes())))
-                .ToList();
         }
     }
 }

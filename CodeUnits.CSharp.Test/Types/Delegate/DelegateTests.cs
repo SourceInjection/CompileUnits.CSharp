@@ -7,72 +7,28 @@
         [TestCaseSource(typeof(DelegateResources), nameof(DelegateResources.ModifierConfigs))]
         public void ModifierTest(string code, string propertyName, object expectedValue)
         {
-            var sut = CodeUnit.FromString(code).Types().OfType<IDelegate>().Single();
-            var value = sut.GetType().GetProperty(propertyName)!.GetValue(sut);
-
-            Assert.That(value, Is.EqualTo(expectedValue));
-        }
-
-
-        private static void CommonTest(ICodeUnit cu, IDelegate sut)
-        {
-            Assert.Multiple(() =>
-            {
-                Assert.That(sut.ContainingNamespace, Is.EqualTo(cu));
-                Assert.That(sut.ContainingType, Is.Null);
-                Assert.That(sut.TypeKind, Is.EqualTo(TypeKind.Delegate));
-                TreeNodeAssert.LinksAreValid(sut);
-            });
+            Modifier.Test<IDelegate>(code, propertyName, expectedValue);
         }
 
         [Test]
         public void DelegateIsCorrectlyLinkedAtNamespace()
         {
-            string code = "delegate int Del();";
-
-            var cu = CodeUnit.FromString(code);
-            var result = cu.Types().OfType<IDelegate>().Single();
-
-            CommonTest(cu, result);
+            var code = "delegate int Del();";
+            TypeLinks.Test<IDelegate>(code, TypeKind.Delegate);
         }
 
         [Test]
         [TestCaseSource(typeof(DelegateResources), nameof(DelegateResources.GenericTypeParameters))]
         public void TypeArgumentTest(string code, string expectedName, Variance expectedVariance)
         {
-            var cu = CodeUnit.FromString(code);
-            var del = cu.Types().OfType<IDelegate>().Single();
-            var result = del.GenericTypeArguments[0];
-
-            Assert.Multiple(() =>
-            {
-                Assert.That(result.Name, Is.EqualTo(expectedName));
-                Assert.That(result.Variance, Is.EqualTo(expectedVariance));
-                TreeNodeAssert.LinksAreValid(result);
-            });
+            TypeArgument.Test<IDelegate>(code, expectedName, expectedVariance, t => t.GenericTypeArguments[0]);
         }
 
         [Test]
         [TestCaseSource(typeof(DelegateResources), nameof(DelegateResources.Parameters))]
         public void ParameterTest(string code, ParameterInfo[] parameters)
         {
-            var cu = CodeUnit.FromString(code);
-            var result = cu.Types().OfType<IDelegate>().Single();
-
-            Assert.Multiple(() =>
-            {
-                Assert.That(result.Parameters, Has.Count.EqualTo(parameters.Length));
-                for (var i = 0; i < parameters.Length; i++)
-                {
-                    var expected = parameters[i];
-                    var param = result.Parameters[i];
-
-                    Assert.That(param.Type.FormatedText, Is.EqualTo(expected.Type));
-                    Assert.That(param.Name, Is.EqualTo(expected.Name));
-                    Assert.That(param.Modifier, Is.EqualTo(expected.Modifier));
-                    TreeNodeAssert.LinksAreValid(param);
-                }
-            });
+            Parameters.Test<IDelegate>(code, parameters, t => t.Parameters);
         }
 
         [Test]
@@ -89,7 +45,6 @@
                 TreeNodeAssert.LinksAreValid(result);
             });
         }
-
 
         [Test]
         [TestCaseSource(typeof(DelegateResources), nameof(DelegateResources.Constraints))]
