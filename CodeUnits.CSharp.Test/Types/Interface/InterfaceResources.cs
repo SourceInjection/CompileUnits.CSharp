@@ -36,5 +36,16 @@
             new object[] { "interface IIface : IEquatable<IIface<Tu>> { }", new[] { "IEquatable<IIface<Tu>>" } },
             new object[] { "interface IIface<T> : IEquatable<IIface<T>>, ISomething { }", new[] { "IEquatable<IIface<T>>", "ISomething" } },
         ];
+
+        public static readonly object[] CollectionConfigs =
+        [
+            new object[] { $"[MyAttribute] {EmptyInterface}", nameof(IInterface.AttributeGroups) },
+            new object[] { "interface MyInterface<T> { }", nameof(IInterface.GenericTypeArguments) },
+            new object[] { "interface MyInterface<T> where T : XY { }", nameof(IInterface.Constraints) },
+            new object[] { "interface MyInterface : Interface { }", nameof(IInterface.Inheritance) },
+            new object[] { "interface MyInterface { int Xy { get; set; } }", nameof(IInterface.Members) },
+            new object[] { "interface MyInterface { int this[int idx] { get; set; } }", nameof(IInterface.Members) },
+            new object[] { "interface MyInterface { event PropertyChangedEventHandler PropertyChanged; }", nameof(IInterface.Members) },
+        ];
     }
 }

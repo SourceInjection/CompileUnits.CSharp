@@ -16,7 +16,7 @@ namespace CodeUnits.CSharp.Visitors
     {
         public override MemberDefinition[] VisitStruct_member_declaration([NotNull] Struct_member_declarationContext context)
         {
-            if (context.fixed_size_buffer_declarator() != null)
+            if (context.fixed_size_buffer_declarator().Length > 0)
                 throw new NotSupportedException("fixed size buffers are not supported.");
 
             var commonInfo = new CommonDefinitionInfo(
@@ -41,9 +41,6 @@ namespace CodeUnits.CSharp.Visitors
 
         private static MemberDefinition[] GetCommonMembers(Common_member_declarationContext context, CommonDefinitionInfo commonInfo)
         {
-            if (context is null)
-                return Array.Empty<MemberDefinition>();
-
             if (context.constant_declaration() != null)
                 return ConstantDefinitions.FromContext(context.constant_declaration(), commonInfo).ToArray();
             if (context.typed_member_declaration() != null)
@@ -87,7 +84,6 @@ namespace CodeUnits.CSharp.Visitors
             var extendedInfo = new TypedDefinitionInfo(
                 commonInfo:         commonInfo,
                 hasRefModifier:     context.REF() != null,
-                isReadonly:         context.READONLY() != null,
                 type:               type,
                 addressedInterface: addressedInterface);
 

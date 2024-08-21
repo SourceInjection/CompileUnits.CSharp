@@ -10,6 +10,7 @@
             new object[]{ "enum En : ushort { X, Y }", "ushort" },
             new object[]{ "enum En : long { X, Y }", "long" },
             new object[]{ "enum En : byte { X, Y }", "byte" },
+            new object[]{ "enum En : byte { }", "byte" },
         ];
 
         public static readonly object[] ModifierConfigs =

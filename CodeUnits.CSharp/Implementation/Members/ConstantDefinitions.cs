@@ -8,10 +8,7 @@ namespace CodeUnits.CSharp.Implementation.Members
     {
         public static IEnumerable<ConstantDefinition> FromContext(Constant_declarationContext context, CommonDefinitionInfo commonInfo)
         {
-            if (context == null)
-                yield break;
-
-            var declarators = ConstantDeclarators(context.constant_declarators()?.constant_declarator());
+            var declarators = ConstantDeclarators(context.constant_declarators().constant_declarator());
             var type = TypeUsage.FromContext(context.type_());
             (var accessModifier, var hasNewModifier) = Modifiers.OfConstant(commonInfo.Modifiers);
 
@@ -29,9 +26,6 @@ namespace CodeUnits.CSharp.Implementation.Members
 
         private static IEnumerable<(string Ident, CodeFragment Expression)> ConstantDeclarators(Constant_declaratorContext[] contexts)
         {
-            if (contexts is null)
-                yield break;
-
             foreach (var c in contexts)
                 yield return (c.identifier().GetText(), CodeFragment.FromContext(c.expression()));
         }

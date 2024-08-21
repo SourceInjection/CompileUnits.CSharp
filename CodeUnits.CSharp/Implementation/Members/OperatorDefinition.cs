@@ -1,7 +1,6 @@
 ﻿using CodeUnits.CSharp.Implementation.Attributes;
 using CodeUnits.CSharp.Implementation.Common;
 using CodeUnits.CSharp.Implementation.Parameters;
-using System;
 using System.Collections.Generic;
 using static CodeUnits.CSharp.Generated.CSharpParser;
 
@@ -33,9 +32,6 @@ namespace CodeUnits.CSharp.Implementation.Members
 
         internal static OperatorDefinition FromContext(Operator_declarationContext context, TypedDefinitionInfo extendedInfo)
         {
-            if (context == null)
-                throw new ArgumentNullException(nameof(context));
-
             return new OperatorDefinition(
                 name: context.overloadable_operator().GetText(),
                 attributeGroups: extendedInfo.AttributeGroups,

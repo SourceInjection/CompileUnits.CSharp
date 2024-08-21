@@ -10,25 +10,25 @@ namespace CodeUnits.CSharp.Implementation
         private TypeUsage(IReadOnlyList<TerminalSymbol> symbols, string formatedText)
         {
             Symbols = symbols;
-            FormatedText = formatedText;
             foreach (var symbol in symbols)
                 symbol.ParentNode = this;
+            FormatedText = formatedText;
         }
 
         public ITreeNode ParentNode { get; internal set; }
 
         public IReadOnlyList<ITerminalSymbol> Symbols { get; }
 
+        public IEnumerable<ITreeNode> ChildNodes() => Symbols;
+
         public string FormatedText { get; }
 
-        public IEnumerable<ITreeNode> ChildNodes() => Symbols;
+        internal static TypeUsage Void { get; } = CreateVoidType();
 
         public override string ToString()
         {
             return FormatedText;
         }
-
-        internal static TypeUsage Void { get; } = CreateVoidType();
 
         private static TypeUsage CreateVoidType()
         {
@@ -51,8 +51,7 @@ namespace CodeUnits.CSharp.Implementation
             return FromSymbols(new TerminalSymbol[] { symbol });
         }
 
-        internal static TypeUsage FromSymbols(IReadOnlyList<TerminalSymbol> symbols) 
-            => new TypeUsage(symbols, Text.TypeUsage(symbols));
+        internal static TypeUsage FromSymbols(IReadOnlyList<TerminalSymbol> symbols) => new TypeUsage(symbols, Text.TypeUsage(symbols));
 
         internal static TypeUsage FromContext(Namespace_or_type_nameContext context) => FromTree(context);
 

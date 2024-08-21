@@ -25,11 +25,9 @@ namespace CodeUnits.CSharp.Implementation
             if (context == null)
                 return null;
 
-            var arrow = new TerminalSymbol(TerminalSymbolKind.RightArrow, "=>");
-            var semiColon = new TerminalSymbol(TerminalSymbolKind.Semicolon, ";");
             var tokens = TerminalSymbols.FromNode(context)
-                .Prepend(arrow)
-                .Append(semiColon)
+                .Prepend(new TerminalSymbol(TerminalSymbolKind.RightArrow, "=>"))
+                .Append(new TerminalSymbol(TerminalSymbolKind.Semicolon, ";"))
                 .ToArray();
 
             return new CodeFragment(tokens);

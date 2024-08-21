@@ -25,9 +25,8 @@ namespace CodeUnits.CSharp.Implementation.Common
 
         private static bool IsCommaOrCloseBracket(TerminalSymbol symbol)
         {
-            return symbol != null && (
-                symbol.IsKind(TerminalSymbolKind.CloseBracket)
-                || symbol.IsKind(TerminalSymbolKind.Comma));
+            return symbol.IsKind(TerminalSymbolKind.CloseBracket)
+                || symbol.IsKind(TerminalSymbolKind.Comma);
         }
     }
 }

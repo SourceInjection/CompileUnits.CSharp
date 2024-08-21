@@ -9,13 +9,17 @@ namespace CodeUnits.CSharp.Implementation.Common
     {
         public static (string Name, TypeUsage AddressedInterface) FromContext(Namespace_or_type_nameContext context)
         {
-            var nameChild = context.identifier()[context.identifier().Length - 1];
-            return (nameChild.GetText(), InterfaceFromChildren(context, nameChild));
+            return FromContext(context.identifier(), context);
         }
 
         public static (string Name, TypeUsage AddressedInterface) FromContext(Method_member_nameContext context)
         {
-            var nameChild = context.identifier()[context.identifier().Length - 1];
+            return FromContext(context.identifier(), context);
+        }
+
+        private static (string Name, TypeUsage AddressedInterface) FromContext(IdentifierContext[] identifierContext, ParserRuleContext context)
+        {
+            var nameChild = identifierContext[identifierContext.Length - 1];
             return (nameChild.GetText(), InterfaceFromChildren(context, nameChild));
         }
 

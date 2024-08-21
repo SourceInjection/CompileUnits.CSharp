@@ -1,7 +1,6 @@
 ﻿using CodeUnits.CSharp.Implementation.Attributes;
 using CodeUnits.CSharp.Implementation.Common;
 using CodeUnits.CSharp.Implementation.Members.Types.Generics;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using static CodeUnits.CSharp.Generated.CSharpParser;
@@ -44,9 +43,6 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
 
         internal static StructDefinition FromContext(Struct_definitionContext context, CommonDefinitionInfo commonInfo)
         {
-            if (context == null)
-                throw new ArgumentNullException(nameof(context));
-
             var modifiers = Modifiers.OfStruct(commonInfo.Modifiers);
             var isRecord = context.RECORD() != null;
             var genericTypeArguments = GenericTypeArgumentDefinitions.FromContext(context.type_parameter_list());

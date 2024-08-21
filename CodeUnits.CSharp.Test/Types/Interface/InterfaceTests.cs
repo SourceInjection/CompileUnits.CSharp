@@ -1,4 +1,6 @@
-﻿namespace CodeUnits.CSharp.Test.Types.Interface
+﻿using System.Collections;
+
+namespace CodeUnits.CSharp.Test.Types.Interface
 {
     internal class InterfaceTests
     {
@@ -40,6 +42,17 @@
                     TreeNodeAssert.LinksAreValid(result[i]);
                 }
             });
+        }
+
+        [Test]
+        [TestCaseSource(typeof(InterfaceResources), nameof(InterfaceResources.CollectionConfigs))]
+        public void CollectionHasElementTest(string code, string propertyName)
+        {
+            var cu = CodeUnit.FromString(code);
+            var sut = cu.Types().OfType<IInterface>().Single();
+            var value = sut.GetType().GetProperty(propertyName)!.GetValue(sut) as IEnumerable;
+
+            CollectionAssert.IsNotEmpty(value);
         }
     }
 }

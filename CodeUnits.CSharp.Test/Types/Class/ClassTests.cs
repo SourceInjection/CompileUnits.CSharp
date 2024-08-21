@@ -29,5 +29,14 @@ namespace CodeUnits.CSharp.Test.Types.Class
 
             CollectionAssert.IsNotEmpty(value);
         }
+
+        [Test]
+        public void TestFinalizer()
+        {
+            var cu = CodeUnit.FromString("class MyClass { ~MyClass() {} }");
+            var sut = cu.Types().OfType<IClass>().Single();
+            
+            Assert.That(sut.Finalizer, Is.Not.Null);
+        }
     }
 }

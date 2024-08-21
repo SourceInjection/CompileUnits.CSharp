@@ -2,7 +2,6 @@
 using CodeUnits.CSharp.Implementation.Common;
 using CodeUnits.CSharp.Implementation.Members.Types.Generics;
 using CodeUnits.CSharp.Implementation.Parameters;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using static CodeUnits.CSharp.Generated.CSharpParser;
@@ -64,9 +63,6 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
 
         internal static DelegateDefinition FromContext(Delegate_definitionContext context, CommonDefinitionInfo commonInfo)
         {
-            if (context == null)
-                throw new ArgumentNullException(nameof(context));
-
             var modifiers = Modifiers.OfDelegate(commonInfo.Modifiers);
             var genericTypeArguments = GenericTypeArgumentDefinitions.FromContext(context.variant_type_parameter_list());
 

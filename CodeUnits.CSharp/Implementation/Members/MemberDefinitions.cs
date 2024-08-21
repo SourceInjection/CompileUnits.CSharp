@@ -9,8 +9,6 @@ namespace CodeUnits.CSharp.Implementation.Members
         public static List<MemberDefinition> FromContext(Struct_bodyContext context)
         {
             var members = new List<MemberDefinition>();
-            if (context?.struct_member_declaration() is null)
-                return members;
 
             var visitor = new MemberVisitor();
             foreach (var c in context.struct_member_declaration())
@@ -25,7 +23,7 @@ namespace CodeUnits.CSharp.Implementation.Members
         public static List<MemberDefinition> FromContext(Class_bodyContext context)
         {
             var members = new List<MemberDefinition>();
-            if (context?.class_member_declarations() is null)
+            if (context.class_member_declarations() is null)
                 return members;
 
             var visitor = new MemberVisitor();

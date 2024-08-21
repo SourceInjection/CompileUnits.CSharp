@@ -10,9 +10,6 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
     {
         public static List<EnumMemberDefinition> FromContext(Enum_bodyContext context)
         {
-            if (context?.enum_member_declaration() is null)
-                return new List<EnumMemberDefinition>();
-
             return context.enum_member_declaration()
                 .Select(c => new EnumMemberDefinition(
                     c.identifier().GetText(),

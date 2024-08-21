@@ -1,5 +1,4 @@
 ﻿using CodeUnits.CSharp.Generated;
-using System;
 using System.Collections.Generic;
 
 namespace CodeUnits.CSharp.Implementation.Common
@@ -8,9 +7,7 @@ namespace CodeUnits.CSharp.Implementation.Common
     {
         public static TerminalSymbolKind KindFromAntlrType(int id)
         {
-            if (_symbolKind.TryGetValue(id, out var symbolKind))
-                return symbolKind;
-            throw new InvalidOperationException($"{nameof(CSharpParser)} does not have a token in its dictionary with id '{id}'.");
+            return _symbolKind[id];
         }
 
         private static readonly Dictionary<int, TerminalSymbolKind> _symbolKind = new Dictionary<int, TerminalSymbolKind>()

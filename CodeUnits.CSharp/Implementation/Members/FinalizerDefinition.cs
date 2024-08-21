@@ -22,8 +22,6 @@ namespace CodeUnits.CSharp.Implementation.Members
 
         internal static FinalizerDefinition FromContext(Destructor_definitionContext context, List<AttributeGroup> attributeGroups)
         {
-            if (context == null)
-                throw new ArgumentNullException(nameof(context));
             return new FinalizerDefinition(attributeGroups, CodeFragment.FromContext(context.body()));
         }
     }
