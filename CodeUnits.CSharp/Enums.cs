@@ -142,8 +142,6 @@
         CoalesceAssignmentOperator,
         /// <summary>Symbol: ..</summary>
         RangeOperator,
-        /// <summary>Symbol: &gt;&gt;</summary>
-        RightShiftOperator,
         /// <summary>Symbol: &gt;&gt;=</summary>
         RightShiftAssignmentOperator,
         /// <summary>Symbol: !=</summary>

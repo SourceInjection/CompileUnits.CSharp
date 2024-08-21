@@ -61,5 +61,7 @@ namespace CodeUnits.CSharp.Implementation
         internal static TypeUsage FromContext(Type_Context context) => FromTree(context);
 
         internal static TypeUsage FromContext(Class_typeContext context) => FromTree(context);
+
+        internal static TypeUsage FromContext(Enum_base_typeContext context) => FromTree(context);
     }
 }

@@ -61,7 +61,7 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
                 constraints: ConstraintDefinitions.FromContext(context.type_parameter_constraints_clauses(), genericTypeArguments),
                 isRecord: isRecord,
                 isReadonly: modifiers.IsReadonly,
-                inheritance: TypeUsages.FromContext(context.struct_interfaces()).ToArray());
+                inheritance: TypeUsages.FromContext(context.interface_base()).ToArray());
         }
     }
 }

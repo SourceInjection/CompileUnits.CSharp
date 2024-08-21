@@ -27,16 +27,14 @@
             new object[] { "interface IIface<out T> { }", "T", Variance.Out },
         ];
 
-        interface IIface<T> : IEquatable<IIface<T>> { }
-
         public static readonly object[] Inheritance =
         [
             new object[] { "interface IIface<T> { }", Array.Empty<string>() },
             new object[] { "interface IIface : IEquatable<IIface> { }", new[] { "IEquatable<IIface>" } },
             new object[] { "interface IIface<T> : ISomething { }", new[] { "ISomething" } },
-            new object[] { "interface IIface<T> : IEquatable<IIface> { }", new[] { "IEquatable<IIface>" } },
-            new object[] { "interface IIface<T> : IEquatable<IIface<T>> { }", new[] { "IEquatable<IIface<T>>" } },
-            //new object[] { "interface IIface<T> : IEquatable<IIface<T>>, ISomething { }", new[] { "IEquatable<IIface<T>>", "ISomething" } },
+            new object[] { "interface IIface<T> : IEquatable<IIface, T> { }", new[] { "IEquatable<IIface, T>" } },
+            new object[] { "interface IIface : IEquatable<IIface<Tu>> { }", new[] { "IEquatable<IIface<Tu>>" } },
+            new object[] { "interface IIface<T> : IEquatable<IIface<T>>, ISomething { }", new[] { "IEquatable<IIface<T>>", "ISomething" } },
         ];
     }
 }

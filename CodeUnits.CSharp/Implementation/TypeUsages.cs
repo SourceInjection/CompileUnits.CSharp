@@ -29,7 +29,7 @@ namespace CodeUnits.CSharp.Implementation
                 yield return TypeUsage.FromContext(c);
         }
 
-        public static IEnumerable<TypeUsage> FromContext(Struct_interfacesContext context)
+        public static IEnumerable<TypeUsage> FromContext(Interface_baseContext context)
         {
             if(context?.interface_type_list()?.namespace_or_type_name() == null)
                 yield break;

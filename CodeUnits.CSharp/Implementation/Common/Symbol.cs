@@ -47,7 +47,6 @@ namespace CodeUnits.CSharp.Implementation.Common
             [CSharpParser.OP_LEFT_SHIFT_ASSIGNMENT] = TerminalSymbolKind.LeftShiftAssignmentOperator,
             [CSharpParser.OP_COALESCING_ASSIGNMENT] = TerminalSymbolKind.CoalesceAssignmentOperator,
             [CSharpParser.OP_RANGE] = TerminalSymbolKind.RangeOperator,
-            [CSharpParser.OP_RIGHT_SHIFT] = TerminalSymbolKind.RightShiftOperator,
             [CSharpParser.OP_RIGHT_SHIFT_ASSIGNMENT] = TerminalSymbolKind.RightShiftAssignmentOperator,
             [CSharpParser.OP_NE] = TerminalSymbolKind.NotEqualsOperator,
             [CSharpParser.OP_LE] = TerminalSymbolKind.LessEqualsOperator,

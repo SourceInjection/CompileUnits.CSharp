@@ -1,7 +1,4 @@
-﻿// $antlr-format alignTrailingComments true, columnLimit 150, minEmptyLines 1, maxEmptyLinesToKeep 1, reflowComments false, useTab false
-// $antlr-format allowShortRulesOnASingleLine false, allowShortBlocksOnASingleLine true, alignSemicolons hanging, alignColons hanging
-
-parser grammar CSharpParser;
+﻿parser grammar CSharpParser;
 @parser::header {#pragma warning disable 3021}
 
 options {
@@ -55,6 +52,11 @@ numeric_type
     ;
 
 integral_type
+    : enum_base_type
+    | CHAR
+    ;
+
+enum_base_type
     : SBYTE
     | BYTE
     | SHORT
@@ -63,7 +65,6 @@ integral_type
     | UINT
     | LONG
     | ULONG
-    | CHAR
     ;
 
 floating_point_type
@@ -201,7 +202,7 @@ type_pattern
     ;
 
 shift_expression
-    : additive_expression ((OP_LEFT_SHIFT | OP_RIGHT_SHIFT) additive_expression)*
+    : additive_expression ((OP_LEFT_SHIFT | right_shift) additive_expression)*
     ;
 
 additive_expression
@@ -922,13 +923,17 @@ overloadable_operator
     | BITWISE_OR
     | CARET
     | OP_LEFT_SHIFT
-    | OP_RIGHT_SHIFT
+    | right_shift
     | OP_EQ
     | OP_NE
     | GT
     | LT
     | OP_GE
     | OP_LE
+    ;
+
+right_shift
+    : first = GT second = GT {$first.index + 1 == $second.index}?
     ;
 
 conversion_operator_declarator
@@ -943,11 +948,6 @@ constructor_initializer
 body
     : block
     | SEMICOLON
-    ;
-
-//B.2.8 Structs
-struct_interfaces
-    : COLON interface_type_list
     ;
 
 struct_body
@@ -1014,7 +1014,7 @@ interface_accessors
 
 //B.2.11 Enums
 enum_base
-    : COLON type_
+    : COLON enum_base_type
     ;
 
 enum_body
@@ -1234,7 +1234,7 @@ class_definition
     ;
 
 struct_definition
-    : (READONLY RECORD? | REF | RECORD)?  STRUCT identifier type_parameter_list? struct_interfaces? type_parameter_constraints_clauses? struct_body SEMICOLON?
+    : (READONLY RECORD? | REF | RECORD)?  STRUCT identifier type_parameter_list? interface_base? type_parameter_constraints_clauses? struct_body SEMICOLON?
     ;
 
 interface_definition

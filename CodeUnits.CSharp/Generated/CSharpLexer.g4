@@ -1,8 +1,4 @@
-﻿// $antlr-format alignTrailingComments true, columnLimit 150, maxEmptyLinesToKeep 1, reflowComments false, useTab false
-// $antlr-format allowShortRulesOnASingleLine true, allowShortBlocksOnASingleLine true, minEmptyLines 0, alignSemicolons ownLine
-// $antlr-format alignColons trailing, singleLineOverrulesHangingColon true, alignLexerCommands true, alignLabels true, alignTrailers true
-
-lexer grammar CSharpLexer;
+﻿lexer grammar CSharpLexer;
 @lexer::header {#pragma warning disable 3021}
 
 options {
@@ -26,8 +22,9 @@ ENDREGION_LINE              : '#endregion' InputCharacter* -> skip;
 ERROR_LINE                  : '#error' InputCharacter*     -> skip;
 WARNING_LINE                : '#warning' InputCharacter*   -> skip;
 LINE_LINE                   : '#line' InputCharacter*      -> skip;
-CONDITIONAL_BLOCK           : '#if' ~'#'* ( '#elsif' ~'#'* )* ( '#else' ~'#'* )?  '#endif' InputCharacter* -> skip;
-
+IF_LINE                     : '#if' InputCharacter*        -> skip;
+ELSIF_LINE                  : '#elsif' InputCharacter*     -> skip;
+ELSE_LINE                   : '#else' InputCharacter*      -> skip;
 
 ABSTRACT   : 'abstract';
 ADD        : 'add';
@@ -176,11 +173,10 @@ OP_MOD_ASSIGNMENT        : '%=';
 OP_AND_ASSIGNMENT        : '&=';
 OP_OR_ASSIGNMENT         : '|=';
 OP_XOR_ASSIGNMENT        : '^=';
-OP_LEFT_SHIFT            : '<<';
 OP_LEFT_SHIFT_ASSIGNMENT : '<<=';
+OP_LEFT_SHIFT            : '<<';
 OP_COALESCING_ASSIGNMENT : '??=';
 OP_RANGE                 : '..';
-OP_RIGHT_SHIFT           : '>>';
 OP_RIGHT_SHIFT_ASSIGNMENT: '>>=';
 
 OP_NE                    : '!=';

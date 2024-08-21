@@ -60,7 +60,7 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
                 hasNewModifier: modifiers.HasNewModifier,
                 attributeGroups: commonInfo.AttributeGroups,
                 members: EnumMemberDefinitions.FromContext(context.enum_body()),
-                baseType: TypeUsage.FromContext(context.enum_base()?.type_()));
+                baseType: TypeUsage.FromContext(context.enum_base()?.enum_base_type()));
         }
     }
 }
