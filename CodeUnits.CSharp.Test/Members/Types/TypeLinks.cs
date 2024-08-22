@@ -1,8 +1,8 @@
-﻿namespace CodeUnits.CSharp.Test.Types
+﻿namespace CodeUnits.CSharp.Test.Members.Types
 {
     internal class TypeLinks
     {
-        public static void Test<T>(string code, TypeKind typeKind) where T: IType
+        public static void Test<T>(string code, TypeKind typeKind) where T : IType
         {
             var cu = CodeUnit.FromString(code);
             var result = cu.Types().OfType<T>().Single();

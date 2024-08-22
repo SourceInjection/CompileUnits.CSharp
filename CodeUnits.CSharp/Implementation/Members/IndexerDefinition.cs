@@ -12,6 +12,7 @@ namespace CodeUnits.CSharp.Implementation.Members
         internal IndexerDefinition(
             AccessModifier accessModifier,
             bool hasNewModifier,
+            bool isStatic,
             IReadOnlyList<AttributeGroup> attributeGroups,
             IReadOnlyList<ParameterDefinition> parameters,
             TypeUsage type,
@@ -34,6 +35,7 @@ namespace CodeUnits.CSharp.Implementation.Members
             AddressedInterface = addressedInterface;
             InheritanceModifier = inheritanceModifier;
             Parameters = parameters;
+            IsStatic = isStatic;
         }
 
         public override MemberKind MemberKind { get; } = MemberKind.Indexer;
@@ -50,6 +52,8 @@ namespace CodeUnits.CSharp.Implementation.Members
 
         public bool HasNewModifier { get; }
 
+        public bool IsStatic { get; }
+
         public ITypeUsage AddressedInterface { get; }
 
         public IReadOnlyList<IParameter> Parameters { get; }
@@ -65,6 +69,7 @@ namespace CodeUnits.CSharp.Implementation.Members
             return new IndexerDefinition(
                 accessModifier: modifiers.AccessModifier,
                 hasNewModifier: modifiers.HasNewModifier,
+                isStatic: modifiers.IsStatic,
                 attributeGroups: extendedInfo.AttributeGroups,
                 parameters: ParameterDefinitions.FromContext(context.formal_parameter_list()),
                 type: extendedInfo.Type,

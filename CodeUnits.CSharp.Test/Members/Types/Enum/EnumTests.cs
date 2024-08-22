@@ -1,4 +1,4 @@
-﻿namespace CodeUnits.CSharp.Test.Types.Enum
+﻿namespace CodeUnits.CSharp.Test.Members.Types.Enum
 {
     internal class EnumTests
     {
@@ -13,7 +13,7 @@
         [TestCaseSource(typeof(EnumResources), nameof(EnumResources.ModifierConfigs))]
         public void ModifierTest(string code, string propertyName, object expectedValue)
         {
-            Modifier.Test<IEnum>(code, propertyName, expectedValue);
+            Modifier.TypeTest<IEnum>(code, propertyName, expectedValue);
         }
 
         [Test]

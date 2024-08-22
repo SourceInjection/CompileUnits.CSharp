@@ -2,7 +2,6 @@
 using CodeUnits.CSharp.Implementation.Common;
 using CodeUnits.CSharp.Implementation.Members.Types.Generics;
 using CodeUnits.CSharp.Implementation.Parameters;
-using System;
 using System.Collections.Generic;
 using static CodeUnits.CSharp.Generated.CSharpParser;
 namespace CodeUnits.CSharp.Implementation.Members
@@ -13,6 +12,7 @@ namespace CodeUnits.CSharp.Implementation.Members
             string name,
             AccessModifier accessModifier,
             bool hasNewModifier,
+            bool isStatic,
             IReadOnlyList<AttributeGroup> attributeGroups,
             IReadOnlyList<GenericTypeArgumentDefinition> genericTypeArguments,
             IReadOnlyList<ParameterDefinition> parameters,
@@ -33,6 +33,7 @@ namespace CodeUnits.CSharp.Implementation.Members
             HasNewModifier = hasNewModifier;
             AddressedInterface = addressedInterface;
             InheritanceModifier = inheritanceModifier;
+            IsStatic = isStatic;
         }
 
         public override MemberKind MemberKind { get; } = MemberKind.Method;
@@ -43,13 +44,12 @@ namespace CodeUnits.CSharp.Implementation.Members
 
         public bool HasNewModifier { get; }
 
+        public bool IsStatic { get; }
+
         public ITypeUsage AddressedInterface { get; }
 
         internal static MethodDefinition FromContext(Method_declarationContext context, TypedDefinitionInfo extendedInfo)
         {
-            if (context == null)
-                throw new ArgumentNullException(nameof(context));
-
             var modifiers = Modifiers.OfMethod(extendedInfo.Modifiers);
             var (name, addressedInterface) = ResolvedName.FromContext(context.method_member_name());
 
@@ -57,13 +57,23 @@ namespace CodeUnits.CSharp.Implementation.Members
                 name: name,
                 accessModifier: modifiers.AccessModifier,
                 hasNewModifier: modifiers.HasNewModifier,
+                isStatic: modifiers.IsStatic,
                 attributeGroups: extendedInfo.AttributeGroups,
                 genericTypeArguments: GenericTypeArgumentDefinitions.FromContext(context.type_parameter_list()),
                 parameters: ParameterDefinitions.FromContext(context.formal_parameter_list()),
                 returnType: extendedInfo.Type,
                 inheritanceModifier: modifiers.InheritanceModifier,
-                body: CodeFragment.FromContext(context.method_body()?.block()),
+                body: GetBody(context),
                 addressedInterface: addressedInterface);
+        }
+
+        private static CodeFragment GetBody(Method_declarationContext context)
+        {
+            if (context.method_body()?.block() != null)
+                return CodeFragment.FromContext(context.method_body().block());
+            if (context.throwable_expression() != null)
+                return CodeFragment.FromContext(context.throwable_expression());
+            return null;
         }
     }
 }

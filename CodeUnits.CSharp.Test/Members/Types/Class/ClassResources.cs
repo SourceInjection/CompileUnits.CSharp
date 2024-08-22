@@ -1,11 +1,11 @@
-﻿namespace CodeUnits.CSharp.Test.Types.Class
+﻿namespace CodeUnits.CSharp.Test.Members.Types.Class
 {
     internal static class ClassResources
     {
         private readonly static string EmptyClass = "class MyClass {}";
 
         public static readonly object[] ModifierConfigs =
-        [
+        {
             new object[] { EmptyClass, nameof(IClass.AccessModifier), AccessModifier.None, },
             new object[] { $"public {EmptyClass}", nameof(IClass.AccessModifier), AccessModifier.Public, },
             new object[] { $"internal {EmptyClass}", nameof(IClass.AccessModifier), AccessModifier.Internal, },
@@ -29,10 +29,10 @@
             new object[] { $"abstract {EmptyClass}", nameof(IClass.IsAbstract), true, },
             new object[] { EmptyClass, nameof(IClass.HasNewModifier), false, },
             new object[] { $"new {EmptyClass}", nameof(IClass.HasNewModifier), true, },
-        ];
+        };
 
         public static readonly object[] CollectionConfigs =
-        [
+        {
             new object[] { $"[MyAttribute] {EmptyClass}", nameof(IClass.AttributeGroups) },
             new object[] { "class MyClass<T> { }", nameof(IClass.GenericTypeArguments) },
             new object[] { "class MyClass<T> where T : XY { }", nameof(IClass.Constraints) },
@@ -44,10 +44,11 @@
             new object[] { "class MyClass { ~MyClass() {} }", nameof(IClass.Members) },
             new object[] { "class MyClass { int this[int idx] { get; set; } }", nameof(IClass.Members) },
             new object[] { "class MyClass { event PropertyChangedEventHandler PropertyChanged; }", nameof(IClass.Members) },
+            new object[] { "class MyClass { event PropertyChangedEventHandler PropertyChanged { add { } remove { } } }", nameof(IClass.Members) },
             new object[] { "class MyClass { const string s = \"ABC\"; }", nameof(IClass.Members) },
             new object[] { "class MyClass { public static int operator+(MyClass lhs, int rhs) { } }", nameof(IClass.Members) },
             new object[] { "class MyClass { public static explicit operator bool(MyClass lhs) { } }", nameof(IClass.Members) },
             new object[] { "class MyClass { class MyNestedClass { } }", nameof(IClass.Members) },
-        ];
+        };
     }
 }

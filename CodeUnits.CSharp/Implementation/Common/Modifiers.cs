@@ -65,23 +65,23 @@ namespace CodeUnits.CSharp.Implementation.Common
         public static (AccessModifier AccessModifier, bool HasNewModifier)
             OfConstant(IEnumerable<string> modifier) => OfAny(modifier);
 
-        public static (AccessModifier AccessModifier, bool HasNewModifier, InheritanceModifier InheritanceModifier)
+        public static (AccessModifier AccessModifier, bool HasNewModifier, bool IsStatic, InheritanceModifier InheritanceModifier)
             OfProperty(IEnumerable<string> modifiers) => OfOverwriteable(modifiers);
 
-        public static (AccessModifier AccessModifier, bool HasNewModifier, InheritanceModifier InheritanceModifier)
+        public static (AccessModifier AccessModifier, bool HasNewModifier, bool IsStatic, InheritanceModifier InheritanceModifier)
             OfMethod(IEnumerable<string> modifiers) => OfOverwriteable(modifiers);
 
-        public static (AccessModifier AccessModifier, bool HasNewModifier, InheritanceModifier InheritanceModifier)
+        public static (AccessModifier AccessModifier, bool HasNewModifier, bool IsStatic, InheritanceModifier InheritanceModifier)
             OfIndexer(IEnumerable<string> modifiers) => OfOverwriteable(modifiers);
 
-        private static (AccessModifier AccessModifier, bool HasNewModifier, InheritanceModifier InheritanceModifier)
+        private static (AccessModifier AccessModifier, bool HasNewModifier, bool IsStatic, InheritanceModifier InheritanceModifier)
             OfOverwriteable(IEnumerable<string> modifiers)
         {
             var commonModifiers = OfAny(modifiers);
             var inheritanceModifiers = new HashSet<InheritanceModifier>();
             foreach (var modifier in modifiers)
                 MayAddInheritanceModifier(inheritanceModifiers, modifier);
-            return (commonModifiers.AccessModifier, commonModifiers.HasNewModifier, MergeInheritanceModifiers(inheritanceModifiers));
+            return (commonModifiers.AccessModifier, commonModifiers.HasNewModifier, Seek(modifiers, Static)[Static], MergeInheritanceModifiers(inheritanceModifiers));
         }
 
         private static (AccessModifier AccessModifier, bool HasNewModifier)
@@ -104,7 +104,7 @@ namespace CodeUnits.CSharp.Implementation.Common
         private static Dictionary<string, bool> Seek(IEnumerable<string> modifiers, params string[] modifierNames)
         {
             var result = modifierNames.ToDictionary(s => s, _ => false);
-            foreach (var modifier in modifiers.Where(s => result.ContainsKey(s)))
+            foreach (var modifier in modifiers)
                 result[modifier] = true;
             return result;
         }

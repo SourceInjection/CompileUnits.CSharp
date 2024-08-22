@@ -1,4 +1,4 @@
-﻿namespace CodeUnits.CSharp.Test.Types.Delegate
+﻿namespace CodeUnits.CSharp.Test.Members.Types.Delegate
 {
     [TestFixture]
     internal class DelegateTests
@@ -7,7 +7,7 @@
         [TestCaseSource(typeof(DelegateResources), nameof(DelegateResources.ModifierConfigs))]
         public void ModifierTest(string code, string propertyName, object expectedValue)
         {
-            Modifier.Test<IDelegate>(code, propertyName, expectedValue);
+            Modifier.TypeTest<IDelegate>(code, propertyName, expectedValue);
         }
 
         [Test]
@@ -54,7 +54,7 @@
                 .OfType<IDelegate>()
                 .Single().Constraints[0];
 
-            Assert.Multiple(() => 
+            Assert.Multiple(() =>
             {
                 Assert.That(result.TargetedTypeArgument.Name, Is.EqualTo(typeArgumentName));
                 Assert.That(result.Clauses, Is.Not.Empty);

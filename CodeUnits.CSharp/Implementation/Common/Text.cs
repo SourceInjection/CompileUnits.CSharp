@@ -13,7 +13,7 @@ namespace CodeUnits.CSharp.Implementation.Common
 
             foreach (var item in symbols)
             {
-                if (IsComma(prev) && !IsCommaOrCloseBracket(item))
+                if (IsComma(prev) && !IsCommaOrCloseSymbol(item))
                     sb.Append(' ');
                 sb.Append(item.Value);
                 prev = item;
@@ -23,10 +23,12 @@ namespace CodeUnits.CSharp.Implementation.Common
 
         private static bool IsComma(TerminalSymbol symbol) => symbol?.Kind is TerminalSymbolKind.Comma;
 
-        private static bool IsCommaOrCloseBracket(TerminalSymbol symbol)
+        private static bool IsCommaOrCloseSymbol(TerminalSymbol symbol)
         {
             return symbol.IsKind(TerminalSymbolKind.CloseBracket)
-                || symbol.IsKind(TerminalSymbolKind.Comma);
+                || symbol.IsKind(TerminalSymbolKind.Comma)
+                || symbol.IsKind(TerminalSymbolKind.GreaterThanOperator)
+                || symbol.IsKind(TerminalSymbolKind.CloseParenthese);
         }
     }
 }

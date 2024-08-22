@@ -1,11 +1,11 @@
-﻿namespace CodeUnits.CSharp.Test.Types.Struct
+﻿namespace CodeUnits.CSharp.Test.Members.Types.Struct
 {
     internal class StructResources
     {
         private static readonly string EmptyStruct = "struct MyStruct {}";
 
         public static readonly object[] ModifierConfigs =
-        [
+        {
             new object[] { EmptyStruct, nameof(IStruct.AccessModifier), AccessModifier.None, },
             new object[] { $"public {EmptyStruct}", nameof(IStruct.AccessModifier), AccessModifier.Public, },
             new object[] { $"internal {EmptyStruct}", nameof(IStruct.AccessModifier), AccessModifier.Internal, },
@@ -20,25 +20,25 @@
 
             new object[] { EmptyStruct, nameof(IStruct.HasNewModifier), false, },
             new object[] { $"new {EmptyStruct}", nameof(IStruct.HasNewModifier), true, },
-        ];
+        };
 
         public static readonly object[] GenericTypeParameters =
-        [
+        {
             new object[] { "struct MyStruct<T> { }", "T", Variance.None },
-        ];
+        };
 
         public static readonly object[] Inheritance =
-        [
+        {
             new object[] { "struct MyStruct<[DoesNothing]T> { }", Array.Empty<string>() },
             new object[] { "struct MyStruct : IEquatable<IIface> { }", new[] { "IEquatable<IIface>" } },
             new object[] { "struct MyStruct<T> : ISomething { }", new[] { "ISomething" } },
             new object[] { "struct MyStruct<T> : IEquatable<IIface, T> { }", new[] { "IEquatable<IIface, T>" } },
             new object[] { "struct MyStruct : IEquatable<IIface<Tu>> { }", new[] { "IEquatable<IIface<Tu>>" } },
             new object[] { "struct MyStruct<T> : IEquatable<IIface<T>>, ISomething { }", new[] { "IEquatable<IIface<T>>", "ISomething" } },
-        ];
+        };
 
         public static readonly object[] CollectionConfigs =
-        [
+        {
             new object[] { $"[MyAttribute(herbert: true)] {EmptyStruct}", nameof(IStruct.AttributeGroups) },
             new object[] { "struct MyStruct<T> { }", nameof(IStruct.GenericTypeArguments) },
             new object[] { "struct MyStruct<T> where T : XY { }", nameof(IStruct.Constraints) },
@@ -60,6 +60,6 @@
             new object[] { "struct MyStruct { public void GetNothing(in int x) { } }", nameof(IStruct.Members)},
             new object[] { "struct MyStruct { public void GetNothing(out int x) { } }", nameof(IStruct.Members)},
             new object[] { "struct MyStruct { [DoesNothing] public void GetNothing(int x = 3) { } }", nameof(IStruct.Members)},
-        ];
+        };
     }
 }

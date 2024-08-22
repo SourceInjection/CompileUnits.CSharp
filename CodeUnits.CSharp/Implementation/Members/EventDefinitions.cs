@@ -8,9 +8,6 @@ namespace CodeUnits.CSharp.Implementation.Members
     {
         public static IEnumerable<EventDefinition> FromContext(Event_declarationContext context, CommonDefinitionInfo commonInfo)
         {
-            if (context == null)
-                yield break;
-
             var type = TypeUsage.FromContext(context.type_());
 
             if (context.member_name() != null)

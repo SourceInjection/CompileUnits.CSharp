@@ -51,9 +51,11 @@ namespace CodeUnits.CSharp.Implementation.Members.Types.Generics
                 return new ConstraintClause(ConstraintKind.Unmanaged);
             else if (context.NOTNULL() != null)
                 return new ConstraintClause(ConstraintKind.NotNull);
+            else if (context.DEFAULT() != null)
+                return new ConstraintClause(ConstraintKind.Default);
             else if (context.CLASS() != null)
             {
-                if (context.CLASS().GetText().EndsWith("?"))
+                if (context.INTERR() != null)
                     return new ConstraintClause(ConstraintKind.ClassNullable);
                 else return new ConstraintClause(ConstraintKind.Class);
             }

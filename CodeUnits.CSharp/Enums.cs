@@ -30,7 +30,7 @@
         Struct,
         Unmanaged,
         NotNull,
-        Default
+        Default,
     }
 
     public enum AccessModifier

@@ -46,6 +46,11 @@ namespace CodeUnits.CSharp
         bool HasNewModifier { get; }
 
         /// <summary>
+        /// If the indexer has the <see langword="static"/> modifier this is <see langword="true"/>.
+        /// </summary>
+        bool IsStatic { get; }
+
+        /// <summary>
         /// Represents the addressed interface <see langword="interface"/>.<br/>
         /// E.g.: IMyInterface.this[int i].<br/>
         /// This might be <see langword="null"/> since this is only necessary when multiple interfaces expect the same members.

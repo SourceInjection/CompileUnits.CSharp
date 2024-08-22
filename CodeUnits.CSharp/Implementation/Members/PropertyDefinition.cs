@@ -1,6 +1,5 @@
 ﻿using CodeUnits.CSharp.Implementation.Attributes;
 using CodeUnits.CSharp.Implementation.Common;
-using System;
 using System.Collections.Generic;
 using static CodeUnits.CSharp.Generated.CSharpParser;
 
@@ -16,6 +15,7 @@ namespace CodeUnits.CSharp.Implementation.Members
             TypeUsage type,
             InheritanceModifier inheritanceModifier,
             bool hasRefModifier,
+            bool isStatic,
             AccessorDefinition getter,
             AccessorDefinition setter,
             TypeUsage addressedInterface,
@@ -34,6 +34,7 @@ namespace CodeUnits.CSharp.Implementation.Members
             AddressedInterface = addressedInterface;
             InheritanceModifier = inheritanceModifier;
             Initialization = defaultValue;
+            IsStatic = isStatic;
         }
 
         public override MemberKind MemberKind { get; } = MemberKind.Property;
@@ -50,15 +51,14 @@ namespace CodeUnits.CSharp.Implementation.Members
 
         public bool HasNewModifier { get; }
 
+        public bool IsStatic { get; }
+
         public ITypeUsage AddressedInterface { get; }
 
         public ICodeFragment Initialization { get; }
 
         internal static PropertyDefinition FromContext(Property_declarationContext context, TypedDefinitionInfo extendedInfo)
         {
-            if (context == null)
-                throw new ArgumentNullException(nameof(context));
-
             var modifiers = Modifiers.OfIndexer(extendedInfo.Modifiers);
             var (getter, setter) = AccessorDefinitions.FromContext(context);
             var (name, addressedInterface) = ResolvedName.FromContext(context.member_name().namespace_or_type_name());
@@ -79,6 +79,7 @@ namespace CodeUnits.CSharp.Implementation.Members
                 type: extendedInfo.Type,
                 inheritanceModifier: modifiers.InheritanceModifier,
                 hasRefModifier: extendedInfo.HasRefModifier,
+                isStatic: modifiers.IsStatic,
                 getter: getter,
                 setter: setter,
                 addressedInterface: addressedInterface,

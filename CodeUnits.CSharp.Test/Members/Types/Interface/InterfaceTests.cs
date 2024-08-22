@@ -1,36 +1,36 @@
 ﻿using System.Collections;
 
-namespace CodeUnits.CSharp.Test.Types.Struct
+namespace CodeUnits.CSharp.Test.Members.Types.Interface
 {
-    internal class StructTests
+    internal class InterfaceTests
     {
         [Test]
-        public void StructIsCorrectlyLinkedAtNamespace()
+        public void InterfaceIsCorrectlyLinkedAtNamespace()
         {
-            var code = "struct MyStruct {}";
-            TypeLinks.Test<IStruct>(code, TypeKind.Struct);
+            var code = "interface IIface {}";
+            TypeLinks.Test<IInterface>(code, TypeKind.Interface);
         }
 
         [Test]
-        [TestCaseSource(typeof(StructResources), nameof(StructResources.ModifierConfigs))]
+        [TestCaseSource(typeof(InterfaceResources), nameof(InterfaceResources.ModifierConfigs))]
         public void ModifierTest(string code, string propertyName, object expectedValue)
         {
-            Modifier.Test<IStruct>(code, propertyName, expectedValue);
+            Modifier.TypeTest<IInterface>(code, propertyName, expectedValue);
         }
 
         [Test]
-        [TestCaseSource(typeof(StructResources), nameof(StructResources.GenericTypeParameters))]
+        [TestCaseSource(typeof(InterfaceResources), nameof(InterfaceResources.GenericTypeParameters))]
         public void TypeArgumentTest(string code, string expectedName, Variance expectedVariance)
         {
-            TypeArgument.Test<IStruct>(code, expectedName, expectedVariance, t => t.GenericTypeArguments[0]);
+            TypeArgument.Test<IInterface>(code, expectedName, expectedVariance, t => t.GenericTypeArguments[0]);
         }
 
         [Test]
-        [TestCaseSource(typeof(StructResources), nameof(StructResources.Inheritance))]
+        [TestCaseSource(typeof(InterfaceResources), nameof(InterfaceResources.Inheritance))]
         public void InheritanceTest(string code, string[] expectedTypes)
         {
             var result = CodeUnit.FromString(code)
-                .Types().OfType<IStruct>()
+                .Types().OfType<IInterface>()
                 .Single().Inheritance;
 
             Assert.Multiple(() =>
@@ -45,11 +45,11 @@ namespace CodeUnits.CSharp.Test.Types.Struct
         }
 
         [Test]
-        [TestCaseSource(typeof(StructResources), nameof(StructResources.CollectionConfigs))]
+        [TestCaseSource(typeof(InterfaceResources), nameof(InterfaceResources.CollectionConfigs))]
         public void CollectionHasElementTest(string code, string propertyName)
         {
             var cu = CodeUnit.FromString(code);
-            var sut = cu.Types().OfType<IStruct>().Single();
+            var sut = cu.Types().OfType<IInterface>().Single();
             var value = sut.GetType().GetProperty(propertyName)!.GetValue(sut) as IEnumerable;
 
             CollectionAssert.IsNotEmpty(value);

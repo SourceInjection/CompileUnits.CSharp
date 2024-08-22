@@ -17,28 +17,23 @@ namespace CodeUnits.CSharp
         IReadOnlyList<ITerminalSymbol> Symbols { get; }
     }
 
-    public static class ICodeFragmentEstensions
+    public static class ICodeFragmentExtensions
     {
-    /// <summary>
-    /// Computes the token index of the given code by tokenize the code and comparing the tokens.
-    /// </summary>
-    /// <param name="fragment">The fragment to be checked.</param>
-    /// <param name="code">The code which is tokenized and then searched.</param>
-    /// <param name="startIndex">The start index from where the search begins.</param>
-    /// <returns>-1 if the fragment does not contain the searched code and the token index if it contains the code.</returns>
+        /// <summary>
+        /// Computes the token index of the given code by tokenize the code and comparing the tokens.
+        /// </summary>
+        /// <param name="fragment">The fragment to be checked.</param>
+        /// <param name="code">The code which is tokenized and then searched.</param>
+        /// <param name="startIndex">The start index from where the search begins.</param>
+        /// <returns>-1 if the fragment does not contain the searched code and the token index if it contains the code.</returns>
         public static int IndexOf(this ICodeFragment fragment, string code, int startIndex = 0)
         {
             if (fragment.Symbols.Count == 0)
                 return -1;
 
-            CSharpLexer lexer;
             TerminalSymbol[] tokens;
 
-            try
-            {
-                lexer = new CSharpLexer(new AntlrInputStream(code));
-                tokens = lexer.GetAllTokens().Select(t => TerminalSymbol.FromToken(t)).ToArray();
-            }
+            try { tokens = GetTokens(code); }
             catch { return -1; }
 
             if (tokens.Length == 0 || tokens.Length > fragment.Symbols.Count - startIndex)
@@ -65,6 +60,28 @@ namespace CodeUnits.CSharp
         public static bool Contains(this ICodeFragment fragment, string code)
         {
             return fragment.IndexOf(code) >= 0;
+        }
+
+        /// <summary>
+        /// Checks if the fragment equals a given code by tokenize the code and comparing the symbols.
+        /// </summary>
+        /// <param name="fragment">The fragment which is checked.</param>
+        /// <param name="code">The code which is tokenized and then compared.</param>
+        /// <returns><see cref="true"/> if the fragment equals the code else <see cref="false"/></returns>
+        public static bool IsEquivalentTo(this ICodeFragment fragment, string code)
+        {
+            TerminalSymbol[] tokens;
+
+            try { tokens = GetTokens(code); }
+            catch { return false; }
+
+            return tokens.SequenceEqual(fragment.Symbols);
+        }
+
+        private static TerminalSymbol[] GetTokens(string code)
+        {
+            return new CSharpLexer(new AntlrInputStream(code))
+                .GetAllTokens().Select(t => TerminalSymbol.FromToken(t)).ToArray();
         }
     }
 }

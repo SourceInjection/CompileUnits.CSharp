@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace CodeUnits.CSharp.Test.Types.Class
+namespace CodeUnits.CSharp.Test.Members.Types.Class
 {
     [TestFixture]
     internal class ClassTests
@@ -16,7 +16,7 @@ namespace CodeUnits.CSharp.Test.Types.Class
         [TestCaseSource(typeof(ClassResources), nameof(ClassResources.ModifierConfigs))]
         public void ModifierTest(string code, string propertyName, object expectedValue)
         {
-            Modifier.Test<IClass>(code, propertyName, expectedValue);
+            Modifier.TypeTest<IClass>(code, propertyName, expectedValue);
         }
 
         [Test]
@@ -35,7 +35,7 @@ namespace CodeUnits.CSharp.Test.Types.Class
         {
             var cu = CodeUnit.FromString("class MyClass { ~MyClass() {} }");
             var sut = cu.Types().OfType<IClass>().Single();
-            
+
             Assert.That(sut.Finalizer, Is.Not.Null);
         }
     }

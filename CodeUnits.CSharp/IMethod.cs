@@ -24,6 +24,11 @@ namespace CodeUnits.CSharp
         bool HasNewModifier { get; }
 
         /// <summary>
+        /// If the method has the <see langword="static"/> modifier this is <see langword="true"/>.
+        /// </summary>
+        bool IsStatic { get; }
+
+        /// <summary>
         /// Represents the addressed interface <see langword="interface"/>.<br/>
         /// E.g.: void IMyInterface.MyMethod().<br/>
         /// This might be <see langword="null"/> since this is only necessary when multiple interfaces expect the same members.

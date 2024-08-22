@@ -22,9 +22,6 @@ namespace CodeUnits.CSharp.Implementation
 
         public static CodeFragment FromContext(Throwable_expressionContext context)
         {
-            if (context == null)
-                return null;
-
             var tokens = TerminalSymbols.FromNode(context)
                 .Prepend(new TerminalSymbol(TerminalSymbolKind.RightArrow, "=>"))
                 .Append(new TerminalSymbol(TerminalSymbolKind.Semicolon, ";"))

@@ -1,5 +1,4 @@
-﻿
-namespace CodeUnits.CSharp.Test.Types
+﻿namespace CodeUnits.CSharp.Test.Members.Types
 {
     internal class Parameters
     {

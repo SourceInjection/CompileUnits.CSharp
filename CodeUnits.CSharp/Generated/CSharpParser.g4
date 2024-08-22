@@ -728,11 +728,12 @@ type_parameter_constraints
     ;
 
 primary_constraint
-    : class_type
-    | CLASS INTERR?
+    : CLASS INTERR?
     | STRUCT
     | UNMANAGED
     | NOTNULL
+    | DEFAULT
+    | class_type
     ;
 
 // namespace_or_type_name includes identifier

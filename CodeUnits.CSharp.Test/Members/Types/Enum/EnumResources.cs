@@ -1,20 +1,20 @@
-﻿namespace CodeUnits.CSharp.Test.Types.Enum
+﻿namespace CodeUnits.CSharp.Test.Members.Types.Enum
 {
     internal class EnumResources
     {
         private static readonly string AnyEnum = "enum En { X, Y }";
 
-        public static object[] BaseTypes = 
-        [
+        public static object[] BaseTypes =
+        {
             new object[]{ "enum En : int { X, Y }", "int" },
             new object[]{ "enum En : ushort { X, Y }", "ushort" },
             new object[]{ "enum En : long { X, Y }", "long" },
             new object[]{ "enum En : byte { X, Y }", "byte" },
             new object[]{ "enum En : byte { }", "byte" },
-        ];
+        };
 
         public static readonly object[] ModifierConfigs =
-        [
+        {
             new object[] { AnyEnum, nameof(IEnum.AccessModifier), AccessModifier.None, },
             new object[] { $"public {AnyEnum}", nameof(IEnum.AccessModifier), AccessModifier.Public, },
             new object[] { $"internal {AnyEnum}", nameof(IEnum.AccessModifier), AccessModifier.Internal, },
@@ -27,6 +27,6 @@
 
             new object[] { AnyEnum, nameof(IEnum.HasNewModifier), false, },
             new object[] { $"new {AnyEnum}", nameof(IEnum.HasNewModifier), true, },
-        ];
+        };
     }
 }

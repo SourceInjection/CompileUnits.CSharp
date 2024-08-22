@@ -39,6 +39,11 @@
         bool HasNewModifier { get; }
 
         /// <summary>
+        /// If the property has the <see langword="static"/> modifier this is <see langword="true"/>.
+        /// </summary>
+        bool IsStatic { get; }
+
+        /// <summary>
         /// Represents the addressed interface <see langword="interface"/>.<br/>
         /// E.g.: public int IMyInterface.MyProperty { get; }.<br/>
         /// This might be <see langword="null"/> since this is only necessary when multiple interfaces expect the same members.
