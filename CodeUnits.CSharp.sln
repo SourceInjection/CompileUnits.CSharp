@@ -5,7 +5,13 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeUnits.CSharp", "CodeUnits.CSharp\CodeUnits.CSharp.csproj", "{E8A2EBF8-15F3-44F3-AFAB-98C54481734E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeUnits.CSharp.Test", "CodeUnits.CSharp.Test\CodeUnits.CSharp.Test.csproj", "{CE2B7B51-29A1-4841-924A-8FE5B427404B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeUnits.CSharp.Test", "CodeUnits.CSharp.Test\CodeUnits.CSharp.Test.csproj", "{CE2B7B51-29A1-4841-924A-8FE5B427404B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AC337D97-A997-4C7E-B107-3D476FEC65FB}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE.txt = LICENSE.txt
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
