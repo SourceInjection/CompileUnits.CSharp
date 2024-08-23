@@ -1,10 +1,10 @@
-# CodeUnits.CSharp
+# CompileUnits.CSharp
 
 A library to which is designed to analyze generated code with source generators.
 
 ## Usage
 
-The main entry point is CodeUnits.CSharp.CodeUnit which provides several methods to get your semi structured info of the source code within a file.
+The main entry point is CompileUnits.CSharp.CompileUnit which provides several methods to get your semi structured info of the source code within a file.
 
 ## Known Issues and restrictions
 

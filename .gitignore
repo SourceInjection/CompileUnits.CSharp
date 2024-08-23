@@ -361,5 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/CodeUnits.CSharp/Generated/.vscode
-/CodeUnits.CSharp/nuget.config
+/CompileUnits.CSharp/Generated/.vscode
+/CompileUnits.CSharp/nuget.config

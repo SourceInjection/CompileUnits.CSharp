@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <RepositoryUrl>https://github.com/GittingGudAtIT/CompileUnits.CSharp</RepositoryUrl>
+    <RepositoryType>github</RepositoryType>
+    <PackageReleaseNotes>Release version</PackageReleaseNotes>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+	<PackageVersion>1.0.0</PackageVersion>
+	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+	<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+	<Title>Compile Units</Title>
+	<Copyright>Florian Reischl</Copyright>
+	<PackageIcon>image.jpg</PackageIcon>
+	<PackageTags>parser;semi-structured;analysis</PackageTags>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Antlr4" Version="4.6.6">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Antlr4.Runtime" Version="4.6.6" />
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+			<_Parameter1>CompileUnits.CSharp.Test</_Parameter1>
+		</AssemblyAttribute>
+		<None Include="..\LICENSE.txt">
+		  <Pack>True</Pack>
+		  <PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\README.md" Pack="true" PackagePath="" />
+
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="image.jpg">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
+</Project>
