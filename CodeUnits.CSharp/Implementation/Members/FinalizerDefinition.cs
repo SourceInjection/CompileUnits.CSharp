@@ -8,7 +8,7 @@ namespace CodeUnits.CSharp.Implementation.Members
 {
     internal class FinalizerDefinition : InvokableMemberDefinition, IFinalizer
     {
-        private FinalizerDefinition(IReadOnlyList<AttributeGroup> attributeGroups, CodeFragment body)
+        private FinalizerDefinition(IReadOnlyList<AttributeGroup> attributeGroups, Body body)
             : base(
                   "~",
                   AccessModifier.None,
@@ -22,7 +22,7 @@ namespace CodeUnits.CSharp.Implementation.Members
 
         internal static FinalizerDefinition FromContext(Destructor_definitionContext context, List<AttributeGroup> attributeGroups)
         {
-            return new FinalizerDefinition(attributeGroups, CodeFragment.FromContext(context.body()));
+            return new FinalizerDefinition(attributeGroups, Implementation.Body.FromContext(context.body()));
         }
     }
 }

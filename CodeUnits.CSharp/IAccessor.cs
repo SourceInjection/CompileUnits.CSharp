@@ -28,7 +28,7 @@
         /// The body of the accessor.<br/>
         /// This might be <see langword="null"/> since accessors don't have to declare a body.
         /// </summary>
-        ICodeFragment Body { get; }
+        IBody Body { get; }
     }
 
     public static class IAccessorExtensions

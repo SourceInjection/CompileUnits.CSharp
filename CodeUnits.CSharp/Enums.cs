@@ -1,5 +1,7 @@
 ﻿namespace CodeUnits.CSharp
 {
+    public enum FragmentKind { Expression, Body }
+
     public enum ConstructorInitializerKind { Base, This }
 
     public enum ConversionKind { Implicit, Explicit }

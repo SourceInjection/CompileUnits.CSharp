@@ -12,7 +12,7 @@ namespace CodeUnits.CSharp.Implementation.Members
             string name,
             AccessModifier accessModifier,
             IReadOnlyList<AttributeGroup> attributeGroups,
-            CodeFragment body,
+            Body body,
             AccessorKind kind)
         {
             Name = name;
@@ -37,7 +37,7 @@ namespace CodeUnits.CSharp.Implementation.Members
 
         public AccessorKind Kind { get; }
 
-        public ICodeFragment Body { get; }
+        public IBody Body { get; }
 
         public IEnumerable<ITreeNode> ChildNodes()
         {
@@ -56,7 +56,7 @@ namespace CodeUnits.CSharp.Implementation.Members
                 name: "set",
                 accessModifier: GetAccessModifier(context.accessor_modifier()),
                 attributeGroups: Attributes.AttributeGroups.FromContext(context.attributes()),
-                body: CodeFragment.FromContext(context.accessor_body()?.block()),
+                body: Implementation.Body.FromContext(context.accessor_body()?.block()),
                 kind: AccessorKind.Setter);
         }
 
@@ -69,7 +69,7 @@ namespace CodeUnits.CSharp.Implementation.Members
                 name: "get",
                 accessModifier: GetAccessModifier(context.accessor_modifier()),
                 attributeGroups: Attributes.AttributeGroups.FromContext(context.attributes()),
-                body: CodeFragment.FromContext(context.accessor_body()?.block()),
+                body: Implementation.Body.FromContext(context.accessor_body()?.block()),
                 kind: AccessorKind.Getter);
         }
 

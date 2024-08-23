@@ -25,7 +25,7 @@
         /// The default value of the parameter.
         /// This might be <see langword="null"/> since declaring a default value is optional.
         /// </summary>
-        ICodeFragment DefaultValue { get; }
+        IExpression DefaultValue { get; }
 
         /// <summary>
         /// If the parameter has the <see langword="params"/> keyword followed by brackets ('[]') this is <see langword="true"/>.

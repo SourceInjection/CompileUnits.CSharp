@@ -9,7 +9,7 @@
         /// <summary>
         /// The expression which is passed to a e.g. method or constructor.
         /// </summary>
-        ICodeFragment Expression { get; }
+        IExpression Expression { get; }
 
         /// <summary>
         /// If the argument targets a parameter this represents its name.<br/>

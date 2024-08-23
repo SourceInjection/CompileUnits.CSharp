@@ -15,7 +15,7 @@ namespace CodeUnits.CSharp.Implementation.Members
             AccessModifier accessModifier,
             IReadOnlyList<AttributeGroup> attributeGroups,
             IReadOnlyList<ParameterDefinition> parameters,
-            CodeFragment body,
+            Body body,
             ConstructorInitializer initializer)
 
             : base(
@@ -66,7 +66,7 @@ namespace CodeUnits.CSharp.Implementation.Members
 
             var accessModifier = Modifiers.Accessibility(commonInfo.Modifiers);
             var parameters = ParameterDefinitions.FromContext(context.formal_parameter_list());
-            var body = CodeFragment.FromContext(context.body());
+            var body = Implementation.Body.FromContext(context.body());
             var initializer = context.constructor_initializer() == null
                 ? null
                 : GetInitializer(context.constructor_initializer());

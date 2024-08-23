@@ -29,6 +29,6 @@
         /// <summary>
         /// The initialization of the field.
         /// </summary>
-        ICodeFragment Initialization { get; }
+        IExpression Initialization { get; }
     }
 }

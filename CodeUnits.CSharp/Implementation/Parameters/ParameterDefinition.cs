@@ -14,7 +14,7 @@ namespace CodeUnits.CSharp.Implementation.Parameters
             ParameterModifier modifier, 
             IReadOnlyList<AttributeGroup> attributes, 
             bool isParamsArray = false, 
-            CodeFragment defaultValue = null)
+            Expression defaultValue = null)
         {
             Type = type;
             Name = name;
@@ -39,7 +39,7 @@ namespace CodeUnits.CSharp.Implementation.Parameters
 
         public IReadOnlyList<IAttributeGroup> AttributeGroups { get; }
 
-        public ICodeFragment DefaultValue { get; }
+        public IExpression DefaultValue { get; }
 
         public bool IsParamsArray { get; }
 

@@ -54,6 +54,6 @@
         /// The initial value of a property.<br/>
         /// This might be <see langword="null"/> since property initialization is optional.
         /// </summary>
-        ICodeFragment Initialization { get; }
+        IExpression Initialization { get; }
     }
 }

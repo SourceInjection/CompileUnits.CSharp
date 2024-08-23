@@ -12,7 +12,7 @@ namespace CodeUnits.CSharp.Implementation.Members
             bool hasNewModifier,
             IReadOnlyList<AttributeGroup> attributeGroups,
             TypeUsage type,
-            CodeFragment value)
+            Expression value)
 
             : base(
                   name: name,
@@ -30,7 +30,7 @@ namespace CodeUnits.CSharp.Implementation.Members
 
         public ITypeUsage Type { get; }
 
-        public ICodeFragment Value { get; }
+        public IExpression Value { get; }
 
         public bool HasNewModifier { get; }
 

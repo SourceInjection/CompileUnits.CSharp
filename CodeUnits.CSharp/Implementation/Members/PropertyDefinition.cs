@@ -19,7 +19,7 @@ namespace CodeUnits.CSharp.Implementation.Members
             AccessorDefinition getter,
             AccessorDefinition setter,
             TypeUsage addressedInterface,
-            CodeFragment defaultValue)
+            Expression defaultValue)
 
             : base(
                   name: name,
@@ -55,21 +55,13 @@ namespace CodeUnits.CSharp.Implementation.Members
 
         public ITypeUsage AddressedInterface { get; }
 
-        public ICodeFragment Initialization { get; }
+        public IExpression Initialization { get; }
 
         internal static PropertyDefinition FromContext(Property_declarationContext context, TypedDefinitionInfo extendedInfo)
         {
             var modifiers = Modifiers.OfIndexer(extendedInfo.Modifiers);
             var (getter, setter) = AccessorDefinitions.FromContext(context);
             var (name, addressedInterface) = ResolvedName.FromContext(context.member_name().namespace_or_type_name());
-            CodeFragment defaultValue = null;
-            if (context.variable_initializer() != null)
-            {
-                if (context.variable_initializer().array_initializer() != null)
-                    defaultValue = CodeFragment.FromContext(context.variable_initializer().array_initializer());
-                else if (context.variable_initializer().expression() != null)
-                    defaultValue = CodeFragment.FromContext(context.variable_initializer().expression());
-            }
 
             return new PropertyDefinition(
                 name: name,
@@ -83,7 +75,7 @@ namespace CodeUnits.CSharp.Implementation.Members
                 getter: getter,
                 setter: setter,
                 addressedInterface: addressedInterface,
-                defaultValue: defaultValue);
+                defaultValue: Expression.FromContext(context.variable_initializer()));
         }
     }
 }

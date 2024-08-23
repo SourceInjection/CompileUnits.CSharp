@@ -83,7 +83,7 @@ namespace CodeUnits.CSharp.Implementation.Parameters
             {
                 foreach (var c in context.fixed_parameter())
                 {
-                    var expression = CodeFragment.FromContext(c.arg_declaration().expression());
+                    var expression = Expression.FromContext(c.arg_declaration().expression());
                     yield return new ParameterDefinition(
                         type: TypeUsage.FromContext(c.arg_declaration().type_()),
                         name: c.arg_declaration().identifier().GetText(),

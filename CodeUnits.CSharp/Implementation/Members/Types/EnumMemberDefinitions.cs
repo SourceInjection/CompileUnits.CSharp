@@ -13,7 +13,7 @@ namespace CodeUnits.CSharp.Implementation.Members.Types
             return context.enum_member_declaration()
                 .Select(c => new EnumMemberDefinition(
                     c.identifier().GetText(),
-                    CodeFragment.FromContext(c.expression()),
+                    Expression.FromContext(c.expression()),
                     AttributeGroups.FromContext(c.attributes())))
                 .ToList();
         }

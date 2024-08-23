@@ -38,7 +38,7 @@ namespace CodeUnits.CSharp.Implementation.Members
                     name: "add",
                     accessModifier: AccessModifier.None,
                     attributeGroups: attributes,
-                    body: CodeFragment.FromContext(context.block()),
+                    body: Body.FromContext(context.block()),
                     kind: AccessorKind.Add);
 
                 return (add, RemoveFromAccessorDeclaration(context.remove_accessor_declaration()));
@@ -49,7 +49,7 @@ namespace CodeUnits.CSharp.Implementation.Members
                     name: "remove",
                     accessModifier: AccessModifier.None,
                     attributeGroups: attributes,
-                    body: CodeFragment.FromContext(context.block()),
+                    body: Body.FromContext(context.block()),
                     kind: AccessorKind.Remove);
 
                 return (AddFromAccessorDeclaration(context.add_accessor_declaration()), remove);
@@ -72,7 +72,7 @@ namespace CodeUnits.CSharp.Implementation.Members
                 ? "add"
                 : "remove";
             var attributes = AttributeGroups.FromContext(attributesContext);
-            var body = CodeFragment.FromContext(blockContext);
+            var body = Body.FromContext(blockContext);
 
             return new AccessorDefinition(
                 name: name,
@@ -88,7 +88,7 @@ namespace CodeUnits.CSharp.Implementation.Members
                 name: "get",
                 accessModifier: AccessModifier.None,
                 attributeGroups: Array.Empty<AttributeGroup>(),
-                body: CodeFragment.FromContext(context),
+                body: Body.FromContext(context),
                 kind: AccessorKind.Getter);
         }
 
@@ -99,7 +99,7 @@ namespace CodeUnits.CSharp.Implementation.Members
 
             var attributes = AttributeGroups.FromContext(context.attrs);
             var modifier = AccessorDefinition.GetAccessModifier(context.mods);
-            var body = CodeFragment.FromContext(context.accessor_body()?.block());
+            var body = Body.FromContext(context.accessor_body()?.block());
 
             if (context.GET() != null)
             {

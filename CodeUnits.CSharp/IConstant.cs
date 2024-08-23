@@ -14,7 +14,7 @@
         /// <summary>
         /// The value of a constant.
         /// </summary>
-        ICodeFragment Value { get; }
+        IExpression Value { get; }
 
         /// <summary>
         /// If the constant has a <see langword="new"/> modifier this is <see langword="true"/>.

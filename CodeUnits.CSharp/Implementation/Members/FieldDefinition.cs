@@ -17,7 +17,7 @@ namespace CodeUnits.CSharp.Implementation.Members
             TypeUsage type,
             bool isStatic,
             bool isReadonly,
-            CodeFragment defaultValue)
+            Expression defaultValue)
 
             : base(
                   name: name,
@@ -42,7 +42,7 @@ namespace CodeUnits.CSharp.Implementation.Members
 
         public bool IsReadonly { get; }
 
-        public ICodeFragment Initialization { get; }
+        public IExpression Initialization { get; }
 
         public bool HasNewModifier { get; }
 
@@ -60,15 +60,6 @@ namespace CodeUnits.CSharp.Implementation.Members
             if (context == null)
                 throw new ArgumentNullException(nameof(context));
 
-            CodeFragment defaultValue = null;
-            if (context.variable_initializer() != null)
-            {
-                if (context.variable_initializer().expression() != null)
-                    defaultValue = CodeFragment.FromContext(context.variable_initializer().expression());
-                else if (context.variable_initializer().array_initializer() != null)
-                    defaultValue = CodeFragment.FromContext(context.variable_initializer().array_initializer());
-            }
-
             return new FieldDefinition(
                 name: context.identifier().GetText(),
                 accessModifier: fieldInfo.Modifiers.AccessModifier,
@@ -77,7 +68,7 @@ namespace CodeUnits.CSharp.Implementation.Members
                 type: fieldInfo.Type,
                 isStatic: fieldInfo.Modifiers.IsStatic,
                 isReadonly: fieldInfo.Modifiers.IsReadonly,
-                defaultValue: defaultValue);
+                defaultValue: Expression.FromContext(context.variable_initializer()));
         }
     }
 }

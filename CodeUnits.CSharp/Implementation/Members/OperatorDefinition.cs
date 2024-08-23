@@ -13,7 +13,7 @@ namespace CodeUnits.CSharp.Implementation.Members
             IReadOnlyList<AttributeGroup> attributeGroups,
             IReadOnlyList<ParameterDefinition> parameters,
             TypeUsage returnType,
-            CodeFragment body,
+            Body body,
             TypeUsage addressedInterface)
 
             : base(name: name,
@@ -37,7 +37,7 @@ namespace CodeUnits.CSharp.Implementation.Members
                 attributeGroups: extendedInfo.AttributeGroups,
                 parameters: ParameterDefinitions.FromContext(context),
                 returnType: extendedInfo.Type,
-                body: CodeFragment.FromContext(context.body()),
+                body: Implementation.Body.FromContext(context.body()),
                 addressedInterface: extendedInfo.AddressedInterface);
         }
     }

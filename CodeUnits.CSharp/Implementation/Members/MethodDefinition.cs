@@ -18,7 +18,7 @@ namespace CodeUnits.CSharp.Implementation.Members
             IReadOnlyList<ParameterDefinition> parameters,
             TypeUsage returnType,
             InheritanceModifier inheritanceModifier,
-            CodeFragment body,
+            Body body,
             TypeUsage addressedInterface)
 
             : base(
@@ -67,12 +67,12 @@ namespace CodeUnits.CSharp.Implementation.Members
                 addressedInterface: addressedInterface);
         }
 
-        private static CodeFragment GetBody(Method_declarationContext context)
+        private static Body GetBody(Method_declarationContext context)
         {
             if (context.method_body()?.block() != null)
-                return CodeFragment.FromContext(context.method_body().block());
+                return Implementation.Body.FromContext(context.method_body().block());
             if (context.throwable_expression() != null)
-                return CodeFragment.FromContext(context.throwable_expression());
+                return Implementation.Body.FromContext(context.throwable_expression());
             return null;
         }
     }

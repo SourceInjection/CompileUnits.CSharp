@@ -15,10 +15,24 @@ namespace CodeUnits.CSharp
         /// Lists the terminal symbols of the code fragment.
         /// </summary>
         IReadOnlyList<ITerminalSymbol> Symbols { get; }
+
+        /// <summary>
+        /// The kind of the code fragment.
+        /// </summary>
+        FragmentKind FragmentKind { get; }
     }
 
     public static class ICodeFragmentExtensions
     {
+        /// <summary>
+        /// Checks if the given fragment is of the desired kind.
+        /// </summary>
+        /// <param name="fragment">The fragment to be checked.</param>
+        /// <param name="kind">The desired fragment kind.</param>
+        /// <returns><see langword="true"/>if the code fragment is of the desired kind else <see langword="false"/></returns>
+        public static bool IsKind(this ICodeFragment fragment, FragmentKind kind) 
+            => fragment.FragmentKind == kind;
+
         /// <summary>
         /// Computes the token index of the given code by tokenize the code and comparing the tokens.
         /// </summary>

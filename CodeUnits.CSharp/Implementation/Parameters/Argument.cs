@@ -4,7 +4,7 @@ namespace CodeUnits.CSharp.Implementation.Parameters
 {
     internal class Argument: IArgument
     {
-        internal Argument(CodeFragment expression, string targetedParameter = null)
+        internal Argument(Expression expression, string targetedParameter = null)
         {
             Expression = expression;
             TargetedParameter = targetedParameter;
@@ -13,7 +13,7 @@ namespace CodeUnits.CSharp.Implementation.Parameters
 
         public ITreeNode ParentNode { get; internal set; }
 
-        public ICodeFragment Expression { get; }
+        public IExpression Expression { get; }
 
         public string TargetedParameter { get; }
 

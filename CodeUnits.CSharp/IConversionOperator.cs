@@ -24,7 +24,7 @@
         /// <summary>
         /// The body of the conversion.
         /// </summary>
-        ICodeFragment Body { get; }
+        IBody Body { get; }
     }
 
     public static class IConversionOperatorExtensions

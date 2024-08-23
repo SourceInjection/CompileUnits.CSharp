@@ -49,6 +49,9 @@
             new object[] { "class MyClass { public static int operator+(MyClass lhs, int rhs) { } }", nameof(IClass.Members) },
             new object[] { "class MyClass { public static explicit operator bool(MyClass lhs) { } }", nameof(IClass.Members) },
             new object[] { "class MyClass { class MyNestedClass { } }", nameof(IClass.Members) },
+            new object[] { "class MyClass { void XY(string x, int y) { } }", nameof(IClass.Members) },
+            new object[] { "class MyClass { [DoesNothing(ignore = true, false)] void XY(string x, [MayBeNull] int y) { } }", nameof(IClass.Members) },
+            new object[] { "class MyClass { public MyClass() : base(true) { } }", nameof(IClass.Members) },
         };
     }
 }

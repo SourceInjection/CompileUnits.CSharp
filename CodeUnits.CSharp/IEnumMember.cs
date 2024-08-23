@@ -20,6 +20,6 @@
         /// The value of the member.</br>
         /// This might be <see langword="null"/> if not explicitely defined.
         /// </summary>
-        ICodeFragment Value { get; }
+        IExpression Value { get; }
     }
 }

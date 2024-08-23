@@ -15,7 +15,7 @@ namespace CodeUnits.CSharp.Implementation.Members
             ConversionKind kind,
             TypeUsage returnType,
             ParameterDefinition parameter,
-            CodeFragment body)
+            Body body)
 
             : base(name: returnType.FormatedText,
                   modifier: AccessModifier.Public,
@@ -38,7 +38,7 @@ namespace CodeUnits.CSharp.Implementation.Members
 
         public ITypeUsage ReturnType { get; }
 
-        public ICodeFragment Body { get; }
+        public IBody Body { get; }
 
         public override IEnumerable<ITreeNode> ChildNodes()
         {
@@ -59,7 +59,7 @@ namespace CodeUnits.CSharp.Implementation.Members
 
             var type = TypeUsage.FromContext(context.type_());
             var parameter = ParameterDefinition.FromContext(context.arg_declaration());
-            var body = CodeFragment.FromContext(context.body());
+            var body = Implementation.Body.FromContext(context.body());
 
             return new ConversionOperatorDefinition(
                 attributeGroups: commonInfo.AttributeGroups,

@@ -22,6 +22,6 @@ namespace CodeUnits.CSharp
         /// The body of the invokable member.
         /// This might be <see langword="null"/> since a body is optional.
         /// </summary>
-        ICodeFragment Body { get; }
+        IBody Body { get; }
     }
 }

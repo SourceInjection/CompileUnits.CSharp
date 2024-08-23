@@ -24,10 +24,10 @@ namespace CodeUnits.CSharp.Implementation.Members
             }
         }
 
-        private static IEnumerable<(string Ident, CodeFragment Expression)> ConstantDeclarators(Constant_declaratorContext[] contexts)
+        private static IEnumerable<(string Ident, Expression Expression)> ConstantDeclarators(Constant_declaratorContext[] contexts)
         {
             foreach (var c in contexts)
-                yield return (c.identifier().GetText(), CodeFragment.FromContext(c.expression()));
+                yield return (c.identifier().GetText(), Expression.FromContext(c.expression()));
         }
     }
 }

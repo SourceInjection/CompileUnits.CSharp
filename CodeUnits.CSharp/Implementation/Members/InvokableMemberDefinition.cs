@@ -13,7 +13,7 @@ namespace CodeUnits.CSharp.Implementation.Members
             IReadOnlyList<AttributeGroup> attributeGroups,
             TypeUsage returnType,
             IReadOnlyList<ParameterDefinition> parameters,
-            CodeFragment body)
+            Body body)
 
             : base(
                   name: name,
@@ -35,7 +35,7 @@ namespace CodeUnits.CSharp.Implementation.Members
 
         public ITypeUsage ReturnType { get; protected private set; }
 
-        public ICodeFragment Body { get; }
+        public IBody Body { get; }
 
         public override IEnumerable<ITreeNode> ChildNodes()
         {

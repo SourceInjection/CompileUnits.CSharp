@@ -6,7 +6,7 @@ namespace CodeUnits.CSharp.Implementation.Members.Minor
 {
     internal class EnumMemberDefinition : IEnumMember
     {
-        internal EnumMemberDefinition(string name, CodeFragment value, IReadOnlyList<AttributeGroup> attributeGroups)
+        internal EnumMemberDefinition(string name, Expression value, IReadOnlyList<AttributeGroup> attributeGroups)
         {
             Name = name;
             Value = value;
@@ -23,7 +23,7 @@ namespace CodeUnits.CSharp.Implementation.Members.Minor
 
         public string Name { get; }
 
-        public ICodeFragment Value { get; }
+        public IExpression Value { get; }
 
         public IReadOnlyList<IAttributeGroup> AttributeGroups { get; }
 
