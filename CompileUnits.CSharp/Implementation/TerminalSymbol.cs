@@ -21,14 +21,14 @@ namespace CompileUnits.CSharp.Implementation
 
         public IEnumerable<ITreeNode> ChildNodes() => Enumerable.Empty<ITreeNode>();
 
-        public override string ToString()
-        {
-            return Value;
-        }
-
         public static TerminalSymbol FromToken(IToken token)
         {
             return new TerminalSymbol(Symbol.KindFromAntlrType(token.Type), token.Text);
+        }
+
+        public override string ToString()
+        {
+            return Value;
         }
     }
 }

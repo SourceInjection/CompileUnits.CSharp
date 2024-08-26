@@ -47,7 +47,7 @@ namespace CompileUnits.CSharp
 
             TerminalSymbol[] tokens;
 
-            try { tokens = GetTokens(code); }
+            try { tokens = GetTokens(fragment, code); }
             catch { return -1; }
 
             if (tokens.Length == 0 || tokens.Length > fragment.Symbols.Count - startIndex)
@@ -56,7 +56,7 @@ namespace CompileUnits.CSharp
             for (int i = startIndex; i < fragment.Symbols.Count; i++)
             {
                 int j = 0;
-                while (j < tokens.Length && i + j < fragment.Symbols.Count && fragment.Symbols[i + j].Equals(tokens[j]))
+                while (j < tokens.Length && i + j < fragment.Symbols.Count && SymbolEquals(fragment.Symbols[i + j], tokens[j]))
                     j++;
 
                 if (j == tokens.Length)
@@ -86,16 +86,29 @@ namespace CompileUnits.CSharp
         {
             TerminalSymbol[] tokens;
 
-            try { tokens = GetTokens(code); }
+            try { tokens = GetTokens(fragment, code); }
             catch { return false; }
 
             return tokens.SequenceEqual(fragment.Symbols);
         }
 
-        private static TerminalSymbol[] GetTokens(string code)
+        private static TerminalSymbol[] GetTokens(ICodeFragment fragment, string code)
         {
             return new CSharpLexer(new AntlrInputStream(code))
-                .GetAllTokens().Select(t => TerminalSymbol.FromToken(t)).ToArray();
+                .GetAllTokens().Select(t => GetToken(fragment, t)).ToArray();
+        }
+
+        private static TerminalSymbol GetToken(ICodeFragment fragment, IToken t)
+        {
+            var result = TerminalSymbol.FromToken(t);
+            result.ParentNode = fragment;
+            return result;
+        }
+
+        private static bool SymbolEquals(ITerminalSymbol a, ITerminalSymbol b)
+        {
+            return a.Kind == b.Kind
+                && a.Value == b.Value;
         }
     }
 }
