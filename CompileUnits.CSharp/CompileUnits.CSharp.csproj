@@ -7,14 +7,15 @@
     <RepositoryType>github</RepositoryType>
     <PackageReleaseNotes>Release version</PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
-	<PackageVersion>1.0.0</PackageVersion>
+    <AssemblyVersion>1.0.1</AssemblyVersion>
+	<PackageVersion>1.0.1</PackageVersion>
 	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 	<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 	<Title>Compile Units</Title>
 	<Copyright>Florian Reischl</Copyright>
 	<PackageIcon>image.jpg</PackageIcon>
 	<PackageTags>parser;semi-structured;analysis</PackageTags>
+	<Description>A library to serialize .cs files.</Description>
   </PropertyGroup>
 
 	<ItemGroup>
