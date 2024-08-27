@@ -217,6 +217,7 @@ CARET                    : '^';
 BANG                     : '!';
 TILDE                    : '~';
 ASSIGNMENT               : '=';
+SHARP                    : '#';
 
 // https://msdn.microsoft.com/en-us/library/dn961160.aspx
 mode INTERPOLATION_STRING;

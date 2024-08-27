@@ -78,6 +78,8 @@
 
     public enum TerminalSymbolKind
     {
+        /// <summary>Symbol: '#'</summary>
+        Sharp,
         /// <summary>Identifier symbols</summary>
         Identifier,
 

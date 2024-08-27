@@ -12,6 +12,7 @@ namespace CompileUnits.CSharp.Implementation.Common
 
         private static readonly Dictionary<int, TerminalSymbolKind> _symbolKind = new Dictionary<int, TerminalSymbolKind>()
         {
+            [CSharpParser.SHARP] = TerminalSymbolKind.Sharp,
             [CSharpParser.IDENTIFIER] = TerminalSymbolKind.Identifier,
             [CSharpParser.REAL_LITERAL] = TerminalSymbolKind.RealLiteral,
             [CSharpParser.BIN_INTEGER_LITERAL] = TerminalSymbolKind.BinaryIntegerLiteral,
