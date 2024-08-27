@@ -5,10 +5,9 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/GittingGudAtIT/CompileUnits.CSharp</RepositoryUrl>
     <RepositoryType>github</RepositoryType>
-    <PackageReleaseNotes>Release version</PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <AssemblyVersion>1.0.1</AssemblyVersion>
-	<PackageVersion>1.0.1</PackageVersion>
+    <AssemblyVersion>1.0.2</AssemblyVersion>
+	<PackageVersion>1.0.2</PackageVersion>
 	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 	<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 	<Title>Compile Units</Title>
