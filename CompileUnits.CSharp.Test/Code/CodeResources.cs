@@ -1,10 +1,11 @@
 ﻿namespace CompileUnits.CSharp.Test.Code
 {
-    internal class CodeResources
+    internal static class CodeResources
     {
         private static readonly string[] TestStrings =
         {
-            "{ { if(true) { } else { } } }"
+            "{ { if(true) { } else { } } }",
+            "var s = $\"{dt:HH:mm}\";",
         };
 
         private static readonly string[] ChatGptExamples =

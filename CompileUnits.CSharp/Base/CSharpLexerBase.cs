@@ -53,24 +53,9 @@ namespace CompileUnits.CSharp.Base
 
         protected void OnColon()
         {
-
-            if (interpolatedStringLevel > 0)
+            if (interpolatedStringLevel > 0 && _mode != CSharpLexer.INTERPOLATION_FORMAT)
             {
-                int ind = 1;
-                bool switchToFormatString = true;
-                while ((char)_input.La(ind) != '}')
-                {
-                    if (_input.La(ind) == ':' || _input.La(ind) == ')')
-                    {
-                        switchToFormatString = false;
-                        break;
-                    }
-                    ind++;
-                }
-                if (switchToFormatString)
-                {
-                    Mode(CSharpLexer.INTERPOLATION_FORMAT);
-                }
+                Mode(CSharpLexer.INTERPOLATION_FORMAT);
             }
         }
 

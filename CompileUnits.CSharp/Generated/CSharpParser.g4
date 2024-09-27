@@ -1139,7 +1139,7 @@ interpolated_verbatium_string_part
     ;
 
 interpolated_string_expression
-    : expression (COMMA expression)* (COLON FORMAT_STRING+)?
+    : expression (COMMA expression)* (COLON FORMAT_STRING*)?
     ;
 
 //B.1.7 Keywords
