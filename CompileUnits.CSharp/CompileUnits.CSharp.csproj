@@ -6,8 +6,8 @@
     <RepositoryUrl>https://github.com/GittingGudAtIT/CompileUnits.CSharp</RepositoryUrl>
     <RepositoryType>github</RepositoryType>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <AssemblyVersion>1.0.2</AssemblyVersion>
-	<PackageVersion>1.0.2</PackageVersion>
+    <AssemblyVersion>1.0.3-alpha</AssemblyVersion>
+	<PackageVersion>1.0.3-alpha</PackageVersion>
 	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 	<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 	<Title>Compile Units</Title>
