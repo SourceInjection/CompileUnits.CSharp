@@ -22,6 +22,14 @@ namespace CompileUnits.CSharp.Test.Members.Properties
         }
 
         [Test]
+        public void PropertyHasArrowGetter()
+        {
+            var property = GetSut(Class.WithMember("public int X { get => 3; }"));
+
+            Assert.That(property.Getter, Is.Not.Null);
+        }
+
+        [Test]
         public void PropertyHasSetter()
         {
             var property = GetSut(Class.WithMember("public int X { set; }"));

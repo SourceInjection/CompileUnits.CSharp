@@ -52,11 +52,15 @@ namespace CompileUnits.CSharp.Implementation.Members
             if (context == null)
                 return null;
 
+            var body = context.accessor_body()?.throwable_expression() != null
+                ? Implementation.Body.FromContext(context.accessor_body()?.throwable_expression())
+                : Implementation.Body.FromContext(context.accessor_body()?.block());
+
             return new AccessorDefinition(
                 name: "set",
                 accessModifier: GetAccessModifier(context.accessor_modifier()),
                 attributeGroups: Attributes.AttributeGroups.FromContext(context.attributes()),
-                body: Implementation.Body.FromContext(context.accessor_body()?.block()),
+                body: body,
                 kind: AccessorKind.Setter);
         }
 
@@ -65,11 +69,15 @@ namespace CompileUnits.CSharp.Implementation.Members
             if (context == null)
                 return null;
 
+            var body = context.accessor_body()?.throwable_expression() != null
+                ? Implementation.Body.FromContext(context.accessor_body()?.throwable_expression())
+                : Implementation.Body.FromContext(context.accessor_body()?.block());
+
             return new AccessorDefinition(
                 name: "get",
                 accessModifier: GetAccessModifier(context.accessor_modifier()),
                 attributeGroups: Attributes.AttributeGroups.FromContext(context.attributes()),
-                body: Implementation.Body.FromContext(context.accessor_body()?.block()),
+                body: body,
                 kind: AccessorKind.Getter);
         }
 

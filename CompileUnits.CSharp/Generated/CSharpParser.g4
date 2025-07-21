@@ -894,6 +894,7 @@ accessor_modifier
 accessor_body
     : block
     | SEMICOLON
+    | RIGHT_ARROW throwable_expression SEMICOLON
     ;
 
 event_accessor_declarations

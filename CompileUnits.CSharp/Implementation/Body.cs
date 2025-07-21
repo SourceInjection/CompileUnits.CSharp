@@ -16,6 +16,9 @@ namespace CompileUnits.CSharp.Implementation
 
         public static Body FromContext(Throwable_expressionContext context)
         {
+            if (context == null)
+                return null;
+
             return new Body(
                 TerminalSymbols.FromNode(context)
                     .Prepend(new TerminalSymbol(TerminalSymbolKind.RightArrow, "=>"))
