@@ -62,6 +62,24 @@ namespace CompileUnits.CSharp.Test.Members.Properties
         }
 
         [Test]
+        [TestCaseSource(typeof(PropertyResources), nameof(PropertyResources.GetterModifiers))]
+        public void PropertyHasExpectedGetterModifier(string code, AccessModifier expectedModifier)
+        {
+            var property = GetSut(Class.WithMember(code));
+
+            Assert.That(property.Getter.AccessModifier, Is.EqualTo(expectedModifier));
+        }
+
+        [Test]
+        [TestCaseSource(typeof(PropertyResources), nameof(PropertyResources.SetterModifiers))]
+        public void PropertyHasExpectedSetterModifier(string code, AccessModifier expectedModifier)
+        {
+            var property = GetSut(Class.WithMember(code));
+
+            Assert.That(property.Setter.AccessModifier, Is.EqualTo(expectedModifier));
+        }
+
+        [Test]
         [TestCaseSource(typeof(PropertyResources), nameof(PropertyResources.ReturnTypes))]
         public void ReturnTypeTest(string code, string expectedType)
         {

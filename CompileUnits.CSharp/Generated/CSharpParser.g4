@@ -884,11 +884,9 @@ set_accessor_declaration
     ;
 
 accessor_modifier
-    : PROTECTED
-    | INTERNAL
-    | PRIVATE
-    | PROTECTED INTERNAL
-    | INTERNAL PROTECTED
+    : PROTECTED ( INTERNAL | PRIVATE )?
+    | INTERNAL PROTECTED?
+    | PRIVATE PROTECTED?
     ;
 
 accessor_body

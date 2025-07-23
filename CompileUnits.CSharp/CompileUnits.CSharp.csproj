@@ -6,8 +6,8 @@
     <RepositoryUrl>https://github.com/SourceInjection/CompileUnits.CSharp</RepositoryUrl>
     <RepositoryType>github</RepositoryType>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
-	<PackageVersion>1.0.0</PackageVersion>
+    <AssemblyVersion>1.0.1</AssemblyVersion>
+	<PackageVersion>1.0.1</PackageVersion>
 	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 	<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 	<Title>Compile Units</Title>

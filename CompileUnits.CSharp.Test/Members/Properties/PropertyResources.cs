@@ -4,6 +4,12 @@
     {
         private static readonly string DefaultProperty = "int X { get; set; }";
 
+        private static string PropertyWithGetterAccessModifier(string accessModifier)
+            => $"public int X {{ {accessModifier} get; set; }}";
+
+        private static string PropertyWithSetterAccessModifier(string accessModifier)
+            => $"public int X {{ get; {accessModifier} set; }}";
+
         private static string PropertyWithReturnType(string type) => $"{type} X {{ get; set; }}";
 
 
@@ -30,6 +36,28 @@
             new object[] { $"new {DefaultProperty}", nameof(IProperty.HasNewModifier), true, },
             new object[] { DefaultProperty, nameof(IProperty.IsStatic), false, },
             new object[] { $"static {DefaultProperty}", nameof(IProperty.IsStatic), true, },
+        };
+
+        public static readonly object[] GetterModifiers =
+        {
+            new object[] { PropertyWithGetterAccessModifier("internal"), AccessModifier.Internal, },
+            new object[] { PropertyWithGetterAccessModifier("private"), AccessModifier.Private, },
+            new object[] { PropertyWithGetterAccessModifier("protected"), AccessModifier.Protected, },
+            new object[] { PropertyWithGetterAccessModifier("protected internal"), AccessModifier.ProtectedInternal, },
+            new object[] { PropertyWithGetterAccessModifier("internal protected"), AccessModifier.ProtectedInternal, },
+            new object[] { PropertyWithGetterAccessModifier("protected private"), AccessModifier.PrivateProtected, },
+            new object[] { PropertyWithGetterAccessModifier("private protected"), AccessModifier.PrivateProtected, },
+        };
+
+        public static readonly object[] SetterModifiers =
+        {
+            new object[] { PropertyWithSetterAccessModifier("internal"), AccessModifier.Internal, },
+            new object[] { PropertyWithSetterAccessModifier("private"), AccessModifier.Private, },
+            new object[] { PropertyWithSetterAccessModifier("protected"), AccessModifier.Protected, },
+            new object[] { PropertyWithSetterAccessModifier("protected internal"), AccessModifier.ProtectedInternal, },
+            new object[] { PropertyWithSetterAccessModifier("internal protected"), AccessModifier.ProtectedInternal, },
+            new object[] { PropertyWithSetterAccessModifier("protected private"), AccessModifier.PrivateProtected, },
+            new object[] { PropertyWithSetterAccessModifier("private protected"), AccessModifier.PrivateProtected, },
         };
 
         public static object[] ReturnTypes =
