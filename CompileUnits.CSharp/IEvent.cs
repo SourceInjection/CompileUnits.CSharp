@@ -9,6 +9,11 @@
     public interface IEvent : IMember
     {
         /// <summary>
+        /// The type of the event.
+        /// </summary>
+        ITypeUsage Type { get; }
+
+        /// <summary>
         /// If the event has a <see langword="new"/> modifier this is <see langword="true"/>.
         /// </summary>
         bool HasNewModifier { get; }

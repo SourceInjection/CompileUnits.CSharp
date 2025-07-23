@@ -8,6 +8,7 @@ namespace CompileUnits.CSharp.Implementation.Members
     {
         public EventDefinition(
             string name,
+            TypeUsage type,
             AccessModifier modifier,
             IReadOnlyList<AttributeGroup> attributeGroups,
             bool hasNewModifier,
@@ -26,6 +27,8 @@ namespace CompileUnits.CSharp.Implementation.Members
             InheritanceModifier = inheritanceModifier;
             AddAccessor = addAccessor;
             RemoveAccessor = removeAccessor;
+            Type = type;
+
             if (addAccessor != null)
                 addAccessor.ParentNode = this;
             if(removeAccessor != null)
@@ -33,6 +36,8 @@ namespace CompileUnits.CSharp.Implementation.Members
         }
 
         public override MemberKind MemberKind { get; } = MemberKind.Event;
+
+        public ITypeUsage Type { get; }
 
         public bool HasNewModifier { get; }
 
